@@ -16,7 +16,6 @@ using namespace  cv;
 using namespace std;
 
 File file;
-ShowImage showImage;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -39,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->contourButtonGroup->setId(ui->radioButtonCircle,2);
     ui->contourButtonGroup->setId(ui->radioButtonRect,3);
 
+    ui->ImageButtonGroup->setId(ui->radioButtonIgnoreAspectRatio,0);//设置图像显示方式按钮组的ID值
+    ui->ImageButtonGroup->setId(ui->radioButtonKeepAspectRatio,1);
+    ui->ImageButtonGroup->setId(ui->radioButtonArtWork,2);
 }
 
 MainWindow::~MainWindow()
@@ -54,7 +56,7 @@ void MainWindow::on_actionOpenImg_triggered()
     ui->lineEdit_FileName->setText(file.getFileString());
 
     QImage* img=new QImage;
-    if(showImage.IgnoreAspectRatio(ui,img,file.getFileString(),SRCImage)==-1){
+    if(showImg.showImage(ui,img,file.getFileString(),SRCImage)==-1){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
                                           tr("打开图像失败!"));
@@ -82,7 +84,7 @@ void MainWindow::on_binaryButton_clicked()
         case 0:
             threshold(srcImage,dstImage,thresh,max,THRESH_BINARY);
             imwrite("temp.jpg",dstImage);
-            if(showImage.IgnoreAspectRatio(ui,img,"temp.jpg",DSTImage)==-1){
+            if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
                 QMessageBox::information(this,
                                                   tr("打开图像失败"),
                                                   tr("打开图像失败!"));
@@ -94,7 +96,7 @@ void MainWindow::on_binaryButton_clicked()
         case 1:
             threshold(srcImage,dstImage,thresh,max,THRESH_BINARY_INV);
             imwrite("temp.jpg",dstImage);
-            if(showImage.IgnoreAspectRatio(ui,img,"temp.jpg",DSTImage)==-1){
+            if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
                 QMessageBox::information(this,
                                                   tr("打开图像失败"),
                                                   tr("打开图像失败!"));
@@ -105,7 +107,7 @@ void MainWindow::on_binaryButton_clicked()
         case 2:
             threshold(srcImage,dstImage,thresh,max,THRESH_TRUNC);
             imwrite("temp.jpg",dstImage);
-            if(showImage.IgnoreAspectRatio(ui,img,"temp.jpg",DSTImage)==-1){
+            if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
                 QMessageBox::information(this,
                                                   tr("打开图像失败"),
                                                   tr("打开图像失败!"));
@@ -116,7 +118,7 @@ void MainWindow::on_binaryButton_clicked()
         case 3:
             threshold(srcImage,dstImage,thresh,max,THRESH_TOZERO);
             imwrite("temp.jpg",dstImage);
-            if(showImage.IgnoreAspectRatio(ui,img,"temp.jpg",DSTImage)==-1){
+            if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
                 QMessageBox::information(this,
                                                   tr("打开图像失败"),
                                                   tr("打开图像失败!"));
@@ -127,7 +129,7 @@ void MainWindow::on_binaryButton_clicked()
         case 4:
             threshold(srcImage,dstImage,thresh,max,THRESH_TOZERO_INV);
             imwrite("temp.jpg",dstImage);
-            if(showImage.IgnoreAspectRatio(ui,img,"temp.jpg",DSTImage)==-1){
+            if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
                 QMessageBox::information(this,
                                                   tr("打开图像失败"),
                                                   tr("打开图像失败!"));
@@ -141,7 +143,7 @@ void MainWindow::on_binaryButton_clicked()
             adaptive_set.getAdaptiveSet(method,type,size,C);
             adaptiveThreshold(srcImage,dstImage,255,method,type,size,C);
             imwrite("temp.jpg",dstImage);
-            if(showImage.IgnoreAspectRatio(ui,img,"temp.jpg",DSTImage)==-1){
+            if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
                 QMessageBox::information(this,
                                                   tr("打开图像失败"),
                                                   tr("打开图像失败!"));
@@ -189,7 +191,7 @@ void MainWindow::on_contourButton_clicked()
             }
 
             imwrite("temp.jpg",drawing);
-            if(showImage.IgnoreAspectRatio(ui,img,"temp.jpg",DSTImage)==-1){
+            if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
                 QMessageBox::information(this,
                                                   tr("打开图像失败"),
                                                   tr("打开图像失败!"));
@@ -271,4 +273,25 @@ void MainWindow::on_adaptiveButton_clicked()
 {
     AdaptiveThreshold *adaptivethreshold=new AdaptiveThreshold;
     adaptivethreshold->show();
+}
+
+void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
+{
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("输入图像与输出图像采用饱满填充");
+    showImg.setShowImageType(0);
+}
+
+void MainWindow::on_radioButtonKeepAspectRatio_clicked()
+{
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("输入图像与输出图像采用按比例填充");
+    showImg.setShowImageType(1);
+}
+
+void MainWindow::on_radioButtonArtWork_clicked()
+{
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("输入图像与输出图像显示原图");
+    showImg.setShowImageType(2);
 }

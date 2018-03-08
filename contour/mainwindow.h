@@ -38,6 +38,12 @@ private slots:
 
     void on_adaptiveButton_clicked();
 
+    void on_radioButtonIgnoreAspectRatio_clicked();
+
+    void on_radioButtonKeepAspectRatio_clicked();
+
+    void on_radioButtonArtWork_clicked();
+
 private:
     Ui::MainWindow *ui;
 
