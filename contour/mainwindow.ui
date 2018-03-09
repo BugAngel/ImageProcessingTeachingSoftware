@@ -54,6 +54,15 @@
        <height>261</height>
       </rect>
      </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -62,39 +71,10 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>449</width>
-        <height>259</height>
+        <width>451</width>
+        <height>261</height>
        </rect>
       </property>
-      <widget class="QLabel" name="srcImage">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>451</width>
-         <height>261</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 170, 0);
-font: 26pt &quot;华文行楷&quot;;</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::Panel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Sunken</enum>
-       </property>
-       <property name="text">
-        <string>输入图像</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::AutoText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
      </widget>
     </widget>
    </widget>
@@ -119,6 +99,9 @@ font: 26pt &quot;华文行楷&quot;;</string>
        <height>261</height>
       </rect>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -127,42 +110,13 @@ font: 26pt &quot;华文行楷&quot;;</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>419</width>
-        <height>259</height>
+        <width>421</width>
+        <height>261</height>
        </rect>
       </property>
-      <widget class="QLabel" name="dstImage">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>421</width>
-         <height>261</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 170, 0);
-font: 26pt &quot;华文行楷&quot;;</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::Panel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Sunken</enum>
-       </property>
-       <property name="text">
-        <string>输出图像</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::AutoText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -246,8 +200,108 @@ font: 26pt &quot;华文行楷&quot;;</string>
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>滤波</string>
+      </attribute>
+      <widget class="QPushButton" name="binaryButton_2">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>230</y>
+         <width>191</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>滤波处理</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>241</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="boxFilterRadioButton">
+          <property name="text">
+           <string>方框滤波</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="boxFilterButton">
+          <property name="text">
+           <string>设置</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QRadioButton" name="blurRadioButton">
+          <property name="text">
+           <string>均值滤波</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="blurButton">
+          <property name="text">
+           <string>设置</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QRadioButton" name="gaussianBlurRadioButton">
+          <property name="text">
+           <string>高斯滤波</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="gaussianBlurButton">
+          <property name="text">
+           <string>设置</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QRadioButton" name="medianFilterRadioButton">
+          <property name="text">
+           <string>中值滤波</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="medianFilterButton">
+          <property name="text">
+           <string>设置</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QRadioButton" name="bilateralFilterRadioButton">
+          <property name="text">
+           <string>双边滤波</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="bilateralFilterButton">
+          <property name="text">
+           <string>设置</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>二值化</string>
@@ -372,25 +426,12 @@ font: 26pt &quot;华文行楷&quot;;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QPushButton" name="binaryButton">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>230</y>
-         <width>191</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>二值化处理</string>
-       </property>
-      </widget>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
        <string>轮廓检测</string>
       </attribute>
-      <widget class="QRadioButton" name="radioButtonContour">
+      <widget class="QRadioButton" name="contourRadioButton">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -406,7 +447,7 @@ font: 26pt &quot;华文行楷&quot;;</string>
         <string notr="true">contourButtonGroup</string>
        </attribute>
       </widget>
-      <widget class="QRadioButton" name="radioButtonConvexHull">
+      <widget class="QRadioButton" name="convexHullRadioButton">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -422,7 +463,7 @@ font: 26pt &quot;华文行楷&quot;;</string>
         <string notr="true">contourButtonGroup</string>
        </attribute>
       </widget>
-      <widget class="QRadioButton" name="radioButtonCircle">
+      <widget class="QRadioButton" name="circleRadioButton">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -438,7 +479,7 @@ font: 26pt &quot;华文行楷&quot;;</string>
         <string notr="true">contourButtonGroup</string>
        </attribute>
       </widget>
-      <widget class="QRadioButton" name="radioButtonRect">
+      <widget class="QRadioButton" name="rectRadioButton">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -582,8 +623,8 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="ImageButtonGroup"/>
   <buttongroup name="binaryButtonGroup"/>
   <buttongroup name="contourButtonGroup"/>
-  <buttongroup name="ImageButtonGroup"/>
  </buttongroups>
 </ui>

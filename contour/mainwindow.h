@@ -44,6 +44,16 @@ private slots:
 
     void on_radioButtonArtWork_clicked();
 
+    void on_boxFilterRadioButton_clicked();
+
+    void on_contourRadioButton_clicked();
+
+    void on_convexHullRadioButton_clicked();
+
+    void on_circleRadioButton_clicked();
+
+    void on_rectRadioButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
