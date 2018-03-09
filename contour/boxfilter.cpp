@@ -25,7 +25,7 @@ void BoxFilter::on_pushButton_clicked()
     width=ui->spinBox_2->value();
     heigth=ui->spinBox_3->value();
 
-    boxfilter_set.setBoxFilter(depth,width,heigth);
+    boxfilter_set.setValue(depth,width,heigth);
     this->close();
 }
 

@@ -60,6 +60,10 @@ private slots:
 
     void on_boxFilterButton_clicked();
 
+    void on_blurButton_clicked();
+
+    void on_gaussianBlurButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

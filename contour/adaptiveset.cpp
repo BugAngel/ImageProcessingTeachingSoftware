@@ -1,7 +1,7 @@
 #include "adaptiveset.h"
 
 adaptiveSet adaptive_set;
-int adaptiveSet::setAdaptive(int &method,int &type,int &size,double &C)
+int adaptiveSet::setValue(int &method,int &type,int &size,double &C)
 {
     this->adaptiveMethod=method;
     this->thresholdType=type;
@@ -10,7 +10,7 @@ int adaptiveSet::setAdaptive(int &method,int &type,int &size,double &C)
     return 0;
 }
 
-int adaptiveSet::getAdaptiveSet(int &method,int &type,int &size,double &C)
+int adaptiveSet::getValue(int &method,int &type,int &size,double &C)
 {
     method=this->adaptiveMethod;
     type=this->thresholdType;

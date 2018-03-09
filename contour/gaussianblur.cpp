@@ -1,0 +1,43 @@
+#include "gaussianblur.h"
+#include "ui_gaussianblur.h"
+#include "gaussianblurset.h"
+#include <QMessageBox>
+GaussianBlur::GaussianBlur(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::GaussianBlur)
+{
+    ui->setupUi(this);
+    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+}
+
+GaussianBlur::~GaussianBlur()
+{
+    delete ui;
+}
+
+void GaussianBlur::on_pushButton_clicked()
+{
+    int width;
+    int heigth;
+    double sigmaX;
+    double sigmaY;
+
+    width=ui->spinBox->value();
+    heigth=ui->spinBox_2->value();
+    sigmaX=ui->doubleSpinBox->value();
+    sigmaY=ui->doubleSpinBox_2->value();
+
+    if(width%2==0 || heigth%2==0){
+        QMessageBox::information(this,
+                                          tr("请输入合适的数字"),
+                                          tr("高斯滤波算法中像素宽度和高度必须为正奇数!"));
+        return;
+    }
+    gaussianblur_set.setValue(width,heigth,sigmaX,sigmaY);
+    this->close();
+}
+
+void GaussianBlur::on_pushButton_2_clicked()
+{
+     this->close();
+}

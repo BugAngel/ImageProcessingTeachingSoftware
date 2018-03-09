@@ -18,7 +18,6 @@ AdaptiveThreshold::~AdaptiveThreshold()
 
 void AdaptiveThreshold::on_pushButton_clicked()
 {
-    bool ok=true;
     int method;
     int type;
     int blockSize;
@@ -40,23 +39,11 @@ void AdaptiveThreshold::on_pushButton_clicked()
         type=1;
     }
 
-    blockSize=ui->lineEditSize->text().toInt(&ok);
-    if(ok==false){
-        QMessageBox::information(this,
-                                          tr("输入错误"),
-                                          tr("请输入正确数字!"));
-        return ;
-    }
+    blockSize=ui->spinBox->value();
 
-    C=ui->lineEditC->text().toDouble(&ok);
-    if(ok==false){
-        QMessageBox::information(this,
-                                          tr("输入错误"),
-                                          tr("请输入正确数字!"));
-        return ;
-    }
+    C=ui->doubleSpinBox->value();
 
-    adaptive_set.setAdaptive(method,type,blockSize,C);
+    adaptive_set.setValue(method,type,blockSize,C);
     this->close();
 }
 

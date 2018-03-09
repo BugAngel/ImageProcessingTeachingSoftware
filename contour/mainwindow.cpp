@@ -165,5 +165,3 @@ void MainWindow::on_rectRadioButton_clicked()
 }
 
 
-
-

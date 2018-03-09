@@ -10,8 +10,8 @@ private:
     int height=5;
 
 public:
-    int setBoxFilter(int &depth,int &width,int &height);
-    int getBoxFilter(int &depth,int &width,int &height);
+    int setValue(int &depth,int &width,int &height);
+    int getValue(int &depth,int &width,int &height);
 };
 
 extern BoxFilterSet boxfilter_set;

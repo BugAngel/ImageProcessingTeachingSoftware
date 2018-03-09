@@ -39,8 +39,8 @@ void MainWindow::on_radioButton_Binary_clicked()
     }
 
     try{
-        std::string threSholdString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(threSholdString,0);//输入图像
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
         QImage* img=new QImage;//QT界面显示图像
 
@@ -81,8 +81,8 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
      }
 
      try{
-         std::string threSholdString=file.getFileString().toLocal8Bit().toStdString();
-         Mat srcImage=imread(threSholdString,0);//输入图像
+         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+         Mat srcImage=imread(fileString,0);//输入图像
          Mat dstImage;//输出图像
          QImage* img=new QImage;//QT界面显示图像
 
@@ -124,8 +124,8 @@ void MainWindow::on_radioButton_TRUNC_clicked()
     }
 
     try{
-        std::string threSholdString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(threSholdString,0);//输入图像
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
         QImage* img=new QImage;//QT界面显示图像
 
@@ -166,8 +166,8 @@ void MainWindow::on_radioButton_TRZERO_clicked()
         return ;
     }
     try{
-        std::string threSholdString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(threSholdString,0);//输入图像
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
         QImage* img=new QImage;//QT界面显示图像
 
@@ -208,8 +208,8 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
         return ;
     }
     try{
-        std::string threSholdString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(threSholdString,0);//输入图像
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
         QImage* img=new QImage;//QT界面显示图像
 
@@ -249,13 +249,13 @@ void MainWindow::on_adaptiveRadioButton_clicked()
                                          "第七个参数为C，为减去平均或加权平均值后的常数值，通常为正数，但少数情况下也可以为负数或0\n\n"
                                          );
     try{
-        std::string threSholdString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(threSholdString,0);//输入图像
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
         QImage* img=new QImage;//QT界面显示图像
         int method,type,size;
         double C;
-        adaptive_set.getAdaptiveSet(method,type,size,C);
+        adaptive_set.getValue(method,type,size,C);
         adaptiveThreshold(srcImage,dstImage,255,method,type,size,C);
         imwrite("temp.jpg",dstImage);
         if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){

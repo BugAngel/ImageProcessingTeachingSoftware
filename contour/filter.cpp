@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "boxfilter.h"
-#include "boxfilterset.h"
 #include "file.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -9,8 +7,14 @@
 #include <QMessageBox>
 #include "showimage.h"
 
+#include "boxfilter.h"
+#include "boxfilterset.h"
+#include "blur.h"
+#include "blurset.h"
+#include "gaussianblur.h"
+#include "gaussianblurset.h"
+
 using namespace std;
-using namespace cv;
 
 void MainWindow::on_boxFilterRadioButton_clicked()
 {
@@ -34,15 +38,15 @@ void MainWindow::on_boxFilterRadioButton_clicked()
         int depth;
         int width;
         int heigth;
-        boxfilter_set.getBoxFilter(depth,width,heigth);
+        boxfilter_set.getValue(depth,width,heigth);
 
-        std::string boxFilterString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(boxFilterString);//输入图像
-        Mat dstImage;//输出图像
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
         QImage* img=new QImage;//QT界面显示图像
 
-        boxFilter(srcImage, dstImage, depth,Size(width, heigth));
-        imwrite("temp.jpg",dstImage);
+        cv::boxFilter(srcImage, dstImage, depth,cv::Size(width, heigth));
+        cv::imwrite("temp.jpg",dstImage);
         if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
             QMessageBox::information(this,
                                               tr("打开图像失败"),
@@ -73,6 +77,31 @@ void MainWindow::on_blurRadioButton_clicked()
                                          "第四个参数，Point类型的anchor，表示锚点（即被平滑的那个点），注意他有默认值Point(-1,-1)。"
                                          "如果这个点坐标是负值的话，就表示取核的中心为锚点，所以默认值Point(-1,-1)表示这个锚点在核的中心。\n\n"
                                          "第五个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。有默认值BORDER_DEFAULT，我们一般不去管它。");
+
+    try{
+        int width;
+        int heigth;
+        blur_set.getValue(width,heigth);
+
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+        QImage* img=new QImage;//QT界面显示图像
+
+        cv::blur(srcImage, dstImage, cv::Size(width, heigth));
+        cv::imwrite("temp.jpg",dstImage);
+        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
+            QMessageBox::information(this,
+                                              tr("打开图像失败"),
+                                              tr("打开图像失败!"));
+        }
+        delete img;
+    }catch(exception& e){
+        QMessageBox::information(this,
+                                          tr("打开图像失败"),
+                                          tr("打开图像失败,请输入正确图像!"));
+    }
+
 }
 
 void MainWindow::on_gaussianBlurRadioButton_clicked()
@@ -93,6 +122,31 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
                                          "若sigmaY为零，就将它设为sigmaX，如果sigmaX和sigmaY都是0，那么就由ksize.width和ksize.height计算出来。"
                                          "为了结果的正确性着想，最好是把第三个参数Size，第四个参数sigmaX和第五个参数sigmaY全部指定到。\n\n"
                                          "第六个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。有默认值BORDER_DEFAULT，我们一般不去管它。\n\n");
+    try{
+        int width;
+        int height;
+        double sigmaX;
+        double sigmaY;
+        gaussianblur_set.getValue(width, height, sigmaX, sigmaY);
+
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+        QImage* img=new QImage;//QT界面显示图像
+
+        cv::GaussianBlur(srcImage, dstImage, cv::Size(width, height),sigmaX,sigmaY);
+        cv::imwrite("temp.jpg",dstImage);
+        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
+            QMessageBox::information(this,
+                                              tr("打开图像失败"),
+                                              tr("打开图像失败!"));
+        }
+        delete img;
+    }catch(exception& e){
+        QMessageBox::information(this,
+                                          tr("打开图像失败"),
+                                          tr("打开图像失败,请输入正确图像!"));
+    }
 }
 
 void MainWindow::on_medianFilterRadioButton_clicked()
@@ -131,4 +185,16 @@ void MainWindow::on_boxFilterButton_clicked()
 {
     BoxFilter *boxfilter=new BoxFilter;
     boxfilter->show();
+}
+
+void MainWindow::on_blurButton_clicked()
+{
+    Blur *blur=new Blur;
+    blur->show();
+}
+
+void MainWindow::on_gaussianBlurButton_clicked()
+{
+    GaussianBlur *gaussianblur=new GaussianBlur;
+    gaussianblur->show();
 }

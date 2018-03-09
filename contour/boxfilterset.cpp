@@ -1,7 +1,7 @@
 #include "boxfilterset.h"
 
 BoxFilterSet boxfilter_set;
-BoxFilterSet::setBoxFilter(int &depth,int &width,int &height)
+BoxFilterSet::setValue(int &depth,int &width,int &height)
 {
     this->depth=depth;
     this->width=width;
@@ -9,7 +9,7 @@ BoxFilterSet::setBoxFilter(int &depth,int &width,int &height)
     return 0;
 }
 
-BoxFilterSet::getBoxFilter(int &depth, int &width, int &height){
+BoxFilterSet::getValue(int &depth, int &width, int &height){
     depth=this->depth;
     width=this->width;
     height=this->height;
