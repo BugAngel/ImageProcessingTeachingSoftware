@@ -31,11 +31,6 @@ void AdaptiveThreshold::on_pushButton_clicked()
         method=0;
     }else if(methodString=="ADAPTIVE_THRESH_GAUSSIAN_C"){
         method=1;
-    }else{
-        QMessageBox::information(this,
-                                          tr("输入错误"),
-                                          tr("请输入下拉框的选项!"));
-        return ;
     }
 
     typeString=ui->comboBoxType->currentText();
@@ -43,11 +38,6 @@ void AdaptiveThreshold::on_pushButton_clicked()
         type=0;
     }else if(typeString=="THRESH_BINARY_INV"){
         type=1;
-    }else{
-        QMessageBox::information(this,
-                                          tr("输入错误"),
-                                          tr("请输入下拉框的选项!"));
-        return ;
     }
 
     blockSize=ui->lineEditSize->text().toInt(&ok);

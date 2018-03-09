@@ -29,18 +29,25 @@ SOURCES += \
     file.cpp \
     showimage.cpp \
     adaptivethreshold.cpp \
-    adaptiveset.cpp
+    adaptiveset.cpp \
+    filter.cpp \
+    threshold.cpp \
+    boxfilter.cpp \
+    boxfilterset.cpp
 
 HEADERS += \
         mainwindow.h \
     file.h \
     showimage.h \
     adaptivethreshold.h \
-    adaptiveset.h
+    adaptiveset.h \
+    boxfilter.h \
+    boxfilterset.h
 
 FORMS += \
         mainwindow.ui \
-    adaptivethreshold.ui
+    adaptivethreshold.ui \
+    boxfilter.ui
 
 INCLUDEPATH += E:\Opencv\QTOpenCV\include \
                E:\Opencv\QTOpenCV\include/opencv \

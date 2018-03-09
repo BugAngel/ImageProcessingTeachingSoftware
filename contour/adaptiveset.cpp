@@ -3,18 +3,18 @@
 adaptiveSet adaptive_set;
 int adaptiveSet::setAdaptive(int &method,int &type,int &size,double &C)
 {
-    adaptiveSet::adaptiveMethod=method;
-    adaptiveSet::thresholdType=type;
-    adaptiveSet::blockSize=size;
-    adaptiveSet::C=C;
+    this->adaptiveMethod=method;
+    this->thresholdType=type;
+    this->blockSize=size;
+    this->C=C;
     return 0;
 }
 
 int adaptiveSet::getAdaptiveSet(int &method,int &type,int &size,double &C)
 {
-    method=adaptiveSet::adaptiveMethod;
-    type=adaptiveSet::thresholdType;
-    size=adaptiveSet::blockSize;
-    C=adaptiveSet::C;
+    method=this->adaptiveMethod;
+    type=this->thresholdType;
+    size=this->blockSize;
+    C=this->C;
     return 0;
 }

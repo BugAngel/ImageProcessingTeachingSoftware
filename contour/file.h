@@ -13,4 +13,5 @@ public:
     QString getFileString();
 };
 
+extern File file;
 #endif // FILE_H
