@@ -64,6 +64,8 @@ private slots:
 
     void on_gaussianBlurButton_clicked();
 
+    void on_bilateralFilterButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

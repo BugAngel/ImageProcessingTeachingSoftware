@@ -23,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->helpTextBrowser->setFontPointSize(14);
     ui->helpTextBrowser->setFontFamily("楷体");
+    ui->helpTextBrowser->insertPlainText("王容出品，必属精品\n\n");
+    ui->helpTextBrowser->insertPlainText("点击图像处理设置里的选项即可立即处理图像，无需任何繁杂操作\n\n");
+    ui->helpTextBrowser->insertPlainText("等我调剂归来，再来做轮廓检测和形态学滤波");
 
     ui->binaryButtonGroup->setId(ui->radioButton_Binary,0);//设置二值化按钮组的ID值
     ui->binaryButtonGroup->setId(ui->radioButton_BinaryInv,1);
@@ -163,5 +166,3 @@ void MainWindow::on_rectRadioButton_clicked()
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("敬请期待");
 }
-
-

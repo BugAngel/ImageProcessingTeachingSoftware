@@ -8,6 +8,15 @@ BoxFilter::BoxFilter(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+
+    int depth;
+    int width;
+    int Heigth;
+    boxfilter_set.getValue(depth,width,Heigth);
+
+    ui->spinBox->setValue(depth);
+    ui->spinBox_2->setValue(width);
+    ui->spinBox_3->setValue(Heigth);
 }
 
 BoxFilter::~BoxFilter()

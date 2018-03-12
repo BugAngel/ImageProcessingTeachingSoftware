@@ -6,6 +6,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <QMessageBox>
 #include "showimage.h"
+#include <QInputDialog>
 
 #include "boxfilter.h"
 #include "boxfilterset.h"
@@ -13,6 +14,8 @@
 #include "blurset.h"
 #include "gaussianblur.h"
 #include "gaussianblurset.h"
+#include "bilateralfilter.h"
+#include "bilateralfilterset.h"
 
 using namespace std;
 
@@ -161,12 +164,39 @@ void MainWindow::on_medianFilterRadioButton_clicked()
                                          "我们可以用Mat::Clone，以源图片为模板，来初始化得到如假包换的目标图。\n\n"
                                          "第三个参数，int类型的ksize，孔径的线性尺寸（aperture linear size），"
                                          "注意这个参数必须是大于1的奇数，比如：3，5，7，9 ...");
+    int ksize=ui->medianFilterSpinBox->value();
+    if(ksize<3 || ksize%2==0){
+        QMessageBox::information(this,
+                                          tr("输入数据错误"),
+                                          tr("这个参数必须是大于1的奇数!"));
+        return;
+    }
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+        QImage* img=new QImage;//QT界面显示图像
+
+        cv::medianBlur(srcImage, dstImage, ksize);
+        cv::imwrite("temp.jpg",dstImage);
+        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
+            QMessageBox::information(this,
+                                              tr("打开图像失败"),
+                                              tr("打开图像失败!"));
+        }
+        delete img;
+    }catch(exception& e){
+        QMessageBox::information(this,
+                                          tr("打开图像失败"),
+                                          tr("打开图像失败,请输入正确图像!"));
+    }
 }
 
 void MainWindow::on_bilateralFilterRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("使用双边滤波来处理一张图片\n\n"
+                                         "这个算法有点卡，用起来要注意\n\n"
                                          "函数原型为：\n"
                                          "void bilateralFilter(InputArray src, OutputArraydst, int d, double sigmaColor, double sigmaSpace, "
                                          "int borderType=BORDER_DEFAULT)  \n\n"
@@ -179,6 +209,32 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
                                          "他的数值越大，意味着越远的像素会相互影响，从而使更大的区域足够相似的颜色获取相同的颜色。"
                                          "当d>0，d指定了邻域大小且与sigmaSpace无关。否则，d正比于sigmaSpace。\n\n"
                                          "第六个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。注意它有默认值BORDER_DEFAULT。");
+
+    try{
+        int d;
+        double sigmaColor;
+        double sigmaSpace;
+        bilateralfilter_set.getValue(d,sigmaColor,sigmaSpace);
+
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+        QImage* img=new QImage;//QT界面显示图像
+
+        cv::bilateralFilter( srcImage, dstImage, d, sigmaColor, sigmaSpace );
+
+        cv::imwrite("temp.jpg",dstImage);
+        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
+            QMessageBox::information(this,
+                                              tr("打开图像失败"),
+                                              tr("打开图像失败!"));
+        }
+        delete img;
+    }catch(exception& e){
+        QMessageBox::information(this,
+                                          tr("打开图像失败"),
+                                          tr("打开图像失败,请输入正确图像!"));
+    }
 }
 
 void MainWindow::on_boxFilterButton_clicked()
@@ -197,4 +253,10 @@ void MainWindow::on_gaussianBlurButton_clicked()
 {
     GaussianBlur *gaussianblur=new GaussianBlur;
     gaussianblur->show();
+}
+
+void MainWindow::on_bilateralFilterButton_clicked()
+{
+    BilateralFilter *bilateralfilter=new BilateralFilter;
+    bilateralfilter->show();
 }

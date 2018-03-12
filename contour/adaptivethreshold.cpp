@@ -9,6 +9,32 @@ AdaptiveThreshold::AdaptiveThreshold(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+
+    int method;
+    int type;
+    int blockSize;
+    double C;
+    QString methodString;
+    QString typeString;
+
+    adaptive_set.getValue(method,type,blockSize,C);
+
+    if(method==0){
+        methodString="ADAPTIVE_THRESH_MEAN_C";
+    }else if(method==1){
+        methodString="ADAPTIVE_THRESH_GAUSSIAN_C";
+    }
+
+    if(type==0){
+        typeString="THRESH_BINARY";
+    }else if(type==1){
+        typeString="THRESH_BINARY_INV";
+    }
+
+    ui->comboBoxMethod->setCurrentText(methodString);
+    ui->comboBoxType->setCurrentText(typeString);
+    ui->spinBox->setValue(blockSize);
+    ui->doubleSpinBox->setValue(C);
 }
 
 AdaptiveThreshold::~AdaptiveThreshold()

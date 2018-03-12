@@ -37,7 +37,9 @@ SOURCES += \
     blur.cpp \
     blurset.cpp \
     gaussianblur.cpp \
-    gaussianblurset.cpp
+    gaussianblurset.cpp \
+    bilateralfilter.cpp \
+    bilateralfilterset.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,14 +52,17 @@ HEADERS += \
     blur.h \
     blurset.h \
     gaussianblur.h \
-    gaussianblurset.h
+    gaussianblurset.h \
+    bilateralfilter.h \
+    bilateralfilterset.h
 
 FORMS += \
         mainwindow.ui \
     adaptivethreshold.ui \
     boxfilter.ui \
     blur.ui \
-    gaussianblur.ui
+    gaussianblur.ui \
+    bilateralfilter.ui
 
 INCLUDEPATH += E:\Opencv\QTOpenCV\include \
                E:\Opencv\QTOpenCV\include/opencv \

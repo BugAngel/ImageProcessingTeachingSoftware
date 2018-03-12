@@ -8,6 +8,13 @@ Blur::Blur(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+
+    int width;
+    int height;
+    blur_set.getValue(width,height);
+
+    ui->spinBox->setValue(width);
+    ui->spinBox_2->setValue(height);
 }
 
 Blur::~Blur()

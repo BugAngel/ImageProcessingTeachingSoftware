@@ -8,6 +8,17 @@ GaussianBlur::GaussianBlur(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+
+    int width;
+    int heigth;
+    double sigmaX;
+    double sigmaY;
+    gaussianblur_set.getValue(width,heigth,sigmaX,sigmaY);
+
+    ui->spinBox->setValue(width);
+    ui->spinBox_2->setValue(heigth);
+    ui->doubleSpinBox->setValue(sigmaX);
+    ui->doubleSpinBox_2->setValue(sigmaY);
 }
 
 GaussianBlur::~GaussianBlur()
