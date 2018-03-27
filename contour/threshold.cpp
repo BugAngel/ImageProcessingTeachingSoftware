@@ -28,15 +28,9 @@ void MainWindow::on_radioButton_Binary_clicked()
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
+    ui->radioButton_Binary->setChecked(true);
 
-    bool ok=true;
-    int thresh=ui->binaryThreshold->text().toDouble(&ok);
-    if(ok==false){
-        QMessageBox::information(this,
-                                          tr("输入错误"),
-                                          tr("请输入正确数字!"));
-        return ;
-    }
+    double thresh=ui->binaryDoubleSpinBox->value();
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -71,14 +65,9 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
                                           "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                           "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                           "第五个参数，阈值类型\n\n");
-     bool ok=true;
-     int thresh=ui->binaryThreshold->text().toDouble(&ok);
-     if(ok==false){
-         QMessageBox::information(this,
-                                           tr("输入错误"),
-                                           tr("请输入正确数字!"));
-         return ;
-     }
+     ui->radioButton_BinaryInv->setChecked(true);
+
+     double thresh=ui->binaryInvDoubleSpinBox->value();
 
      try{
          std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -113,15 +102,9 @@ void MainWindow::on_radioButton_TRUNC_clicked()
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
+    ui->radioButton_TRUNC->setChecked(true);
 
-    bool ok=true;
-    int thresh=ui->binaryThreshold->text().toDouble(&ok);
-    if(ok==false){
-        QMessageBox::information(this,
-                                          tr("输入错误"),
-                                          tr("请输入正确数字!"));
-        return ;
-    }
+    double thresh=ui->truncDoubleSpinBox->value();
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -156,15 +139,10 @@ void MainWindow::on_radioButton_TRZERO_clicked()
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
+    ui->radioButton_TRZERO->setChecked(true);
 
-    bool ok=true;
-    int thresh=ui->binaryThreshold->text().toDouble(&ok);
-    if(ok==false){
-        QMessageBox::information(this,
-                                          tr("输入错误"),
-                                          tr("请输入正确数字!"));
-        return ;
-    }
+    double thresh=ui->tozeroDoubleSpinBox->value();
+
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         Mat srcImage=imread(fileString,0);//输入图像
@@ -198,15 +176,10 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
+    ui->radioButton_TRZERO_INV->setChecked(true);
 
-    bool ok=true;
-    int thresh=ui->binaryThreshold->text().toDouble(&ok);
-    if(ok==false){
-        QMessageBox::information(this,
-                                          tr("输入错误"),
-                                          tr("请输入正确数字!"));
-        return ;
-    }
+    int thresh=ui->tozeroInvDoubleSpinBox->value();
+
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         Mat srcImage=imread(fileString,0);//输入图像
@@ -248,6 +221,8 @@ void MainWindow::on_adaptiveRadioButton_clicked()
                                          "第六个参数为blockSize，用于计算阈值大小的一个像素的邻域尺寸，取值为3,5,7等\n\n"
                                          "第七个参数为C，为减去平均或加权平均值后的常数值，通常为正数，但少数情况下也可以为负数或0\n\n"
                                          );
+    ui->adaptiveRadioButton->setChecked(true);//设置被选上
+
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         Mat srcImage=imread(fileString,0);//输入图像
@@ -271,8 +246,33 @@ void MainWindow::on_adaptiveRadioButton_clicked()
     }
 }
 
+void MainWindow::on_binaryDoubleSpinBox_valueChanged(double arg1)
+{
+    on_radioButton_Binary_clicked();
+}
+
+void MainWindow::on_binaryInvDoubleSpinBox_valueChanged(double arg1)
+{
+    on_radioButton_BinaryInv_clicked();
+}
+
+void MainWindow::on_truncDoubleSpinBox_valueChanged(double arg1)
+{
+    on_radioButton_TRUNC_clicked();
+}
+
+void MainWindow::on_tozeroDoubleSpinBox_valueChanged(double arg1)
+{
+    on_radioButton_TRZERO_clicked();
+}
+
+void MainWindow::on_tozeroInvDoubleSpinBox_valueChanged(double arg1)
+{
+    on_radioButton_TRZERO_INV_clicked();
+}
+
 void MainWindow::on_adaptiveButton_clicked()
 {
-    AdaptiveThreshold *adaptivethreshold=new AdaptiveThreshold;
-    adaptivethreshold->show();
+    AdaptiveThreshold adaptivethreshold(this);
+    adaptivethreshold.exec();
 }

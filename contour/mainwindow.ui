@@ -29,34 +29,6 @@
     <property name="title">
      <string>输入图像</string>
     </property>
-    <widget class="QLineEdit" name="lineEdit_FileName">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>290</y>
-       <width>451</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="tabletTracking">
-      <bool>false</bool>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::StrongFocus</enum>
-     </property>
-     <property name="text">
-      <string>文件路径</string>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Normal</enum>
-     </property>
-     <property name="dragEnabled">
-      <bool>false</bool>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="QScrollArea" name="scrollAreaSrcImage">
      <property name="geometry">
       <rect>
@@ -88,6 +60,58 @@
        </rect>
       </property>
      </widget>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>290</y>
+       <width>421</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>输入图像显示方式</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonIgnoreAspectRatio_2">
+        <property name="text">
+         <string>饱满填充</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonKeepAspectRatio_2">
+        <property name="text">
+         <string>按比例填充</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonArtWork_2">
+        <property name="text">
+         <string>原图</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
@@ -150,7 +174,7 @@
          </font>
         </property>
         <property name="text">
-         <string>输入图像与输出图像显示方式</string>
+         <string>输出图像显示方式</string>
         </property>
        </widget>
       </item>
@@ -212,7 +236,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
@@ -224,7 +248,7 @@
          <x>20</x>
          <y>10</y>
          <width>241</width>
-         <height>211</height>
+         <height>241</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
@@ -299,6 +323,9 @@
           <property name="maximum">
            <number>9999</number>
           </property>
+          <property name="singleStep">
+           <number>2</number>
+          </property>
           <property name="value">
            <number>7</number>
           </property>
@@ -317,26 +344,10 @@
          <x>20</x>
          <y>10</y>
          <width>235</width>
-         <height>201</height>
+         <height>251</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="QRadioButton" name="radioButton_Binary">
-          <property name="toolTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>BINARY</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">binaryButtonGroup</string>
-          </attribute>
-         </widget>
-        </item>
         <item row="2" column="0">
          <widget class="QRadioButton" name="radioButton_TRUNC">
           <property name="toolTip">
@@ -357,23 +368,16 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QRadioButton" name="radioButton_BinaryInv">
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radioButton_Binary">
           <property name="toolTip">
            <string/>
           </property>
           <property name="text">
-           <string>BINARY_INV</string>
+           <string>BINARY</string>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">binaryButtonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QRadioButton" name="adaptiveRadioButton">
-          <property name="text">
-           <string>自适应阈值</string>
+          <property name="checked">
+           <bool>true</bool>
           </property>
           <attribute name="buttonGroup">
            <string notr="true">binaryButtonGroup</string>
@@ -406,26 +410,76 @@
           </attribute>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QLineEdit" name="binaryThreshold">
+        <item row="5" column="0">
+         <widget class="QRadioButton" name="adaptiveRadioButton">
+          <property name="text">
+           <string>自适应阈值</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">binaryButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QRadioButton" name="radioButton_BinaryInv">
           <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;请输入0~255整数&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string/>
           </property>
           <property name="text">
-           <string>125</string>
+           <string>BINARY_INV</string>
           </property>
-          <property name="readOnly">
-           <bool>false</bool>
+          <attribute name="buttonGroup">
+           <string notr="true">binaryButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QDoubleSpinBox" name="binaryDoubleSpinBox">
+          <property name="maximum">
+           <double>255.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>127.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>阈值(自适应阈值不需要设置)</string>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="binaryInvDoubleSpinBox">
+          <property name="maximum">
+           <double>255.000000000000000</double>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
+          <property name="value">
+           <double>127.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QDoubleSpinBox" name="truncDoubleSpinBox">
+          <property name="maximum">
+           <double>255.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>127.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QDoubleSpinBox" name="tozeroDoubleSpinBox">
+          <property name="maximum">
+           <double>255.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>127.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QDoubleSpinBox" name="tozeroInvDoubleSpinBox">
+          <property name="maximum">
+           <double>255.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>127.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -628,8 +682,8 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="ImageButtonGroup"/>
-  <buttongroup name="binaryButtonGroup"/>
   <buttongroup name="contourButtonGroup"/>
+  <buttongroup name="binaryButtonGroup"/>
+  <buttongroup name="ImageButtonGroup"/>
  </buttongroups>
 </ui>

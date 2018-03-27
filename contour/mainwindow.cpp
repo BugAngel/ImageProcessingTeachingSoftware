@@ -11,6 +11,8 @@
 #include "showimage.h"
 #include "adaptiveset.h"
 #include "adaptivethreshold.h"
+#include "QProcess"
+#include "boxfilter.h"
 
 using namespace  cv;
 using namespace std;
@@ -46,6 +48,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    QProcess p(0);
+    p.start("cmd", QStringList()<<"/c"<<"del temp.jpg");
+    p.waitForStarted();
+    p.waitForFinished();
     delete ui;
 }
 
@@ -54,7 +60,6 @@ void MainWindow::on_actionOpenImg_triggered()
     qDebug()<< "打开文件键有反应";
 
     file.setFileString(QFileDialog::getOpenFileName(this,tr("打开图像文件"),"/"));
-    ui->lineEdit_FileName->setText(file.getFileString());
 
     QImage* img=new QImage;
     if(showImg.showImage(ui,img,file.getFileString(),SRCImage)==-1){
@@ -122,26 +127,6 @@ void MainWindow::on_contourButton_clicked()
     }
 }
 
-void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输入图像与输出图像采用饱满填充");
-    showImg.setShowImageType(0);
-}
-
-void MainWindow::on_radioButtonKeepAspectRatio_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输入图像与输出图像采用按比例填充");
-    showImg.setShowImageType(1);
-}
-
-void MainWindow::on_radioButtonArtWork_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输入图像与输出图像显示原图");
-    showImg.setShowImageType(2);
-}
 
 void MainWindow::on_contourRadioButton_clicked()
 {
@@ -166,3 +151,4 @@ void MainWindow::on_rectRadioButton_clicked()
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("敬请期待");
 }
+

@@ -1,13 +1,13 @@
 #ifndef BOXFILTER_H
 #define BOXFILTER_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class BoxFilter;
 }
 
-class BoxFilter : public QWidget
+class BoxFilter : public QDialog
 {
     Q_OBJECT
 

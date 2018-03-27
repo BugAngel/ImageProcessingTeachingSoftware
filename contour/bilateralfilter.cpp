@@ -1,13 +1,14 @@
 #include "bilateralfilter.h"
 #include "ui_bilateralfilter.h"
 #include "bilateralfilterset.h"
+#include "mainwindow.h"
 
 BilateralFilter::BilateralFilter(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BilateralFilter)
 {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+//    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
 
     int d;
     double sigmaColor;
@@ -34,7 +35,10 @@ void BilateralFilter::on_pushButton_clicked()
     sigmaSpace=ui->doubleSpinBox_2->value();
 
     bilateralfilter_set.setValue(d,sigmaColor,sigmaSpace);
-    this->close();
+
+    MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
+    ptr->on_bilateralFilterRadioButton_clicked();
+    close();
 }
 
 void BilateralFilter::on_pushButton_2_clicked()

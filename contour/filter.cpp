@@ -36,6 +36,7 @@ void MainWindow::on_boxFilterRadioButton_clicked()
                                          "如果这个点坐标是负值的话，就表示取核的中心为锚点，所以默认值Point(-1,-1)表示这个锚点在核的中心。\n\n"
                                          "第六个参数，bool类型的normalize，默认值为true，一个标识符，表示内核是否被其区域归一化（normalized）了。\n\n"
                                          "第七个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。有默认值BORDER_DEFAULT，我们一般不去管它。");
+    ui->boxFilterRadioButton->setChecked(true);
 
     try{
         int depth;
@@ -80,6 +81,7 @@ void MainWindow::on_blurRadioButton_clicked()
                                          "第四个参数，Point类型的anchor，表示锚点（即被平滑的那个点），注意他有默认值Point(-1,-1)。"
                                          "如果这个点坐标是负值的话，就表示取核的中心为锚点，所以默认值Point(-1,-1)表示这个锚点在核的中心。\n\n"
                                          "第五个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。有默认值BORDER_DEFAULT，我们一般不去管它。");
+    ui->blurRadioButton->setChecked(true);
 
     try{
         int width;
@@ -125,6 +127,8 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
                                          "若sigmaY为零，就将它设为sigmaX，如果sigmaX和sigmaY都是0，那么就由ksize.width和ksize.height计算出来。"
                                          "为了结果的正确性着想，最好是把第三个参数Size，第四个参数sigmaX和第五个参数sigmaY全部指定到。\n\n"
                                          "第六个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。有默认值BORDER_DEFAULT，我们一般不去管它。\n\n");
+    ui->gaussianBlurRadioButton->setChecked(true);
+
     try{
         int width;
         int height;
@@ -164,6 +168,8 @@ void MainWindow::on_medianFilterRadioButton_clicked()
                                          "我们可以用Mat::Clone，以源图片为模板，来初始化得到如假包换的目标图。\n\n"
                                          "第三个参数，int类型的ksize，孔径的线性尺寸（aperture linear size），"
                                          "注意这个参数必须是大于1的奇数，比如：3，5，7，9 ...");
+    ui->medianFilterRadioButton->setChecked(true);
+
     int ksize=ui->medianFilterSpinBox->value();
     if(ksize<3 || ksize%2==0){
         QMessageBox::information(this,
@@ -209,6 +215,7 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
                                          "他的数值越大，意味着越远的像素会相互影响，从而使更大的区域足够相似的颜色获取相同的颜色。"
                                          "当d>0，d指定了邻域大小且与sigmaSpace无关。否则，d正比于sigmaSpace。\n\n"
                                          "第六个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。注意它有默认值BORDER_DEFAULT。");
+    ui->bilateralFilterRadioButton->setChecked(true);
 
     try{
         int d;
@@ -239,24 +246,29 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
 
 void MainWindow::on_boxFilterButton_clicked()
 {
-    BoxFilter *boxfilter=new BoxFilter;
-    boxfilter->show();
+    BoxFilter boxfilter(this);
+    boxfilter.exec();
 }
 
 void MainWindow::on_blurButton_clicked()
 {
-    Blur *blur=new Blur;
-    blur->show();
+    Blur blur(this);
+    blur.exec();
 }
 
 void MainWindow::on_gaussianBlurButton_clicked()
 {
-    GaussianBlur *gaussianblur=new GaussianBlur;
-    gaussianblur->show();
+    GaussianBlur gaussianblur(this);
+    gaussianblur.exec();
 }
 
 void MainWindow::on_bilateralFilterButton_clicked()
 {
-    BilateralFilter *bilateralfilter=new BilateralFilter;
-    bilateralfilter->show();
+    BilateralFilter bilateralfilter(this);
+    bilateralfilter.exec();
+}
+
+void MainWindow::on_medianFilterSpinBox_valueChanged(int arg1)
+{
+    on_medianFilterRadioButton_clicked();
 }

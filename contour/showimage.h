@@ -9,13 +9,20 @@
 const int SRCImage =0;
 const int DSTImage =1;
 
+const int IGNORE=0;
+const int KEEPASPECT=1;
+const int ART=2;
+
 class ShowImage
 {
 private:
-    int showImageType=0;//0为饱满缩放，1为按比例缩放，2为原图
+    int srcShowImageType=0;//0为饱满缩放，1为按比例缩放，2为原图
+    int dstShowImageType=0;//0为饱满缩放，1为按比例缩放，2为原图
 public:
-    int setShowImageType(int showImageType);
-    int getShowImageType();
+    int setSrcShowImageType(int showImageType);
+    int setDstShowImageType(int showImageType);
+    int getSrcShowImageType();
+    int getDstShowImageType();
     int showImage(Ui::MainWindow *ui,QImage* img,QString s,int type);
     int IgnoreAspectRatio(Ui::MainWindow *ui,QImage* img,QString s,int type);//饱满填充
     int KeepAspectRatio(Ui::MainWindow *ui,QImage* img,QString s,int type);//按比例缩放

@@ -2,13 +2,14 @@
 #include "ui_adaptivethreshold.h"
 #include "adaptiveset.h"
 #include <QMessageBox>
+#include "mainwindow.h"
 
 AdaptiveThreshold::AdaptiveThreshold(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::adaptiveThreshold)
 {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+//    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
 
     int method;
     int type;
@@ -70,6 +71,9 @@ void AdaptiveThreshold::on_pushButton_clicked()
     C=ui->doubleSpinBox->value();
 
     adaptive_set.setValue(method,type,blockSize,C);
+
+    MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
+    ptr->on_adaptiveRadioButton_clicked();
     this->close();
 }
 

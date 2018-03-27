@@ -15,6 +15,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void on_boxFilterRadioButton_clicked();
+
+    void on_adaptiveRadioButton_clicked();
+
+    void on_blurRadioButton_clicked();
+
+    void on_gaussianBlurRadioButton_clicked();
+
+    void on_medianFilterRadioButton_clicked();
+
+    void on_bilateralFilterRadioButton_clicked();
+
 private slots:
     void on_actionOpenImg_triggered();
 
@@ -30,7 +43,7 @@ private slots:
 
     void on_radioButton_TRZERO_INV_clicked();
 
-    void on_adaptiveRadioButton_clicked();
+    void on_boxFilterButton_clicked();
 
     void on_adaptiveButton_clicked();
 
@@ -40,8 +53,6 @@ private slots:
 
     void on_radioButtonArtWork_clicked();
 
-    void on_boxFilterRadioButton_clicked();
-
     void on_contourRadioButton_clicked();
 
     void on_convexHullRadioButton_clicked();
@@ -50,25 +61,32 @@ private slots:
 
     void on_rectRadioButton_clicked();
 
-    void on_blurRadioButton_clicked();
-
-    void on_gaussianBlurRadioButton_clicked();
-
-    void on_medianFilterRadioButton_clicked();
-
-    void on_bilateralFilterRadioButton_clicked();
-
-    void on_boxFilterButton_clicked();
-
     void on_blurButton_clicked();
 
     void on_gaussianBlurButton_clicked();
 
     void on_bilateralFilterButton_clicked();
 
-private:
+    void on_radioButtonIgnoreAspectRatio_2_clicked();
+
+    void on_radioButtonKeepAspectRatio_2_clicked();
+
+    void on_radioButtonArtWork_2_clicked();
+
+    void on_binaryDoubleSpinBox_valueChanged(double arg1);
+
+    void on_binaryInvDoubleSpinBox_valueChanged(double arg1);
+
+    void on_truncDoubleSpinBox_valueChanged(double arg1);
+
+    void on_tozeroDoubleSpinBox_valueChanged(double arg1);
+
+    void on_tozeroInvDoubleSpinBox_valueChanged(double arg1);
+
+    void on_medianFilterSpinBox_valueChanged(int arg1);
+
+public:
     Ui::MainWindow *ui;
 
 };
-
 #endif // MAINWINDOW_H

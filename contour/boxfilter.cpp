@@ -1,13 +1,16 @@
 #include "boxfilter.h"
 #include "ui_boxfilter.h"
 #include "boxfilterset.h"
+#include "filter.h"
+#include "mainwindow.h"
+#include <QDebug>
 
 BoxFilter::BoxFilter(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::BoxFilter)
 {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+//    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
 
     int depth;
     int width;
@@ -35,7 +38,11 @@ void BoxFilter::on_pushButton_clicked()
     heigth=ui->spinBox_3->value();
 
     boxfilter_set.setValue(depth,width,heigth);
-    this->close();
+
+//    emit boxFilterEvent();//发射方框滤波信号
+    MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
+    ptr->on_boxFilterRadioButton_clicked();
+    close();
 }
 
 void BoxFilter::on_pushButton_2_clicked()

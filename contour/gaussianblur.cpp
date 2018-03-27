@@ -2,12 +2,14 @@
 #include "ui_gaussianblur.h"
 #include "gaussianblurset.h"
 #include <QMessageBox>
+#include "mainwindow.h"
+
 GaussianBlur::GaussianBlur(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GaussianBlur)
 {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
+//    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
 
     int width;
     int heigth;
@@ -45,7 +47,10 @@ void GaussianBlur::on_pushButton_clicked()
         return;
     }
     gaussianblur_set.setValue(width,heigth,sigmaX,sigmaY);
-    this->close();
+
+    MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
+    ptr->on_gaussianBlurRadioButton_clicked();
+    close();
 }
 
 void GaussianBlur::on_pushButton_2_clicked()
