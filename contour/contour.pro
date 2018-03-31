@@ -39,7 +39,8 @@ SOURCES += \
     gaussianblur.cpp \
     gaussianblurset.cpp \
     bilateralfilter.cpp \
-    bilateralfilterset.cpp
+    bilateralfilterset.cpp \
+    morph.cpp
 
 HEADERS += \
         mainwindow.h \

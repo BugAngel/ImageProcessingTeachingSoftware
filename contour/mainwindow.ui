@@ -17,643 +17,722 @@
    <string notr="true">font: 9pt &quot;Arial&quot;;</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>471</width>
-      <height>331</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>输入图像</string>
-    </property>
-    <widget class="QScrollArea" name="scrollAreaSrcImage">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>451</width>
-       <height>261</height>
-      </rect>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Sunken</enum>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>451</width>
-        <height>261</height>
-       </rect>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>输入图像</string>
       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QScrollArea" name="scrollAreaSrcImage">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>499</width>
+            <height>301</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>9</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>输入图像显示方式</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonIgnoreAspectRatio_2">
+           <property name="text">
+            <string>饱满填充</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">srcImageButtonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonKeepAspectRatio_2">
+           <property name="text">
+            <string>按比例填充</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">srcImageButtonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonArtWork_2">
+           <property name="text">
+            <string>原图</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">srcImageButtonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
-    </widget>
-    <widget class="QWidget" name="layoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>290</y>
-       <width>421</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>9</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>输入图像显示方式</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButtonIgnoreAspectRatio_2">
-        <property name="text">
-         <string>饱满填充</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButtonKeepAspectRatio_2">
-        <property name="text">
-         <string>按比例填充</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButtonArtWork_2">
-        <property name="text">
-         <string>原图</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_2">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>20</y>
-      <width>441</width>
-      <height>331</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>输出图像</string>
-    </property>
-    <widget class="QScrollArea" name="scrollAreaDstImage">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>421</width>
-       <height>261</height>
-      </rect>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_2">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>421</width>
-        <height>261</height>
-       </rect>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>输出图像</string>
       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QScrollArea" name="scrollAreaDstImage">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>499</width>
+            <height>301</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>9</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>输出图像显示方式</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonIgnoreAspectRatio">
+           <property name="text">
+            <string>饱满填充</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">dstImageButtonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonKeepAspectRatio">
+           <property name="text">
+            <string>按比例填充</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">dstImageButtonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonArtWork">
+           <property name="text">
+            <string>原图</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">dstImageButtonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>290</y>
-       <width>421</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>9</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>输出图像显示方式</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButtonIgnoreAspectRatio">
-        <property name="text">
-         <string>饱满填充</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-        <attribute name="buttonGroup">
-         <string notr="true">ImageButtonGroup</string>
-        </attribute>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButtonKeepAspectRatio">
-        <property name="text">
-         <string>按比例填充</string>
-        </property>
-        <attribute name="buttonGroup">
-         <string notr="true">ImageButtonGroup</string>
-        </attribute>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButtonArtWork">
-        <property name="text">
-         <string>原图</string>
-        </property>
-        <attribute name="buttonGroup">
-         <string notr="true">ImageButtonGroup</string>
-        </attribute>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>370</y>
-      <width>301</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>图像处理设置</string>
-    </property>
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>281</width>
-       <height>301</height>
-      </rect>
-     </property>
-     <property name="currentIndex">
-      <number>2</number>
-     </property>
-     <widget class="QWidget" name="tab_3">
-      <attribute name="title">
-       <string>滤波</string>
-      </attribute>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>241</width>
-         <height>241</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QRadioButton" name="boxFilterRadioButton">
-          <property name="text">
-           <string>方框滤波</string>
-          </property>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="title">
+       <string>图像处理设置</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>线性与非线性滤波</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="boxFilterRadioButton">
+             <property name="text">
+              <string>方框滤波</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">BlurButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="boxFilterButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="blurRadioButton">
+             <property name="text">
+              <string>均值滤波</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">BlurButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="blurButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="gaussianBlurRadioButton">
+             <property name="text">
+              <string>高斯滤波</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">BlurButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="gaussianBlurButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QRadioButton" name="medianFilterRadioButton">
+             <property name="text">
+              <string>中值滤波</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">BlurButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QSpinBox" name="medianFilterSpinBox">
+             <property name="minimum">
+              <number>3</number>
+             </property>
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+             <property name="singleStep">
+              <number>2</number>
+             </property>
+             <property name="value">
+              <number>7</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QRadioButton" name="bilateralFilterRadioButton">
+             <property name="text">
+              <string>双边滤波</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">BlurButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="bilateralFilterButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="boxFilterButton">
-          <property name="text">
-           <string>设置</string>
-          </property>
+         <widget class="QWidget" name="tab_4">
+          <attribute name="title">
+           <string>形态学滤波</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QRadioButton" name="erodeRadioButton">
+               <property name="text">
+                <string>腐蚀</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">morphButtonGroup</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="dilateRadioButton">
+               <property name="text">
+                <string>膨胀</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">morphButtonGroup</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="morphOpenRadioButton">
+               <property name="text">
+                <string>开运算</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">morphButtonGroup</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="morphCloseRadioButton">
+               <property name="text">
+                <string>闭运算</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">morphButtonGroup</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="morphGradientRadioButton">
+               <property name="text">
+                <string>形态学梯度</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">morphButtonGroup</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="morphTopHatRadioButton">
+               <property name="text">
+                <string>顶帽</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">morphButtonGroup</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="morphBlackHatRadioButton">
+               <property name="text">
+                <string>黑帽</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">morphButtonGroup</string>
+               </attribute>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>内核形状</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="morphShapeComboBox">
+               <item>
+                <property name="text">
+                 <string>矩形</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>交叉形</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>椭圆形</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>内核长</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="morphSizeLenghtSpinBox">
+               <property name="value">
+                <number>3</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>内核宽</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="morphSizeHighSpinBox">
+               <property name="value">
+                <number>3</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QRadioButton" name="blurRadioButton">
-          <property name="text">
-           <string>均值滤波</string>
-          </property>
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>二值化</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="radioButton_Binary">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>BINARY</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QDoubleSpinBox" name="binaryDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="radioButton_BinaryInv">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>BINARY_INV</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="binaryInvDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="radioButton_TRUNC">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>TRUNC</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="truncDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QRadioButton" name="radioButton_TRZERO">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>TOZERO</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="tozeroDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QRadioButton" name="radioButton_TRZERO_INV">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>TOZERO_INV</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QDoubleSpinBox" name="tozeroInvDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QRadioButton" name="adaptiveRadioButton">
+             <property name="text">
+              <string>自适应阈值</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="adaptiveButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="blurButton">
-          <property name="text">
-           <string>设置</string>
-          </property>
+         <widget class="QWidget" name="tab_2">
+          <attribute name="title">
+           <string>轮廓检测</string>
+          </attribute>
+          <widget class="QRadioButton" name="contourRadioButton">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>20</y>
+             <width>89</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>绘制轮廓</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">contourButtonGroup</string>
+           </attribute>
+          </widget>
+          <widget class="QRadioButton" name="convexHullRadioButton">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>50</y>
+             <width>89</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>绘制凸包</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">contourButtonGroup</string>
+           </attribute>
+          </widget>
+          <widget class="QRadioButton" name="circleRadioButton">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>80</y>
+             <width>111</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>绘制最小外接圆</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">contourButtonGroup</string>
+           </attribute>
+          </widget>
+          <widget class="QRadioButton" name="rectRadioButton">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>110</y>
+             <width>121</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>绘制最小外接矩形</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">contourButtonGroup</string>
+           </attribute>
+          </widget>
+          <widget class="QPushButton" name="contourButton">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>230</y>
+             <width>179</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>轮廓检测</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_2">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>150</y>
+             <width>24</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>阈值</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="contourThreshold">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>150</y>
+             <width>116</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;请输入0~255整数&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>125</string>
+           </property>
+           <property name="readOnly">
+            <bool>false</bool>
+           </property>
+          </widget>
          </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QRadioButton" name="gaussianBlurRadioButton">
-          <property name="text">
-           <string>高斯滤波</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="gaussianBlurButton">
-          <property name="text">
-           <string>设置</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QRadioButton" name="medianFilterRadioButton">
-          <property name="text">
-           <string>中值滤波</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QRadioButton" name="bilateralFilterRadioButton">
-          <property name="text">
-           <string>双边滤波</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="bilateralFilterButton">
-          <property name="text">
-           <string>设置</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QSpinBox" name="medianFilterSpinBox">
-          <property name="minimum">
-           <number>3</number>
-          </property>
-          <property name="maximum">
-           <number>9999</number>
-          </property>
-          <property name="singleStep">
-           <number>2</number>
-          </property>
-          <property name="value">
-           <number>7</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+        </widget>
+       </item>
+      </layout>
      </widget>
-     <widget class="QWidget" name="tab">
-      <attribute name="title">
-       <string>二值化</string>
-      </attribute>
-      <widget class="QWidget" name="verticalLayoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>235</width>
-         <height>251</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="2" column="0">
-         <widget class="QRadioButton" name="radioButton_TRUNC">
-          <property name="toolTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>TRUNC</string>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">binaryButtonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QPushButton" name="adaptiveButton">
-          <property name="text">
-           <string>设置</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QRadioButton" name="radioButton_Binary">
-          <property name="toolTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>BINARY</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">binaryButtonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QRadioButton" name="radioButton_TRZERO">
-          <property name="toolTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>TOZERO</string>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">binaryButtonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QRadioButton" name="radioButton_TRZERO_INV">
-          <property name="toolTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>TOZERO_INV</string>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">binaryButtonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QRadioButton" name="adaptiveRadioButton">
-          <property name="text">
-           <string>自适应阈值</string>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">binaryButtonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QRadioButton" name="radioButton_BinaryInv">
-          <property name="toolTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>BINARY_INV</string>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">binaryButtonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QDoubleSpinBox" name="binaryDoubleSpinBox">
-          <property name="maximum">
-           <double>255.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>127.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QDoubleSpinBox" name="binaryInvDoubleSpinBox">
-          <property name="maximum">
-           <double>255.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>127.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QDoubleSpinBox" name="truncDoubleSpinBox">
-          <property name="maximum">
-           <double>255.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>127.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="tozeroDoubleSpinBox">
-          <property name="maximum">
-           <double>255.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>127.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QDoubleSpinBox" name="tozeroInvDoubleSpinBox">
-          <property name="maximum">
-           <double>255.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>127.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>轮廓检测</string>
-      </attribute>
-      <widget class="QRadioButton" name="contourRadioButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>20</y>
-         <width>89</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>绘制轮廓</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">contourButtonGroup</string>
-       </attribute>
-      </widget>
-      <widget class="QRadioButton" name="convexHullRadioButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>50</y>
-         <width>89</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>绘制凸包</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">contourButtonGroup</string>
-       </attribute>
-      </widget>
-      <widget class="QRadioButton" name="circleRadioButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>80</y>
-         <width>111</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>绘制最小外接圆</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">contourButtonGroup</string>
-       </attribute>
-      </widget>
-      <widget class="QRadioButton" name="rectRadioButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>110</y>
-         <width>121</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>绘制最小外接矩形</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">contourButtonGroup</string>
-       </attribute>
-      </widget>
-      <widget class="QPushButton" name="contourButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>230</y>
-         <width>179</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>轮廓检测</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>150</y>
-         <width>24</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>阈值</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="contourThreshold">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>150</y>
-         <width>116</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;请输入0~255整数&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>125</string>
-       </property>
-       <property name="readOnly">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_5">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>370</y>
-      <width>341</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>帮助</string>
-    </property>
-    <widget class="QTextBrowser" name="helpTextBrowser">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>321</width>
-       <height>331</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>9</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="html">
-      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+    </item>
+    <item row="1" column="1">
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="title">
+       <string>帮助</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QTextBrowser" name="helpTextBrowser">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>9</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="html">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Arial'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_4">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>370</y>
-      <width>301</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>结果显示</string>
-    </property>
-   </widget>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -684,6 +763,9 @@ p, li { white-space: pre-wrap; }
  <buttongroups>
   <buttongroup name="contourButtonGroup"/>
   <buttongroup name="binaryButtonGroup"/>
-  <buttongroup name="ImageButtonGroup"/>
+  <buttongroup name="BlurButtonGroup"/>
+  <buttongroup name="morphButtonGroup"/>
+  <buttongroup name="dstImageButtonGroup"/>
+  <buttongroup name="srcImageButtonGroup"/>
  </buttongroups>
 </ui>

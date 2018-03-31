@@ -47,20 +47,14 @@ void MainWindow::on_boxFilterRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
 
         cv::boxFilter(srcImage, dstImage, depth,cv::Size(width, heigth));
         cv::imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 
 }
@@ -91,20 +85,14 @@ void MainWindow::on_blurRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
 
         cv::blur(srcImage, dstImage, cv::Size(width, heigth));
         cv::imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 
 }
@@ -139,20 +127,14 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
 
         cv::GaussianBlur(srcImage, dstImage, cv::Size(width, height),sigmaX,sigmaY);
         cv::imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -181,20 +163,14 @@ void MainWindow::on_medianFilterRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
 
         cv::medianBlur(srcImage, dstImage, ksize);
         cv::imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -226,21 +202,15 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
 
         cv::bilateralFilter( srcImage, dstImage, d, sigmaColor, sigmaSpace );
 
         cv::imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 

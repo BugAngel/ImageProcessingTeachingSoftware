@@ -23,10 +23,10 @@ public:
     int setDstShowImageType(int showImageType);
     int getSrcShowImageType();
     int getDstShowImageType();
-    int showImage(Ui::MainWindow *ui,QImage* img,QString s,int type);
-    int IgnoreAspectRatio(Ui::MainWindow *ui,QImage* img,QString s,int type);//饱满填充
-    int KeepAspectRatio(Ui::MainWindow *ui,QImage* img,QString s,int type);//按比例缩放
-    int ARTWork(Ui::MainWindow *ui,QImage* img,QString s,int type);//使用滚动条显示原图
+    int showImage(Ui::MainWindow *ui,QString s,int type);
+    int IgnoreAspectRatio(Ui::MainWindow *ui,QString s,int type);//饱满填充
+    int KeepAspectRatio(Ui::MainWindow *ui,QString s,int type);//按比例缩放
+    int ARTWork(Ui::MainWindow *ui,QString s,int type);//使用滚动条显示原图
 };
 
 extern ShowImage showImg;

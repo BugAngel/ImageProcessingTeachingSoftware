@@ -33,16 +33,12 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_2_clicked()
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        if(showImg.showImage(ui,img,file.getFileString(),SRCImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("未找到输出图像!"));
-        }
+        showImg.showImage(ui,file.getFileString(),SRCImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -54,16 +50,12 @@ void MainWindow::on_radioButtonKeepAspectRatio_2_clicked()
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        if(showImg.showImage(ui,img,file.getFileString(),SRCImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("未找到输出图像!"));
-        }
+        showImg.showImage(ui,file.getFileString(),SRCImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -75,16 +67,12 @@ void MainWindow::on_radioButtonArtWork_2_clicked()
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        if(showImg.showImage(ui,img,file.getFileString(),SRCImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("未找到输出图像!"));
-        }
+        showImg.showImage(ui,file.getFileString(),SRCImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -96,16 +84,12 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("未找到输出图像!"));
-        }
+        showImg.showImage(ui,"temp.jpg",DSTImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -117,16 +101,12 @@ void MainWindow::on_radioButtonKeepAspectRatio_clicked()
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("未找到输出图像!"));
-        }
+        showImg.showImage(ui,"temp.jpg",DSTImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -138,86 +118,74 @@ void MainWindow::on_radioButtonArtWork_clicked()
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("未找到输出图像!"));
-        }
+        showImg.showImage(ui,"temp.jpg",DSTImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
-ShowImage::IgnoreAspectRatio(Ui::MainWindow *ui,QImage* img,QString s,const int type)
+ShowImage::IgnoreAspectRatio(Ui::MainWindow *ui,QString s,const int type)
 {
+    QImage* img=new QImage;
     if(! ( img->load(s) ) ) //加载图像
     {
        return -1;
-     }
+    }
 
     QPixmap pixmap = QPixmap::fromImage(*img);
     QLabel *label = new QLabel();
     if(type==SRCImage){
-//        int width = ui->srcImage->width();
-//        int height = ui->srcImage->height();
         int width=ui->scrollAreaSrcImage->width();
         int height=ui->scrollAreaSrcImage->height();
         QPixmap fitpixmap = pixmap.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);  // 饱满填充
 
         label->setPixmap(fitpixmap);
         ui->scrollAreaSrcImage->setWidget(label);
-//        ui->srcImage->setPixmap(fitpixmap);
     }else if(type==DSTImage){
-//        int width = ui->dstImage->width();
-//        int height = ui->dstImage->height();
         int width=ui->scrollAreaDstImage->width();
         int height=ui->scrollAreaDstImage->height();
         QPixmap fitpixmap = pixmap.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);  // 饱满填充
         label->setPixmap(fitpixmap);
-        ui->scrollAreaDstImage->setWidget(label);      
-//        ui->dstImage->setPixmap(fitpixmap);
+        ui->scrollAreaDstImage->setWidget(label);
     }
-//    delete label;
+    delete img;
     return 0;
 }
 
-ShowImage::KeepAspectRatio(Ui::MainWindow *ui,QImage* img,QString s,const int type)
+ShowImage::KeepAspectRatio(Ui::MainWindow *ui, QString s, const int type)
 {
+    QImage* img=new QImage;
+
     if(! ( img->load(s) ) ) //加载图像
     {
        return -1;
-     }
+    }
 
     QPixmap pixmap = QPixmap::fromImage(*img);
     QLabel *label = new QLabel();
     if(type==SRCImage){
-//        int width = ui->srcImage->width();
-//        int height = ui->srcImage->height();
         int width=ui->scrollAreaSrcImage->width();
         int height=ui->scrollAreaSrcImage->height();
         QPixmap fitpixmap = pixmap.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);  // 按比例填充
 
         label->setPixmap(fitpixmap);
         ui->scrollAreaSrcImage->setWidget(label);
-//        ui->srcImage->setPixmap(fitpixmap);
     }else if(type==DSTImage){
-//        int width = ui->dstImage->width();
-//        int height = ui->dstImage->height();
         int width=ui->scrollAreaDstImage->width();
         int height=ui->scrollAreaDstImage->height();
         QPixmap fitpixmap = pixmap.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);  // 按比例填充
         label->setPixmap(fitpixmap);
-        ui->scrollAreaDstImage->setWidget(label);        
-//        ui->dstImage->setPixmap(fitpixmap);
+        ui->scrollAreaDstImage->setWidget(label);
     }
-//    delete label;
+    delete img;
     return 0;
 }
 
-ShowImage::ARTWork(Ui::MainWindow *ui, QImage *img, QString s, const int type){
+ShowImage::ARTWork(Ui::MainWindow *ui, QString s, const int type){
+     QImage* img=new QImage;
     if(! ( img->load(s) ) ) //加载图像
     {
        return -1;
@@ -230,11 +198,11 @@ ShowImage::ARTWork(Ui::MainWindow *ui, QImage *img, QString s, const int type){
         label->setPixmap(QPixmap::fromImage(*img));
         ui->scrollAreaDstImage->setWidget(label);        
     }
-//    delete label;
+        delete img;
     return 0;
 }
 
-ShowImage::showImage(Ui::MainWindow *ui, QImage *img, QString s, const int type){
+ShowImage::showImage(Ui::MainWindow *ui, QString s, const int type){
     int flag;
     if(type==SRCImage){
         flag=getSrcShowImageType();
@@ -242,11 +210,11 @@ ShowImage::showImage(Ui::MainWindow *ui, QImage *img, QString s, const int type)
         flag=getDstShowImageType();
     }
     if(flag==IGNORE){
-        showImg.IgnoreAspectRatio(ui,img,s,type);
+        showImg.IgnoreAspectRatio(ui,s,type);
     }else if(flag==KEEPASPECT){
-        showImg.KeepAspectRatio(ui,img,s,type);
+        showImg.KeepAspectRatio(ui,s,type);
     }else if(flag==ART){
-        showImg.ARTWork(ui,img,s,type);
+        showImg.ARTWork(ui,s,type);
     }
     return 0;
 }

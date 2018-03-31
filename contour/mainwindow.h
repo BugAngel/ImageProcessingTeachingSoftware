@@ -15,6 +15,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+protected:
+    void changeEvent(QEvent * event);
+
 public slots:
     void on_boxFilterRadioButton_clicked();
 
@@ -84,6 +87,28 @@ private slots:
     void on_tozeroInvDoubleSpinBox_valueChanged(double arg1);
 
     void on_medianFilterSpinBox_valueChanged(int arg1);
+
+    void on_tabWidget_currentChanged(int index);
+
+    void on_erodeRadioButton_clicked();
+
+    void on_dilateRadioButton_clicked();
+
+    void on_morphOpenRadioButton_clicked();
+
+    void on_morphCloseRadioButton_clicked();
+
+    void on_morphGradientRadioButton_clicked();
+
+    void on_morphTopHatRadioButton_clicked();
+
+    void on_morphBlackHatRadioButton_clicked();
+
+    void on_morphShapeComboBox_currentIndexChanged(int index);
+
+    void on_morphSizeLenghtSpinBox_valueChanged(int arg1);
+
+    void on_morphSizeHighSpinBox_valueChanged(int arg1);
 
 public:
     Ui::MainWindow *ui;

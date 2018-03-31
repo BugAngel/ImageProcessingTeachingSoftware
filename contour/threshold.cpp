@@ -40,16 +40,12 @@ void MainWindow::on_radioButton_Binary_clicked()
 
         threshold(srcImage,dstImage,thresh,255,THRESH_BINARY);
         imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
+        showImg.showImage(ui,"temp.jpg",DSTImage);
         delete img;
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -73,20 +69,14 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
          std::string fileString=file.getFileString().toLocal8Bit().toStdString();
          Mat srcImage=imread(fileString,0);//输入图像
          Mat dstImage;//输出图像
-         QImage* img=new QImage;//QT界面显示图像
 
          threshold(srcImage,dstImage,thresh,255,THRESH_BINARY_INV);
          imwrite("temp.jpg",dstImage);
-         if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-             QMessageBox::information(this,
-                                               tr("打开图像失败"),
-                                               tr("打开图像失败!"));
-         }
-         delete img;
+         showImg.showImage(ui,"temp.jpg",DSTImage);
      }catch(exception& e){
          QMessageBox::information(this,
                                            tr("打开图像失败"),
-                                           tr("打开图像失败,请输入正确图像!"));
+                                           tr(e.what()));
      }
 }
 
@@ -110,20 +100,14 @@ void MainWindow::on_radioButton_TRUNC_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
 
         threshold(srcImage,dstImage,thresh,255,THRESH_TRUNC);
         imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -147,20 +131,14 @@ void MainWindow::on_radioButton_TRZERO_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
 
         threshold(srcImage,dstImage,thresh,255,THRESH_TOZERO);
         imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -184,20 +162,14 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
 
         threshold(srcImage,dstImage,thresh,255,THRESH_TOZERO_INV);
         imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
@@ -227,22 +199,16 @@ void MainWindow::on_adaptiveRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         Mat srcImage=imread(fileString,0);//输入图像
         Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
         int method,type,size;
         double C;
         adaptive_set.getValue(method,type,size,C);
         adaptiveThreshold(srcImage,dstImage,255,method,type,size,C);
         imwrite("temp.jpg",dstImage);
-        if(showImg.showImage(ui,img,"temp.jpg",DSTImage)==-1){
-            QMessageBox::information(this,
-                                              tr("打开图像失败"),
-                                              tr("打开图像失败!"));
-        }
-        delete img;
+        showImg.showImage(ui,"temp.jpg",DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr("打开图像失败,请输入正确图像!"));
+                                          tr(e.what()));
     }
 }
 
