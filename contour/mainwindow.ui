@@ -200,7 +200,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -419,6 +419,9 @@
              </item>
              <item>
               <widget class="QSpinBox" name="morphSizeLenghtSpinBox">
+               <property name="minimum">
+                <number>1</number>
+               </property>
                <property name="value">
                 <number>3</number>
                </property>
@@ -433,6 +436,9 @@
              </item>
              <item>
               <widget class="QSpinBox" name="morphSizeHighSpinBox">
+               <property name="minimum">
+                <number>1</number>
+               </property>
                <property name="value">
                 <number>3</number>
                </property>
@@ -586,15 +592,15 @@
          </widget>
          <widget class="QWidget" name="tab_2">
           <attribute name="title">
-           <string>轮廓检测</string>
+           <string>边缘与轮廓</string>
           </attribute>
           <widget class="QRadioButton" name="contourRadioButton">
            <property name="geometry">
             <rect>
-             <x>20</x>
-             <y>20</y>
-             <width>89</width>
-             <height>16</height>
+             <x>9</x>
+             <y>46</y>
+             <width>71</width>
+             <height>19</height>
             </rect>
            </property>
            <property name="text">
@@ -603,99 +609,6 @@
            <attribute name="buttonGroup">
             <string notr="true">contourButtonGroup</string>
            </attribute>
-          </widget>
-          <widget class="QRadioButton" name="convexHullRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>50</y>
-             <width>89</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>绘制凸包</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">contourButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QRadioButton" name="circleRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>80</y>
-             <width>111</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>绘制最小外接圆</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">contourButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QRadioButton" name="rectRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>110</y>
-             <width>121</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>绘制最小外接矩形</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">contourButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QPushButton" name="contourButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>230</y>
-             <width>179</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>轮廓检测</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_2">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>150</y>
-             <width>24</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>阈值</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="contourThreshold">
-           <property name="geometry">
-            <rect>
-             <x>70</x>
-             <y>150</y>
-             <width>116</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;请输入0~255整数&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>125</string>
-           </property>
-           <property name="readOnly">
-            <bool>false</bool>
-           </property>
           </widget>
          </widget>
         </widget>
@@ -761,11 +674,11 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="contourButtonGroup"/>
-  <buttongroup name="binaryButtonGroup"/>
-  <buttongroup name="BlurButtonGroup"/>
-  <buttongroup name="morphButtonGroup"/>
-  <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="srcImageButtonGroup"/>
+  <buttongroup name="BlurButtonGroup"/>
+  <buttongroup name="contourButtonGroup"/>
+  <buttongroup name="morphButtonGroup"/>
+  <buttongroup name="binaryButtonGroup"/>
+  <buttongroup name="dstImageButtonGroup"/>
  </buttongroups>
 </ui>

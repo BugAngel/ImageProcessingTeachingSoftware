@@ -40,44 +40,44 @@ void MainWindow::on_radioButton_Binary_clicked()
 
         threshold(srcImage,dstImage,thresh,255,THRESH_BINARY);
         imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
         delete img;
     }catch(exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
 void MainWindow::on_radioButton_BinaryInv_clicked()
 {
-     ui->helpTextBrowser->clear();
-     ui->helpTextBrowser->insertPlainText("当前点值大于阈值时，设置为0，否则取最大值 ，由src输入，dst输出\n\n"
-                                          "函数原型为： \n"
-                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval, THRESH_BINARY_INV) "
-                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                          "第二个参数，InputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
-                                          "且和第一个参数中的Mat变量有一样的尺寸和类型"
-                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
-                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
-                                          "第五个参数，阈值类型\n\n");
-     ui->radioButton_BinaryInv->setChecked(true);
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("当前点值大于阈值时，设置为0，否则取最大值 ，由src输入，dst输出\n\n"
+                                         "函数原型为： \n"
+                                         "double threshold(InputArray src, OutputArray dst, double thresh, double maxval, THRESH_BINARY_INV) "
+                                         "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
+                                         "第二个参数，InputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
+                                         "且和第一个参数中的Mat变量有一样的尺寸和类型"
+                                         "第三个参数，double类型的thresh,阈值的具体值\n\n"
+                                         "第四个参数，double类型的maxval，阈值的最大值\n\n"
+                                         "第五个参数，阈值类型\n\n");
+    ui->radioButton_BinaryInv->setChecked(true);
 
-     double thresh=ui->binaryInvDoubleSpinBox->value();
+    double thresh=ui->binaryInvDoubleSpinBox->value();
 
-     try{
-         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
-         Mat srcImage=imread(fileString,0);//输入图像
-         Mat dstImage;//输出图像
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        Mat srcImage=imread(fileString,0);//输入图像
+        Mat dstImage;//输出图像
 
-         threshold(srcImage,dstImage,thresh,255,THRESH_BINARY_INV);
-         imwrite("temp.jpg",dstImage);
-         showImg.showImage(ui,"temp.jpg",DSTImage);
-     }catch(exception& e){
-         QMessageBox::information(this,
-                                           tr("打开图像失败"),
-                                           tr(e.what()));
-     }
+        threshold(srcImage,dstImage,thresh,255,THRESH_BINARY_INV);
+        imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(exception& e){
+        QMessageBox::information(this,
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
+    }
 }
 
 void MainWindow::on_radioButton_TRUNC_clicked()
@@ -103,11 +103,11 @@ void MainWindow::on_radioButton_TRUNC_clicked()
 
         threshold(srcImage,dstImage,thresh,255,THRESH_TRUNC);
         imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -134,11 +134,11 @@ void MainWindow::on_radioButton_TRZERO_clicked()
 
         threshold(srcImage,dstImage,thresh,255,THRESH_TOZERO);
         imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -165,11 +165,11 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
 
         threshold(srcImage,dstImage,thresh,255,THRESH_TOZERO_INV);
         imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -204,11 +204,11 @@ void MainWindow::on_adaptiveRadioButton_clicked()
         adaptive_set.getValue(method,type,size,C);
         adaptiveThreshold(srcImage,dstImage,255,method,type,size,C);
         imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 

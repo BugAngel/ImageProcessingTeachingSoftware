@@ -50,7 +50,7 @@ void MainWindow::on_boxFilterRadioButton_clicked()
 
         cv::boxFilter(srcImage, dstImage, depth,cv::Size(width, heigth));
         cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -88,7 +88,7 @@ void MainWindow::on_blurRadioButton_clicked()
 
         cv::blur(srcImage, dstImage, cv::Size(width, heigth));
         cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -130,7 +130,7 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
 
         cv::GaussianBlur(srcImage, dstImage, cv::Size(width, height),sigmaX,sigmaY);
         cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -166,7 +166,7 @@ void MainWindow::on_medianFilterRadioButton_clicked()
 
         cv::medianBlur(srcImage, dstImage, ksize);
         cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -206,7 +206,7 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
         cv::bilateralFilter( srcImage, dstImage, d, sigmaColor, sigmaSpace );
 
         cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),

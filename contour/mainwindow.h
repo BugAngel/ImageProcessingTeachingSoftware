@@ -34,8 +34,6 @@ public slots:
 private slots:
     void on_actionOpenImg_triggered();
 
-    void on_contourButton_clicked();
-
     void on_radioButton_Binary_clicked();
 
     void on_radioButton_BinaryInv_clicked();
@@ -57,12 +55,6 @@ private slots:
     void on_radioButtonArtWork_clicked();
 
     void on_contourRadioButton_clicked();
-
-    void on_convexHullRadioButton_clicked();
-
-    void on_circleRadioButton_clicked();
-
-    void on_rectRadioButton_clicked();
 
     void on_blurButton_clicked();
 
@@ -104,11 +96,11 @@ private slots:
 
     void on_morphBlackHatRadioButton_clicked();
 
-    void on_morphShapeComboBox_currentIndexChanged(int index);
+    void on_morphShapeComboBox_currentIndexChanged();
 
-    void on_morphSizeLenghtSpinBox_valueChanged(int arg1);
+    void on_morphSizeLenghtSpinBox_valueChanged();
 
-    void on_morphSizeHighSpinBox_valueChanged(int arg1);
+    void on_morphSizeHighSpinBox_valueChanged();
 
 public:
     Ui::MainWindow *ui;

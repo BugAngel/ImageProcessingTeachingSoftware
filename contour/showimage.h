@@ -6,19 +6,20 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 
-const int SRCImage =0;
-const int DSTImage =1;
-
-const int IGNORE=0;
-const int KEEPASPECT=1;
-const int ART=2;
-
 class ShowImage
 {
 private:
     int srcShowImageType=0;//0为饱满缩放，1为按比例缩放，2为原图
     int dstShowImageType=0;//0为饱满缩放，1为按比例缩放，2为原图
+
 public:
+    const static int SRCImage =0;
+    const static int DSTImage =1;
+
+    const static int IGNORE=0;
+    const static int KEEPASPECT=1;
+    const static int ART=2;
+
     int setSrcShowImageType(int showImageType);
     int setDstShowImageType(int showImageType);
     int getSrcShowImageType();

@@ -45,11 +45,9 @@ void MainWindow::on_erodeRadioButton_clicked()
 
         cv::erode(srcImage,dstImage,element);
         cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(std::exception& e){
-        QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
 }
 
@@ -77,6 +75,24 @@ void MainWindow::on_dilateRadioButton_clicked()
                                          "第七个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->dilateRadioButton->setChecked(true);
+
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+
+    cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
+
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+
+        cv::dilate(srcImage,dstImage,element);
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+    }
 }
 
 void MainWindow::on_morphOpenRadioButton_clicked()
@@ -98,6 +114,24 @@ void MainWindow::on_morphOpenRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphOpenRadioButton->setChecked(true);
+
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+
+    cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
+
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+
+        cv::morphologyEx(srcImage,dstImage, cv::MORPH_OPEN, element);
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+    }
 }
 
 void MainWindow::on_morphCloseRadioButton_clicked()
@@ -118,6 +152,24 @@ void MainWindow::on_morphCloseRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphCloseRadioButton->setChecked(true);
+
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+
+    cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
+
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+
+        cv::morphologyEx(srcImage,dstImage, cv::MORPH_CLOSE, element);
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+    }
 }
 
 void MainWindow::on_morphGradientRadioButton_clicked()
@@ -138,6 +190,24 @@ void MainWindow::on_morphGradientRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphGradientRadioButton->setChecked(true);
+
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+
+    cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
+
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+
+        cv::morphologyEx(srcImage,dstImage, cv::MORPH_GRADIENT, element);
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+    }
 }
 
 void MainWindow::on_morphTopHatRadioButton_clicked()
@@ -163,6 +233,24 @@ void MainWindow::on_morphTopHatRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphTopHatRadioButton->setChecked(true);
+
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+
+    cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
+
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+
+        cv::morphologyEx(srcImage,dstImage, cv::MORPH_TOPHAT, element);
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+    }
 }
 
 void MainWindow::on_morphBlackHatRadioButton_clicked()
@@ -185,19 +273,103 @@ void MainWindow::on_morphBlackHatRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphBlackHatRadioButton->setChecked(true);
+
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+
+    cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
+
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+
+        cv::morphologyEx(srcImage,dstImage, cv::MORPH_BLACKHAT, element);
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+    }
 }
 
-void MainWindow::on_morphShapeComboBox_currentIndexChanged(int index)
+void MainWindow::on_morphShapeComboBox_currentIndexChanged()
 {
-
+    switch(ui->morphButtonGroup->checkedId()){
+    case 0:
+        on_erodeRadioButton_clicked();
+        break;
+    case 1:
+        on_dilateRadioButton_clicked();
+        break;
+    case 2:
+        on_morphOpenRadioButton_clicked();
+        break;
+    case 3:
+        on_morphCloseRadioButton_clicked();
+        break;
+    case 4:
+        on_morphGradientRadioButton_clicked();
+        break;
+    case 5:
+        on_morphTopHatRadioButton_clicked();
+        break;
+    case 6:
+        on_morphBlackHatRadioButton_clicked();
+        break;
+    }
 }
 
-void MainWindow::on_morphSizeLenghtSpinBox_valueChanged(int arg1)
+void MainWindow::on_morphSizeLenghtSpinBox_valueChanged()
 {
-
+    switch(ui->morphButtonGroup->checkedId()){
+    case 0:
+        on_erodeRadioButton_clicked();
+        break;
+    case 1:
+        on_dilateRadioButton_clicked();
+        break;
+    case 2:
+        on_morphOpenRadioButton_clicked();
+        break;
+    case 3:
+        on_morphCloseRadioButton_clicked();
+        break;
+    case 4:
+        on_morphGradientRadioButton_clicked();
+        break;
+    case 5:
+        on_morphTopHatRadioButton_clicked();
+        break;
+    case 6:
+        on_morphBlackHatRadioButton_clicked();
+        break;
+    }
 }
 
-void MainWindow::on_morphSizeHighSpinBox_valueChanged(int arg1)
+void MainWindow::on_morphSizeHighSpinBox_valueChanged()
 {
-
+    switch(ui->morphButtonGroup->checkedId()){
+    case 0:
+        on_erodeRadioButton_clicked();
+        break;
+    case 1:
+        on_dilateRadioButton_clicked();
+        break;
+    case 2:
+        on_morphOpenRadioButton_clicked();
+        break;
+    case 3:
+        on_morphCloseRadioButton_clicked();
+        break;
+    case 4:
+        on_morphGradientRadioButton_clicked();
+        break;
+    case 5:
+        on_morphTopHatRadioButton_clicked();
+        break;
+    case 6:
+        on_morphBlackHatRadioButton_clicked();
+        break;
+    }
 }

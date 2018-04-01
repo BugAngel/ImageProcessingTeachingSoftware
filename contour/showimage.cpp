@@ -29,16 +29,16 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_2_clicked()
 {
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("输入图像采用饱满填充");
-    showImg.setSrcShowImageType(IGNORE);
+    showImg.setSrcShowImageType(ShowImage::IGNORE);
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,file.getFileString(),SRCImage);
+        showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -46,16 +46,16 @@ void MainWindow::on_radioButtonKeepAspectRatio_2_clicked()
 {
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("输入图像采用按比例填充");
-    showImg.setSrcShowImageType(KEEPASPECT);
+    showImg.setSrcShowImageType(ShowImage::KEEPASPECT);
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,file.getFileString(),SRCImage);
+        showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -63,16 +63,16 @@ void MainWindow::on_radioButtonArtWork_2_clicked()
 {
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("输入图像显示原图");
-    showImg.setSrcShowImageType(ART);
+    showImg.setSrcShowImageType(ShowImage::ART);
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,file.getFileString(),SRCImage);
+        showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -80,16 +80,16 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
 {
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("输出图像采用饱满填充");
-    showImg.setDstShowImageType(IGNORE);
+    showImg.setDstShowImageType(ShowImage::IGNORE);
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -97,16 +97,16 @@ void MainWindow::on_radioButtonKeepAspectRatio_clicked()
 {
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("输出图像采用按比例填充");
-    showImg.setDstShowImageType(KEEPASPECT);
+    showImg.setDstShowImageType(ShowImage::KEEPASPECT);
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -114,16 +114,16 @@ void MainWindow::on_radioButtonArtWork_clicked()
 {
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("输出图像显示原图");
-    showImg.setDstShowImageType(ART);
+    showImg.setDstShowImageType(ShowImage::ART);
 
     try{
         QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,"temp.jpg",DSTImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
         delete img;
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr(e.what()));
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
     }
 }
 
@@ -132,7 +132,7 @@ ShowImage::IgnoreAspectRatio(Ui::MainWindow *ui,QString s,const int type)
     QImage* img=new QImage;
     if(! ( img->load(s) ) ) //加载图像
     {
-       return -1;
+        return -1;
     }
 
     QPixmap pixmap = QPixmap::fromImage(*img);
@@ -161,7 +161,7 @@ ShowImage::KeepAspectRatio(Ui::MainWindow *ui, QString s, const int type)
 
     if(! ( img->load(s) ) ) //加载图像
     {
-       return -1;
+        return -1;
     }
 
     QPixmap pixmap = QPixmap::fromImage(*img);
@@ -185,10 +185,10 @@ ShowImage::KeepAspectRatio(Ui::MainWindow *ui, QString s, const int type)
 }
 
 ShowImage::ARTWork(Ui::MainWindow *ui, QString s, const int type){
-     QImage* img=new QImage;
+    QImage* img=new QImage;
     if(! ( img->load(s) ) ) //加载图像
     {
-       return -1;
+        return -1;
     }
     QLabel *label = new QLabel();
     if(type==SRCImage){
@@ -196,9 +196,9 @@ ShowImage::ARTWork(Ui::MainWindow *ui, QString s, const int type){
         ui->scrollAreaSrcImage->setWidget(label);
     }else if(type==DSTImage){
         label->setPixmap(QPixmap::fromImage(*img));
-        ui->scrollAreaDstImage->setWidget(label);        
+        ui->scrollAreaDstImage->setWidget(label);
     }
-        delete img;
+    delete img;
     return 0;
 }
 
