@@ -16,12 +16,15 @@ public:
     ~BilateralFilter();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_spinBox_valueChanged();
 
-    void on_pushButton_2_clicked();
+    void on_doubleSpinBox_valueChanged();
+
+    void on_doubleSpinBox_2_valueChanged();
 
 private:
     Ui::BilateralFilter *ui;
+    void BilateralFilterFunction();
 };
 
 #endif // BILATERALFILTER_H

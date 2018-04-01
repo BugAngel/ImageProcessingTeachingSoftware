@@ -16,12 +16,17 @@ public:
     ~AdaptiveThreshold();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_comboBoxMethod_currentIndexChanged();
 
-    void on_pushButton_2_clicked();
+    void on_comboBoxType_currentIndexChanged();
+
+    void on_spinBox_valueChanged();
+
+    void on_doubleSpinBox_valueChanged();
 
 private:
     Ui::adaptiveThreshold *ui;
+    void adaptiveThresholdFunction();
 };
 
 #endif // ADAPTIVETHRESHOLD_H

@@ -31,6 +31,7 @@ public slots:
 
     void on_bilateralFilterRadioButton_clicked();
 
+    void on_contourRadioButton_clicked();
 private slots:
     void on_actionOpenImg_triggered();
 
@@ -54,8 +55,6 @@ private slots:
 
     void on_radioButtonArtWork_clicked();
 
-    void on_contourRadioButton_clicked();
-
     void on_blurButton_clicked();
 
     void on_gaussianBlurButton_clicked();
@@ -68,17 +67,17 @@ private slots:
 
     void on_radioButtonArtWork_2_clicked();
 
-    void on_binaryDoubleSpinBox_valueChanged(double arg1);
+    void on_binaryDoubleSpinBox_valueChanged();
 
-    void on_binaryInvDoubleSpinBox_valueChanged(double arg1);
+    void on_binaryInvDoubleSpinBox_valueChanged();
 
-    void on_truncDoubleSpinBox_valueChanged(double arg1);
+    void on_truncDoubleSpinBox_valueChanged();
 
-    void on_tozeroDoubleSpinBox_valueChanged(double arg1);
+    void on_tozeroDoubleSpinBox_valueChanged();
 
-    void on_tozeroInvDoubleSpinBox_valueChanged(double arg1);
+    void on_tozeroInvDoubleSpinBox_valueChanged();
 
-    void on_medianFilterSpinBox_valueChanged(int arg1);
+    void on_medianFilterSpinBox_valueChanged();
 
     void on_tabWidget_currentChanged(int index);
 
@@ -101,6 +100,8 @@ private slots:
     void on_morphSizeLenghtSpinBox_valueChanged();
 
     void on_morphSizeHighSpinBox_valueChanged();
+
+    void on_contourButton_clicked();
 
 public:
     Ui::MainWindow *ui;

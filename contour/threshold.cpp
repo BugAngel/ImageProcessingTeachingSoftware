@@ -212,27 +212,27 @@ void MainWindow::on_adaptiveRadioButton_clicked()
     }
 }
 
-void MainWindow::on_binaryDoubleSpinBox_valueChanged(double arg1)
+void MainWindow::on_binaryDoubleSpinBox_valueChanged()
 {
     on_radioButton_Binary_clicked();
 }
 
-void MainWindow::on_binaryInvDoubleSpinBox_valueChanged(double arg1)
+void MainWindow::on_binaryInvDoubleSpinBox_valueChanged()
 {
     on_radioButton_BinaryInv_clicked();
 }
 
-void MainWindow::on_truncDoubleSpinBox_valueChanged(double arg1)
+void MainWindow::on_truncDoubleSpinBox_valueChanged()
 {
     on_radioButton_TRUNC_clicked();
 }
 
-void MainWindow::on_tozeroDoubleSpinBox_valueChanged(double arg1)
+void MainWindow::on_tozeroDoubleSpinBox_valueChanged()
 {
     on_radioButton_TRZERO_clicked();
 }
 
-void MainWindow::on_tozeroInvDoubleSpinBox_valueChanged(double arg1)
+void MainWindow::on_tozeroInvDoubleSpinBox_valueChanged()
 {
     on_radioButton_TRZERO_INV_clicked();
 }

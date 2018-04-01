@@ -238,7 +238,7 @@ void MainWindow::on_bilateralFilterButton_clicked()
     bilateralfilter.exec();
 }
 
-void MainWindow::on_medianFilterSpinBox_valueChanged(int arg1)
+void MainWindow::on_medianFilterSpinBox_valueChanged()
 {
     on_medianFilterRadioButton_clicked();
 }

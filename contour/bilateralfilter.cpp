@@ -24,7 +24,7 @@ BilateralFilter::~BilateralFilter()
     delete ui;
 }
 
-void BilateralFilter::on_pushButton_clicked()
+void BilateralFilter::BilateralFilterFunction()
 {
     int d;
     double sigmaColor;
@@ -38,10 +38,19 @@ void BilateralFilter::on_pushButton_clicked()
 
     MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
     ptr->on_bilateralFilterRadioButton_clicked();
-    close();
 }
 
-void BilateralFilter::on_pushButton_2_clicked()
+void BilateralFilter::on_spinBox_valueChanged()
 {
-    this->close();
+    BilateralFilterFunction();
+}
+
+void BilateralFilter::on_doubleSpinBox_valueChanged()
+{
+    BilateralFilterFunction();
+}
+
+void BilateralFilter::on_doubleSpinBox_2_valueChanged()
+{
+    BilateralFilterFunction();
 }

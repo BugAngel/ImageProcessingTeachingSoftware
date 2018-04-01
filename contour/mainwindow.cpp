@@ -166,6 +166,8 @@ void MainWindow::on_tabWidget_currentChanged(int index)
             break;
         }
         break;
+    case 3:
+        on_contourRadioButton_clicked();
 
     }
 }

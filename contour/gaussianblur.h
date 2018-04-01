@@ -16,12 +16,17 @@ public:
     ~GaussianBlur();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_spinBox_valueChanged();
 
-    void on_pushButton_2_clicked();
+    void on_spinBox_2_valueChanged();
+
+    void on_doubleSpinBox_valueChanged();
+
+    void on_doubleSpinBox_2_valueChanged();
 
 private:
     Ui::GaussianBlur *ui;
+    void gaussianBlurFunction();
 };
 
 #endif // GAUSSIANBLUR_H

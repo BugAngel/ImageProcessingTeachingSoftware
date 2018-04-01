@@ -23,7 +23,7 @@ Blur::~Blur()
     delete ui;
 }
 
-void Blur::on_pushButton_clicked()
+void Blur::blurFunction()
 {
     int width;
     int heigth;
@@ -35,10 +35,14 @@ void Blur::on_pushButton_clicked()
 
     MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
     ptr->on_blurRadioButton_clicked();
-    close();
 }
 
-void Blur::on_pushButton_2_clicked()
+void Blur::on_spinBox_valueChanged()
 {
-    this->close();
+    blurFunction();
+}
+
+void Blur::on_spinBox_2_valueChanged()
+{
+    blurFunction();
 }

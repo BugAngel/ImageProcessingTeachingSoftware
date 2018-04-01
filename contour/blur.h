@@ -16,12 +16,13 @@ public:
     ~Blur();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_spinBox_valueChanged();
 
-    void on_pushButton_2_clicked();
+    void on_spinBox_2_valueChanged();
 
 private:
     Ui::Blur *ui;
+    void blurFunction();
 };
 
 #endif // BLUR_H

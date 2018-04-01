@@ -28,7 +28,7 @@ GaussianBlur::~GaussianBlur()
     delete ui;
 }
 
-void GaussianBlur::on_pushButton_clicked()
+void GaussianBlur::gaussianBlurFunction()
 {
     int width;
     int heigth;
@@ -50,10 +50,24 @@ void GaussianBlur::on_pushButton_clicked()
 
     MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
     ptr->on_gaussianBlurRadioButton_clicked();
-    close();
 }
 
-void GaussianBlur::on_pushButton_2_clicked()
+void GaussianBlur::on_spinBox_valueChanged()
 {
-     this->close();
+    gaussianBlurFunction();
+}
+
+void GaussianBlur::on_spinBox_2_valueChanged()
+{
+    gaussianBlurFunction();
+}
+
+void GaussianBlur::on_doubleSpinBox_valueChanged()
+{
+    gaussianBlurFunction();
+}
+
+void GaussianBlur::on_doubleSpinBox_2_valueChanged()
+{
+    gaussianBlurFunction();
 }

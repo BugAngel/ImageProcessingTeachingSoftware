@@ -610,6 +610,19 @@
             <string notr="true">contourButtonGroup</string>
            </attribute>
           </widget>
+          <widget class="QPushButton" name="contourButton">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>50</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>设置</string>
+           </property>
+          </widget>
          </widget>
         </widget>
        </item>
@@ -674,11 +687,11 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="srcImageButtonGroup"/>
   <buttongroup name="BlurButtonGroup"/>
-  <buttongroup name="contourButtonGroup"/>
-  <buttongroup name="morphButtonGroup"/>
+  <buttongroup name="srcImageButtonGroup"/>
   <buttongroup name="binaryButtonGroup"/>
+  <buttongroup name="contourButtonGroup"/>
   <buttongroup name="dstImageButtonGroup"/>
+  <buttongroup name="morphButtonGroup"/>
  </buttongroups>
 </ui>

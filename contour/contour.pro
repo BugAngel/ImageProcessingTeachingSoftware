@@ -41,7 +41,9 @@ SOURCES += \
     bilateralfilter.cpp \
     bilateralfilterset.cpp \
     morph.cpp \
-    contour.cpp
+    edge.cpp \
+    contour.cpp \
+    contourset.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +58,9 @@ HEADERS += \
     gaussianblur.h \
     gaussianblurset.h \
     bilateralfilter.h \
-    bilateralfilterset.h
+    bilateralfilterset.h \
+    contour.h \
+    contourset.h
 
 FORMS += \
         mainwindow.ui \
@@ -64,7 +68,8 @@ FORMS += \
     boxfilter.ui \
     blur.ui \
     gaussianblur.ui \
-    bilateralfilter.ui
+    bilateralfilter.ui \
+    contour.ui
 
 INCLUDEPATH += E:\Opencv\QTOpenCV\include \
                E:\Opencv\QTOpenCV\include/opencv \

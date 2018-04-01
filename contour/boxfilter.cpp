@@ -27,7 +27,7 @@ BoxFilter::~BoxFilter()
     delete ui;
 }
 
-void BoxFilter::on_pushButton_clicked()
+void BoxFilter::boxFilterFunction()
 {
     int depth;
     int width;
@@ -39,13 +39,21 @@ void BoxFilter::on_pushButton_clicked()
 
     boxfilter_set.setValue(depth,width,heigth);
 
-//    emit boxFilterEvent();//发射方框滤波信号
     MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
     ptr->on_boxFilterRadioButton_clicked();
-    close();
 }
 
-void BoxFilter::on_pushButton_2_clicked()
+void BoxFilter::on_spinBox_valueChanged()
 {
-    this->close();
+    boxFilterFunction();
+}
+
+void BoxFilter::on_spinBox_2_valueChanged()
+{
+    boxFilterFunction();
+}
+
+void BoxFilter::on_spinBox_3_valueChanged()
+{
+    boxFilterFunction();
 }

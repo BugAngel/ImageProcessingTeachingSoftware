@@ -16,12 +16,15 @@ public:
     ~BoxFilter();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_spinBox_valueChanged();
 
-    void on_pushButton_2_clicked();
+    void on_spinBox_2_valueChanged();
+
+    void on_spinBox_3_valueChanged();
 
 private:
     Ui::BoxFilter *ui;
+    void boxFilterFunction();
 };
 
 #endif // BOXFILTER_H
