@@ -73,7 +73,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpenImg_triggered()
 {
-    file.setFileString(QFileDialog::getOpenFileName(this,tr("打开图像文件"),"/"));
+    file.setFileString(QFileDialog::getOpenFileName(this,tr("打开图像文件"),"/",
+                                                    "JPEG文件 (*.jpeg *.jpg *.jpe);;\
+                                                    PNG图片(*.png);;\
+                                                    Windows位图 (*.bmp *.dib);; \
+                                                    便携文件格式(*.pbm *.pgm *.ppm);;\
+                                                    TIFF文件 (*.tiff *.tif)"));
     if(showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage)==-1){
         QMessageBox::information(this,
                                  tr("打开图像失败"),

@@ -60,7 +60,7 @@ void MainWindow::on_contourRadioButton_clicked()
         cv::Canny( g_grayImage, g_cannyMat_output, thresh, thresh*2, 3 );
 
         // 找到轮廓
-        cv::findContours( g_cannyMat_output, g_vContours, g_vHierarchy, mode, method, cv::Point(0, 0) );
+        cv::findContours( g_cannyMat_output, g_vContours, g_vHierarchy, mode, method+1, cv::Point(0, 0) );
 
         // 计算矩
         std::vector<cv::Moments> mu(g_vContours.size() );

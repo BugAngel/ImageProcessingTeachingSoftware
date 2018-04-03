@@ -30,7 +30,7 @@ void Contour::on_doubleSpinBox_valueChanged()
 {
     double thresh=ui->doubleSpinBox->value();
     int mode=ui->comboBox->currentIndex();
-    int method=ui->comboBox_2->currentIndex()+1;
+    int method=ui->comboBox_2->currentIndex();
 
     contour_set.setValue(thresh,mode,method);
 
@@ -42,7 +42,7 @@ void Contour::on_comboBox_currentIndexChanged()
 {
     double thresh=ui->doubleSpinBox->value();
     int mode=ui->comboBox->currentIndex();
-    int method=ui->comboBox_2->currentIndex()+1;
+    int method=ui->comboBox_2->currentIndex();
 
     contour_set.setValue(thresh,mode,method);
 
@@ -54,7 +54,7 @@ void Contour::on_comboBox_2_currentIndexChanged()
 {
     double thresh=ui->doubleSpinBox->value();
     int mode=ui->comboBox->currentIndex();
-    int method=ui->comboBox_2->currentIndex()+1;
+    int method=ui->comboBox_2->currentIndex();
 
     contour_set.setValue(thresh,mode,method);
 
