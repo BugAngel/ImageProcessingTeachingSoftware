@@ -11,8 +11,8 @@ private:
     double C=5;
 
 public:
-    int setValue(int &method,int &type,int &size,double &C);
-    int getValue(int &method,int &type,int &size,double &C);
+    void setValue(int &method,int &type,int &size,double &C);
+    void getValue(int &method,int &type,int &size,double &C);
 };
 
 extern adaptiveSet adaptive_set;

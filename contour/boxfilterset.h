@@ -5,13 +5,12 @@
 class BoxFilterSet
 {
 private:
-    int depth=-1;
     int width=5;
     int height=5;
 
 public:
-    int setValue(int &depth,int &width,int &height);
-    int getValue(int &depth,int &width,int &height);
+    void setValue(int &width,int &height);
+    void getValue(int &width,int &height);
 };
 
 extern BoxFilterSet boxfilter_set;

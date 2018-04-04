@@ -26,7 +26,7 @@ Contour::~Contour()
     delete ui;
 }
 
-void Contour::on_doubleSpinBox_valueChanged()
+void Contour::contourFunction()
 {
     double thresh=ui->doubleSpinBox->value();
     int mode=ui->comboBox->currentIndex();
@@ -38,16 +38,14 @@ void Contour::on_doubleSpinBox_valueChanged()
     ptr->on_contourRadioButton_clicked();
 }
 
+void Contour::on_doubleSpinBox_valueChanged()
+{
+    contourFunction();
+}
+
 void Contour::on_comboBox_currentIndexChanged()
 {
-    double thresh=ui->doubleSpinBox->value();
-    int mode=ui->comboBox->currentIndex();
-    int method=ui->comboBox_2->currentIndex();
-
-    contour_set.setValue(thresh,mode,method);
-
-    MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
-    ptr->on_contourRadioButton_clicked();
+    contourFunction();
 }
 
 void Contour::on_comboBox_2_currentIndexChanged()

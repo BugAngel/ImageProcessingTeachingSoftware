@@ -8,6 +8,52 @@
 #include "showimage.h"
 #include "contour.h"
 #include "contourset.h"
+#include "canny.h"
+#include "cannyset.h"
+#include "sobel.h"
+#include "sobelset.h"
+
+void MainWindow::on_cannyRadioButton_clicked()
+{
+    try{
+        double threshold1;
+        double threshold2;
+        int apertureSize;
+
+        canny_set.getValue(threshold1,threshold2,apertureSize);
+
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+
+        cv::Canny(srcImage,srcImage,threshold1,threshold2,apertureSize);
+        cv::imwrite("temp.jpg",srcImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,
+                                          tr("打开图像失败"),
+                                          tr(e.what()));
+    }
+}
+
+void MainWindow::on_sobelRadioButton_clicked()
+{
+
+}
+
+void MainWindow::on_laplacianRadioButton_clicked()
+{
+
+}
+
+void MainWindow::on_scharrRadioButton_clicked()
+{
+
+}
+
+void MainWindow::on_houghRadioButton_clicked()
+{
+
+}
 
 void MainWindow::on_contourRadioButton_clicked()
 {
@@ -99,6 +145,18 @@ void MainWindow::on_contourRadioButton_clicked()
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
 
+}
+
+void MainWindow::on_cannyButton_clicked()
+{
+    Canny canny(this);
+    canny.exec();
+}
+
+void MainWindow::on_sobelPushButton_clicked()
+{
+    Sobel sobel(this);
+    sobel.exec();
 }
 
 void MainWindow::on_contourButton_clicked()

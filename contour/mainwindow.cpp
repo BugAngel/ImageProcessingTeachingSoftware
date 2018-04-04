@@ -31,8 +31,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->binaryButtonGroup->setId(ui->adaptiveRadioButton,5);
     ui->radioButton_Binary->setChecked(true);//设置默认选项
 
-    ui->contourButtonGroup->setId(ui->contourRadioButton,0);//设置轮廓检测按钮组的ID值
-    ui->contourRadioButton->setChecked(true);//设置默认选项
+    ui->edgeButtonGroup->setId(ui->cannyRadioButton,0);
+    ui->edgeButtonGroup->setId(ui->sobelRadioButton,1);
+    ui->edgeButtonGroup->setId(ui->laplacianRadioButton,2);
+    ui->edgeButtonGroup->setId(ui->scharrRadioButton,3);
+    ui->edgeButtonGroup->setId(ui->houghRadioButton,4);
+    ui->edgeButtonGroup->setId(ui->contourRadioButton,5);//设置轮廓检测按钮组的ID值
+    ui->cannyRadioButton->setChecked(true);//设置默认选项
 
     ui->srcImageButtonGroup->setId(ui->radioButtonIgnoreAspectRatio_2,0);//设置输入图像显示方式按钮组的ID值
     ui->srcImageButtonGroup->setId(ui->radioButtonKeepAspectRatio_2,1);

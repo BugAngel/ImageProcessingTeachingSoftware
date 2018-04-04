@@ -10,8 +10,8 @@ private:
     double sigmaSpace=25/2;
 
 public:
-    int setValue(int &d,double &sigmaColor, double &sigmaSpace);
-    int getValue(int &d,double &sigmaColor, double &sigmaSpace);
+    void setValue(int &d,double &sigmaColor, double &sigmaSpace);
+    void getValue(int &d,double &sigmaColor, double &sigmaSpace);
 };
 
 extern BilateralFilterSet bilateralfilter_set;

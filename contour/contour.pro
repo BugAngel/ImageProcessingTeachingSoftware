@@ -43,7 +43,11 @@ SOURCES += \
     morph.cpp \
     edge.cpp \
     contour.cpp \
-    contourset.cpp
+    contourset.cpp \
+    canny.cpp \
+    cannyset.cpp \
+    sobel.cpp \
+    sobelset.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -60,7 +64,11 @@ HEADERS += \
     bilateralfilter.h \
     bilateralfilterset.h \
     contour.h \
-    contourset.h
+    contourset.h \
+    canny.h \
+    cannyset.h \
+    sobel.h \
+    sobelset.h
 
 FORMS += \
         mainwindow.ui \
@@ -69,7 +77,9 @@ FORMS += \
     blur.ui \
     gaussianblur.ui \
     bilateralfilter.ui \
-    contour.ui
+    contour.ui \
+    canny.ui \
+    sobel.ui
 
 INCLUDEPATH += E:\Opencv\QTOpenCV\include \
                E:\Opencv\QTOpenCV\include/opencv \

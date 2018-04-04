@@ -9,8 +9,8 @@ private:
     int height=5;
 
 public:
-    int setValue(int &width,int &height);
-    int getValue(int &width,int &height);
+    void setValue(int &width,int &height);
+    void getValue(int &width,int &height);
 };
 
 extern BlurSet blur_set;

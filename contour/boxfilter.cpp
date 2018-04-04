@@ -12,12 +12,10 @@ BoxFilter::BoxFilter(QWidget *parent) :
     ui->setupUi(this);
 //    this->setAttribute(Qt::WA_DeleteOnClose);//窗口关闭时销毁窗口
 
-    int depth;
     int width;
     int Heigth;
-    boxfilter_set.getValue(depth,width,Heigth);
+    boxfilter_set.getValue(width,Heigth);
 
-    ui->spinBox->setValue(depth);
     ui->spinBox_2->setValue(width);
     ui->spinBox_3->setValue(Heigth);
 }
@@ -29,15 +27,13 @@ BoxFilter::~BoxFilter()
 
 void BoxFilter::boxFilterFunction()
 {
-    int depth;
     int width;
     int heigth;
 
-    depth=ui->spinBox->value();
     width=ui->spinBox_2->value();
     heigth=ui->spinBox_3->value();
 
-    boxfilter_set.setValue(depth,width,heigth);
+    boxfilter_set.setValue(width,heigth);
 
     MainWindow *ptr = (MainWindow*)parentWidget();  //"parentWidget" very important. 获得父部件指针，同时需要类型强转.
     ptr->on_boxFilterRadioButton_clicked();

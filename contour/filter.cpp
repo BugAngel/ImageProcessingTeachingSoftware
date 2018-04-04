@@ -39,16 +39,15 @@ void MainWindow::on_boxFilterRadioButton_clicked()
     ui->boxFilterRadioButton->setChecked(true);
 
     try{
-        int depth;
         int width;
         int heigth;
-        boxfilter_set.getValue(depth,width,heigth);
+        boxfilter_set.getValue(width,heigth);
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
 
-        cv::boxFilter(srcImage, dstImage, depth,cv::Size(width, heigth));
+        cv::boxFilter(srcImage, dstImage, -1,cv::Size(width, heigth));
         cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
     }catch(exception& e){

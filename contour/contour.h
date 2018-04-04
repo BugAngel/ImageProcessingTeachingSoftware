@@ -24,6 +24,8 @@ private slots:
 
 private:
     Ui::contour *ui;
+
+    void contourFunction();
 };
 
 #endif // CONTOUR_H

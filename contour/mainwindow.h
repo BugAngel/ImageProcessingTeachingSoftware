@@ -32,6 +32,9 @@ public slots:
     void on_bilateralFilterRadioButton_clicked();
 
     void on_contourRadioButton_clicked();
+
+    void on_cannyRadioButton_clicked();
+
 private slots:
     void on_actionOpenImg_triggered();
 
@@ -102,6 +105,18 @@ private slots:
     void on_morphSizeHighSpinBox_valueChanged();
 
     void on_contourButton_clicked();
+
+    void on_cannyButton_clicked();
+
+    void on_sobelPushButton_clicked();
+
+    void on_sobelRadioButton_clicked();
+
+    void on_laplacianRadioButton_clicked();
+
+    void on_scharrRadioButton_clicked();
+
+    void on_houghRadioButton_clicked();
 
 public:
     Ui::MainWindow *ui;
