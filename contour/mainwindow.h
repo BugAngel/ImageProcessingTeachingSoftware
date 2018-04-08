@@ -35,6 +35,8 @@ public slots:
 
     void on_cannyRadioButton_clicked();
 
+    void on_sobelRadioButton_clicked();
+
 private slots:
     void on_actionOpenImg_triggered();
 
@@ -109,8 +111,6 @@ private slots:
     void on_cannyButton_clicked();
 
     void on_sobelPushButton_clicked();
-
-    void on_sobelRadioButton_clicked();
 
     void on_laplacianRadioButton_clicked();
 

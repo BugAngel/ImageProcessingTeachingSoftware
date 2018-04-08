@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->helpTextBrowser->setFontFamily("楷体");
     ui->helpTextBrowser->insertPlainText("王容出品，必属精品\n\n");
     ui->helpTextBrowser->insertPlainText("点击即可立即处理图像，无需任何繁杂操作\n\n");
+    ui->helpTextBrowser->insertPlainText("所有功能参数均经过严格测试，默认值即可使用，非法参数最大程度设置无法输入\n\n");
+    ui->helpTextBrowser->insertPlainText("所有非法操作均有提示\n\n");
 
     ui->binaryButtonGroup->setId(ui->radioButton_Binary,0);//设置二值化按钮组的ID值
     ui->binaryButtonGroup->setId(ui->radioButton_BinaryInv,1);
@@ -79,8 +81,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionOpenImg_triggered()
 {
     file.setFileString(QFileDialog::getOpenFileName(this,tr("打开图像文件"),"/",
-                                                    "JPEG文件 (*.jpeg *.jpg *.jpe);;\
-                                                    PNG图片(*.png);;\
+                                                    "PNG图片(*.png);;\
+                                                    JPEG文件 (*.jpeg *.jpg *.jpe);;\
                                                     Windows位图 (*.bmp *.dib);; \
                                                     便携文件格式(*.pbm *.pgm *.ppm);;\
                                                     TIFF文件 (*.tiff *.tif)"));
@@ -176,9 +178,29 @@ void MainWindow::on_tabWidget_currentChanged(int index)
             break;
         }
         break;
-    case 3:
-        on_contourRadioButton_clicked();
 
+    case 3:
+        switch (ui->edgeButtonGroup->checkedId()){
+        case 0:
+            on_cannyRadioButton_clicked();
+            break;
+        case 1:
+            on_sobelRadioButton_clicked();
+            break;
+        case 2:
+            on_laplacianRadioButton_clicked();
+            break;
+        case 3:
+            on_scharrRadioButton_clicked();
+            break;
+        case 4:
+            on_houghRadioButton_clicked();
+            break;
+        case 5:
+            on_contourRadioButton_clicked();
+            break;
+        }
+        break;
     }
 }
 

@@ -16,16 +16,18 @@ public:
     ~Sobel();
 
 private slots:
-    void on_spinBox_valueChanged(int arg1);
+    void on_comboBox_currentIndexChanged();
 
-    void on_spinBox_2_valueChanged(int arg1);
+    void on_doubleSpinBox_valueChanged();
 
-    void on_comboBox_currentIndexChanged(int index);
+    void on_comboBox_2_currentIndexChanged();
 
-    void on_doubleSpinBox_valueChanged(double arg1);
+    void on_comboBox_3_currentIndexChanged();
 
 private:
     Ui::Sobel *ui;
+
+    void sobelFunction();
 };
 
 #endif // SOBEL_H

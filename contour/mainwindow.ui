@@ -794,10 +794,10 @@ p, li { white-space: pre-wrap; }
  <connections/>
  <buttongroups>
   <buttongroup name="binaryButtonGroup"/>
+  <buttongroup name="morphButtonGroup"/>
   <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="srcImageButtonGroup"/>
   <buttongroup name="BlurButtonGroup"/>
-  <buttongroup name="morphButtonGroup"/>
   <buttongroup name="edgeButtonGroup"/>
  </buttongroups>
 </ui>

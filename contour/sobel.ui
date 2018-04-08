@@ -49,20 +49,6 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QSpinBox" name="spinBox">
-     <property name="value">
-      <number>1</number>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QSpinBox" name="spinBox_2">
-     <property name="value">
-      <number>1</number>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="2">
     <widget class="QComboBox" name="comboBox">
      <item>
@@ -108,6 +94,34 @@
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QComboBox" name="comboBox_2">
+     <item>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="comboBox_3">
+     <item>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </item>
     </widget>
    </item>
   </layout>

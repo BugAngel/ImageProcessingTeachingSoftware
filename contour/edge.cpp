@@ -14,7 +14,28 @@
 #include "sobelset.h"
 
 void MainWindow::on_cannyRadioButton_clicked()
-{
+{   
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("Canny边缘检测算子是John F.Canny于 1986 年开发出来的一个多级边缘检测算法。"
+                                         "更为重要的是 Canny 创立了边缘检测计算理论（Computational theory ofedge detection），"
+                                         "解释了这项技术是如何工作的。Canny边缘检测算法以Canny的名字命名，被很多人推崇为当今最优的边缘检测的算法。"
+                                         "Canny 边缘检测的步骤:\n"
+                                         "1.消除噪声。\n"
+                                         "2.计算梯度幅值和方向。\n"
+                                         "3.非极大值抑制。"
+                                         "4.滞后阈值。\n"
+                                         "tips：对于Canny函数的使用，推荐的高低阈值比在2:1到3:1之间。\n\n"
+                                         "函数原型为： \n"
+                                         "void Canny(InputArray image,OutputArray edges, double threshold1, double threshold2, "
+                                         "int apertureSize=3,bool L2gradient=false ) \n\n"
+                                         "第一个参数，InputArray类型的image，输入图像，即源图像，填Mat类的对象即可，且需为单通道8位图像。\n\n"
+                                         "第二个参数，OutputArray类型的edges，输出的边缘图，需要和源图片有一样的尺寸和类型。\n\n"
+                                         "第三个参数，double类型的threshold1，第一个滞后性阈值。\n\n"
+                                         "第四个参数，double类型的threshold2，第二个滞后性阈值。\n\n"
+                                         "第五个参数，int类型的apertureSize，表示应用Sobel算子的孔径大小，其有默认值3。\n\n"
+                                         "第六个参数，bool类型的L2gradient，一个计算图像梯度幅值的标识，有默认值false。\n\n");
+    ui->cannyRadioButton->setChecked(true);
+
     try{
         double threshold1;
         double threshold2;
@@ -37,7 +58,60 @@ void MainWindow::on_cannyRadioButton_clicked()
 
 void MainWindow::on_sobelRadioButton_clicked()
 {
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("Sobel 算子是一个主要用作边缘检测的离散微分算子 (discrete differentiation operator)。 "
+                                         "它Sobel算子结合了高斯平滑和微分求导，用来计算图像灰度函数的近似梯度。在图像的任何一点使用此算子，"
+                                         "将会产生对应的梯度矢量或是其法矢量。\n\n"
+                                         "函数原型为： \n"
+                                         "void Sobel ( InputArray src, OutputArray dst, int ddepth, int dx,int dy,  "
+                                          "int ksize=3, double scale=1,double delta=0,int borderType=BORDER_DEFAULT ); \n\n"
+                                         "第一个参数，InputArray 类型的src，为输入图像，填Mat类型即可。\n\n"
+                                         "第二个参数，OutputArray类型的dst，即目标图像，函数的输出参数，需要和源图片有一样的尺寸和类型。\n\n"
+                                         "第三个参数，int类型的ddepth，输出图像的深度，支持如下src.depth()和ddepth的组合：\n"
+                                         "若src.depth() = CV_8U, 取ddepth =-1/CV_16S/CV_32F/CV_64F\n"
+                                         "若src.depth() = CV_16U/CV_16S, 取ddepth =-1/CV_32F/CV_64F\n"
+                                         "若src.depth() = CV_32F, 取ddepth =-1/CV_32F/CV_64F\n"
+                                         "若src.depth() = CV_64F, 取ddepth = -1/CV_64F\n\n"
+                                         "第四个参数，int类型dx，x 方向上的差分阶数。\n\n"
+                                         "第五个参数，int类型dy，y方向上的差分阶数。\n\n"
+                                         "第六个参数，int类型ksize，有默认值3，表示Sobel核的大小;必须取1，3，5或7。\n\n"
+                                         "第七个参数，double类型的scale，计算导数值时可选的缩放因子，默认值是1，"
+                                         "表示默认情况下是没有应用缩放的。我们可以在文档中查阅getDerivKernels的相关介绍，来得到这个参数的更多信息。\n\n"
+                                         "第八个参数，double类型的delta，表示在结果存入目标图（第二个参数dst）之前可选的delta值，有默认值0。\n\n"
+                                         "第九个参数， int类型的borderType，我们的老朋友了（万年是最后一个参数），"
+                                         "边界模式，默认值为BORDER_DEFAULT。这个参数可以在官方文档中borderInterpolate处得到更详细的信息。\n\n");
+    ui->sobelRadioButton->setChecked(true);
 
+    try{
+        int dx;
+        int dy;
+        int ksize;
+        double x_weight;
+
+        cv::Mat dstImage;//输出图像
+        cv::Mat grad_x, grad_y;
+        cv::Mat abs_grad_x, abs_grad_y;
+
+        sobel_set.getValue(dx, dy, ksize, x_weight);
+
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+
+        cv::Sobel( srcImage, grad_x, -1, dx, 0, ksize, 1, 1, cv::BORDER_DEFAULT ); //x方向
+        convertScaleAbs( grad_x, abs_grad_x );
+
+        cv::Sobel( srcImage, grad_y, -1, 0, dy, ksize, 1, 1, cv::BORDER_DEFAULT );   //y方向
+        convertScaleAbs( grad_y, abs_grad_y );
+
+        cv::addWeighted( abs_grad_x, x_weight, abs_grad_y, 1-x_weight, 0, dstImage );   //合并
+
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,
+                                          tr("打开图像失败"),
+                                          tr(e.what()));
+    }
 }
 
 void MainWindow::on_laplacianRadioButton_clicked()
