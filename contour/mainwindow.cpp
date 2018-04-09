@@ -37,8 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->edgeButtonGroup->setId(ui->sobelRadioButton,1);
     ui->edgeButtonGroup->setId(ui->laplacianRadioButton,2);
     ui->edgeButtonGroup->setId(ui->scharrRadioButton,3);
-    ui->edgeButtonGroup->setId(ui->houghRadioButton,4);
-    ui->edgeButtonGroup->setId(ui->contourRadioButton,5);//设置轮廓检测按钮组的ID值
+    ui->edgeButtonGroup->setId(ui->contourRadioButton,4);//设置轮廓检测按钮组的ID值
     ui->cannyRadioButton->setChecked(true);//设置默认选项
 
     ui->srcImageButtonGroup->setId(ui->radioButtonIgnoreAspectRatio_2,0);//设置输入图像显示方式按钮组的ID值
@@ -194,13 +193,13 @@ void MainWindow::on_tabWidget_currentChanged(int index)
             on_scharrRadioButton_clicked();
             break;
         case 4:
-            on_houghRadioButton_clicked();
-            break;
-        case 5:
             on_contourRadioButton_clicked();
             break;
         }
         break;
     }
 }
+
+
+
 

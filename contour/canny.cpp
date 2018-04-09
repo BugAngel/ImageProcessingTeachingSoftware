@@ -49,7 +49,7 @@ void Canny::on_doubleSpinBox_2_valueChanged()
     cannyFunction();
 }
 
-void Canny::on_comboBox_currentIndexChanged(int index)
+void Canny::on_comboBox_currentIndexChanged()
 {
     cannyFunction();
 }

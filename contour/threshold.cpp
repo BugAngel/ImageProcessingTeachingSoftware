@@ -13,9 +13,6 @@
 #include "adaptivethreshold.h"
 #include <exception>
 
-using namespace std;
-using namespace  cv;
-
 void MainWindow::on_radioButton_Binary_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -34,15 +31,13 @@ void MainWindow::on_radioButton_Binary_clicked()
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(fileString,0);//输入图像
-        Mat dstImage;//输出图像
-        QImage* img=new QImage;//QT界面显示图像
+        cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        cv::Mat dstImage;//输出图像
 
-        threshold(srcImage,dstImage,thresh,255,THRESH_BINARY);
-        imwrite("temp.jpg",dstImage);
+        cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_BINARY);
+        cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-        delete img;
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
                                  tr(e.what()));
@@ -67,13 +62,13 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(fileString,0);//输入图像
-        Mat dstImage;//输出图像
+        cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        cv::Mat dstImage;//输出图像
 
-        threshold(srcImage,dstImage,thresh,255,THRESH_BINARY_INV);
-        imwrite("temp.jpg",dstImage);
+        cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_BINARY_INV);
+        cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
                                  tr(e.what()));
@@ -98,13 +93,13 @@ void MainWindow::on_radioButton_TRUNC_clicked()
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(fileString,0);//输入图像
-        Mat dstImage;//输出图像
+        cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        cv::Mat dstImage;//输出图像
 
-        threshold(srcImage,dstImage,thresh,255,THRESH_TRUNC);
-        imwrite("temp.jpg",dstImage);
+        cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_TRUNC);
+        cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
                                  tr(e.what()));
@@ -129,13 +124,13 @@ void MainWindow::on_radioButton_TRZERO_clicked()
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(fileString,0);//输入图像
-        Mat dstImage;//输出图像
+        cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        cv::Mat dstImage;//输出图像
 
-        threshold(srcImage,dstImage,thresh,255,THRESH_TOZERO);
-        imwrite("temp.jpg",dstImage);
+        cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_TOZERO);
+        cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
                                  tr(e.what()));
@@ -160,13 +155,13 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(fileString,0);//输入图像
-        Mat dstImage;//输出图像
+        cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        cv::Mat dstImage;//输出图像
 
-        threshold(srcImage,dstImage,thresh,255,THRESH_TOZERO_INV);
-        imwrite("temp.jpg",dstImage);
+        cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_TOZERO_INV);
+        cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
                                  tr(e.what()));
@@ -197,15 +192,15 @@ void MainWindow::on_adaptiveRadioButton_clicked()
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
-        Mat srcImage=imread(fileString,0);//输入图像
-        Mat dstImage;//输出图像
+        cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        cv::Mat dstImage;//输出图像
         int method,type,size;
         double C;
         adaptive_set.getValue(method,type,size,C);
         adaptiveThreshold(srcImage,dstImage,255,method,type,size,C);
-        imwrite("temp.jpg",dstImage);
+        cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
                                  tr(e.what()));

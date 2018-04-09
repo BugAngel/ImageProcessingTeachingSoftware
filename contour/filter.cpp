@@ -17,8 +17,6 @@
 #include "bilateralfilter.h"
 #include "bilateralfilterset.h"
 
-using namespace std;
-
 void MainWindow::on_boxFilterRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -50,7 +48,7 @@ void MainWindow::on_boxFilterRadioButton_clicked()
         cv::boxFilter(srcImage, dstImage, -1,cv::Size(width, heigth));
         cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
                                           tr(e.what()));
@@ -88,7 +86,7 @@ void MainWindow::on_blurRadioButton_clicked()
         cv::blur(srcImage, dstImage, cv::Size(width, heigth));
         cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
                                           tr(e.what()));
@@ -130,7 +128,7 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
         cv::GaussianBlur(srcImage, dstImage, cv::Size(width, height),sigmaX,sigmaY);
         cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
                                           tr(e.what()));
@@ -166,7 +164,7 @@ void MainWindow::on_medianFilterRadioButton_clicked()
         cv::medianBlur(srcImage, dstImage, ksize);
         cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
                                           tr(e.what()));
@@ -206,7 +204,7 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
 
         cv::imwrite("temp.jpg",dstImage);
         showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
-    }catch(exception& e){
+    }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
                                           tr(e.what()));

@@ -37,6 +37,8 @@ public slots:
 
     void on_sobelRadioButton_clicked();
 
+    void on_scharrRadioButton_clicked();
+
 private slots:
     void on_actionOpenImg_triggered();
 
@@ -114,9 +116,9 @@ private slots:
 
     void on_laplacianRadioButton_clicked();
 
-    void on_scharrRadioButton_clicked();
+    void on_laplacianSpinBox_valueChanged();
 
-    void on_houghRadioButton_clicked();
+    void on_scharrDoubleSpinBox_valueChanged();
 
 public:
     Ui::MainWindow *ui;

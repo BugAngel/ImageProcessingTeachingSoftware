@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>王容2014080103018</string>
   </property>
   <property name="styleSheet">
    <string notr="true">font: 9pt &quot;Arial&quot;;</string>
@@ -594,141 +594,102 @@
           <attribute name="title">
            <string>边缘与轮廓</string>
           </attribute>
-          <widget class="QRadioButton" name="contourRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>220</y>
-             <width>71</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>绘制轮廓</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">edgeButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QPushButton" name="contourButton">
-           <property name="geometry">
-            <rect>
-             <x>160</x>
-             <y>220</y>
-             <width>75</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>设置</string>
-           </property>
-          </widget>
-          <widget class="QRadioButton" name="cannyRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>30</y>
-             <width>111</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>canny边缘检测</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">edgeButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QRadioButton" name="sobelRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>70</y>
-             <width>101</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>sobel算子</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">edgeButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QRadioButton" name="laplacianRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>110</y>
-             <width>101</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Laplacian算子</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">edgeButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QRadioButton" name="scharrRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>140</y>
-             <width>89</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>scharr滤波器</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">edgeButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QRadioButton" name="houghRadioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>170</y>
-             <width>121</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>累计概率霍夫变换</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">edgeButtonGroup</string>
-           </attribute>
-          </widget>
-          <widget class="QPushButton" name="cannyButton">
-           <property name="geometry">
-            <rect>
-             <x>150</x>
-             <y>30</y>
-             <width>75</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>设置</string>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="sobelPushButton">
-           <property name="geometry">
-            <rect>
-             <x>150</x>
-             <y>70</y>
-             <width>75</width>
-             <height>23</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>设置</string>
-           </property>
-          </widget>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="cannyRadioButton">
+             <property name="text">
+              <string>canny边缘检测</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">edgeButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="cannyButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="sobelRadioButton">
+             <property name="text">
+              <string>sobel算子</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">edgeButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="sobelPushButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="laplacianRadioButton">
+             <property name="text">
+              <string>Laplacian算子</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">edgeButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="laplacianSpinBox">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="singleStep">
+              <number>2</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QRadioButton" name="scharrRadioButton">
+             <property name="text">
+              <string>scharr滤波器</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">edgeButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="scharrDoubleSpinBox">
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.500000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QRadioButton" name="contourRadioButton">
+             <property name="text">
+              <string>绘制轮廓</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">edgeButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="contourButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>
@@ -738,7 +699,7 @@
     <item row="1" column="1">
      <widget class="QGroupBox" name="groupBox_5">
       <property name="title">
-       <string>帮助</string>
+       <string>功能说明</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
@@ -793,11 +754,11 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="binaryButtonGroup"/>
-  <buttongroup name="morphButtonGroup"/>
+  <buttongroup name="edgeButtonGroup"/>
   <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="srcImageButtonGroup"/>
   <buttongroup name="BlurButtonGroup"/>
-  <buttongroup name="edgeButtonGroup"/>
+  <buttongroup name="morphButtonGroup"/>
+  <buttongroup name="binaryButtonGroup"/>
  </buttongroups>
 </ui>

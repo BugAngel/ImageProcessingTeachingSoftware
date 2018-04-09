@@ -20,7 +20,7 @@ private slots:
 
     void on_doubleSpinBox_2_valueChanged();
 
-    void on_comboBox_currentIndexChanged(int index);
+    void on_comboBox_currentIndexChanged();
 
 private:
     Ui::Canny *ui;

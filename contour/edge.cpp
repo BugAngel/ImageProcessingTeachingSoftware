@@ -59,8 +59,8 @@ void MainWindow::on_cannyRadioButton_clicked()
 void MainWindow::on_sobelRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("Sobel 算子是一个主要用作边缘检测的离散微分算子 (discrete differentiation operator)。 "
-                                         "它Sobel算子结合了高斯平滑和微分求导，用来计算图像灰度函数的近似梯度。在图像的任何一点使用此算子，"
+    ui->helpTextBrowser->insertPlainText("Sobel算子是一个主要用作边缘检测的离散微分算子 (discrete differentiation operator)。 "
+                                         "它结合了高斯平滑和微分求导，用来计算图像灰度函数的近似梯度。在图像的任何一点使用此算子，"
                                          "将会产生对应的梯度矢量或是其法矢量。\n\n"
                                          "函数原型为： \n"
                                          "void Sobel ( InputArray src, OutputArray dst, int ddepth, int dx,int dy,  "
@@ -98,10 +98,10 @@ void MainWindow::on_sobelRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
 
         cv::Sobel( srcImage, grad_x, -1, dx, 0, ksize, 1, 1, cv::BORDER_DEFAULT ); //x方向
-        convertScaleAbs( grad_x, abs_grad_x );
+        cv::convertScaleAbs( grad_x, abs_grad_x );
 
         cv::Sobel( srcImage, grad_y, -1, 0, dy, ksize, 1, 1, cv::BORDER_DEFAULT );   //y方向
-        convertScaleAbs( grad_y, abs_grad_y );
+        cv::convertScaleAbs( grad_y, abs_grad_y );
 
         cv::addWeighted( abs_grad_x, x_weight, abs_grad_y, 1-x_weight, 0, dstImage );   //合并
 
@@ -116,17 +116,100 @@ void MainWindow::on_sobelRadioButton_clicked()
 
 void MainWindow::on_laplacianRadioButton_clicked()
 {
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("数字为滤波器孔径尺寸\n"
+                                         "Laplacian 算子是n维欧几里德空间中的一个二阶微分算子，定义为梯度grad（）的散度div（）。\n"
+                                         "需要点破的是，由于 Laplacian使用了图像梯度，它内部的代码其实是调用了 Sobel 算子的。\n\n"
+                                         "函数原型为： \n"
+                                         "void Laplacian(InputArray src,OutputArray dst, int ddepth, int ksize=1, "
+                                         "double scale=1, double delta=0, intborderType=BORDER_DEFAULT ); \n\n"
+                                         "第一个参数，InputArray类型的image，输入图像，即源图像，填Mat类的对象即可，且需为单通道8位图像。\n\n"
+                                         "第二个参数，OutputArray类型的edges，输出的边缘图，需要和源图片有一样的尺寸和通道数。\n\n"
+                                         "第三个参数，int类型的ddept，目标图像的深度。\n\n"
+                                         "第四个参数，int类型的ksize，用于计算二阶导数的滤波器的孔径尺寸，大小必须为正奇数，且有默认值1。\n\n"
+                                         "第五个参数，double类型的scale，计算拉普拉斯值的时候可选的比例因子，有默认值1。\n\n"
+                                         "第六个参数，double类型的delta，表示在结果存入目标图（第二个参数dst）之前可选的delta值，有默认值0。\n\n"
+                                         "第七个参数， int类型的borderType，边界模式，默认值为BORDER_DEFAULT。这个参数可以在官方文档中borderInterpolate()处得到更详细的信息。\n\n");
+    ui->laplacianRadioButton->setChecked(true);
 
+    int ksize=ui->laplacianSpinBox->value();
+
+    if(ksize%2==0){
+        QMessageBox::information(this,
+                                          tr("请输入合适的数字"),
+                                          tr("滤波器的孔径尺寸大小必须为正奇数!"));
+        return;
+    }
+
+
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        cv::Mat dstImage;//输出图像
+
+        cv::Laplacian( srcImage, dstImage, -1, ksize, 1, 0, cv::BORDER_DEFAULT );
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,
+                                 tr("打开图像失败"),
+                                 tr(e.what()));
+    }
 }
 
 void MainWindow::on_scharrRadioButton_clicked()
 {
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("数字为X方向差分所占权重\n"
+                                         "实践中一般直接称scharr为滤波器而不是算子，它在OPENCV中主要是配合Sobel算子的运算而存在的。\n"
+                                         "Scharr(src, dst, ddepth, dx, dy, scale,delta, borderType)与"
+                                         "Sobel(src, dst, ddepth, dx, dy, CV_SCHARR,scale, delta, borderType)完全等价\n\n"
+                                         "函数原型为： \n"
+                                         "void Scharr(InputArray src,OutputArray dst, int ddepth,int dx,int dy,"
+                                         "double scale=1,double delta=0,intborderType=BORDER_DEFAULT )\n\n"
+                                         "第一个参数，InputArray 类型的src，为输入图像，填Mat类型即可。\n\n"
+                                         "第二个参数，OutputArray类型的dst，即目标图像，函数的输出参数，需要和源图片有一样的尺寸和类型。\n\n"
+                                         "第三个参数，int类型的ddepth，输出图像的深度，支持如下src.depth()和ddepth的组合：\n"
+                                         "若src.depth() = CV_8U, 取ddepth =-1/CV_16S/CV_32F/CV_64F\n"
+                                         "若src.depth() = CV_16U/CV_16S, 取ddepth =-1/CV_32F/CV_64F\n"
+                                         "若src.depth() = CV_32F, 取ddepth =-1/CV_32F/CV_64F\n"
+                                         "若src.depth() = CV_64F, 取ddepth = -1/CV_64F\n\n"
+                                         "第四个参数，int类型dx，x 方向上的差分阶数。\n\n"
+                                         "第五个参数，int类型dy，y方向上的差分阶数。\n\n"
+                                         "第六个参数，double类型的scale，计算导数值时可选的缩放因子，默认值是1，"
+                                         "表示默认情况下是没有应用缩放的。我们可以在文档中查阅getDerivKernels的相关介绍，来得到这个参数的更多信息。\n\n"
+                                         "第七个参数，double类型的delta，表示在结果存入目标图（第二个参数dst）之前可选的delta值，有默认值0。\n\n"
+                                         "第八个参数， int类型的borderType，我们的老朋友了（万年是最后一个参数），"
+                                         "边界模式，默认值为BORDER_DEFAULT。这个参数可以在官方文档中borderInterpolate处得到更详细的信息。\n\n");
+    ui->scharrRadioButton->setChecked(true);
 
-}
+    try{
+        double x_weight;
 
-void MainWindow::on_houghRadioButton_clicked()
-{
+        cv::Mat dstImage;//输出图像
+        cv::Mat grad_x, grad_y;
+        cv::Mat abs_grad_x, abs_grad_y;
 
+        x_weight=ui->scharrDoubleSpinBox->value();
+
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+
+        cv::Scharr( srcImage, grad_x, -1, 1, 0, 1, 1, cv::BORDER_DEFAULT ); //x方向
+        cv::convertScaleAbs( grad_x, abs_grad_x );
+
+        cv::Scharr( srcImage, grad_y, -1, 0, 1, 1, 1, cv::BORDER_DEFAULT );   //y方向
+        cv::convertScaleAbs( grad_y, abs_grad_y );
+
+        cv::addWeighted( abs_grad_x, x_weight, abs_grad_y, 1-x_weight, 0, dstImage );   //合并
+
+        cv::imwrite("temp.jpg",dstImage);
+        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+    }catch(std::exception& e){
+        QMessageBox::information(this,
+                                          tr("打开图像失败"),
+                                          tr(e.what()));
+    }
 }
 
 void MainWindow::on_contourRadioButton_clicked()
@@ -156,7 +239,7 @@ void MainWindow::on_contourRadioButton_clicked()
                                          "第二种是CV_CHAIN_APPROX_SIMPLE，压缩水平方向，垂直方向，对角线方向的元素，只保留该方向的终点坐标，例如一个矩形轮廓只需四个点来保存轮廓信息\n"
                                          "第三种和第四种是CV_CHAIN_APPROX_TC89_L1和CV_CHAIN_APPROX_TC89_KCOS,使用Teh-Chinl链逼近算法中一个\n\n"
                                          "第六个参数，Point类型的offset，每个轮廓点的可选偏移量，有默认值Point()。对ROI图像中找出的轮廓，并要在整个图像中进行分析时，这个参数便可派上用场\n\n");
-    ui->helpTextBrowser->insertPlainText("\t 输出内容: 面积和轮廓长度\n");
+    ui->helpTextBrowser->insertPlainText("\t 输出内容: 轮廓的面积和长度\n");
     ui->contourRadioButton->setChecked(true);
 
     double thresh;
@@ -182,35 +265,22 @@ void MainWindow::on_contourRadioButton_clicked()
         // 找到轮廓
         cv::findContours( g_cannyMat_output, g_vContours, g_vHierarchy, mode, method+1, cv::Point(0, 0) );
 
-        // 计算矩
-        std::vector<cv::Moments> mu(g_vContours.size() );
-        for(unsigned int i = 0; i < g_vContours.size(); i++ )
-        { mu[i] = cv::moments( g_vContours[i], false ); }
-
-        //  计算中心矩
-        std::vector<cv::Point2f> mc( g_vContours.size() );
-        for( unsigned int i = 0; i < g_vContours.size(); i++ )
-        { mc[i] = cv::Point2f( static_cast<float>(mu[i].m10/mu[i].m00), static_cast<float>(mu[i].m01/mu[i].m00 )); }
-
         // 绘制轮廓
         cv::Mat drawing = cv::Mat::zeros( g_cannyMat_output.size(), CV_8UC3 );
         for( unsigned int i = 0; i< g_vContours.size(); i++ )
         {
             cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
             cv::drawContours( drawing, g_vContours, i, color, 2, 8, g_vHierarchy, 0, cv::Point() );//绘制外层和内层轮廓
-            cv::circle( drawing, mc[i], 4, color, -1, 8, 0 );;//绘制圆
         }
 
-        // 通过m00计算轮廓面积并且和OpenCV函数比较
         for(unsigned  int i = 0; i< g_vContours.size(); i++ )
         {
             char s[200];
-            sprintf(s," >通过m00计算出轮廓[%d]的面积: (M_00) = %.2f \n OpenCV函数计算出的面积=%.2f , 长度: %.2f \n\n",
-                    i, mu[i].m00, cv::contourArea(g_vContours[i]), cv::arcLength( g_vContours[i], true ));
+            sprintf(s," >轮廓[%d]的面积: %.2f , 长度: %.2f \n\n",
+                    i, cv::contourArea(g_vContours[i]), cv::arcLength( g_vContours[i], true ));
             ui->helpTextBrowser->insertPlainText(s);
             cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );
             cv::drawContours( drawing, g_vContours, i, color, 2, 8, g_vHierarchy, 0, cv::Point() );
-            cv::circle( drawing, mc[i], 4, color, -1, 8, 0 );
         }
 
         cv::imwrite("temp.jpg",drawing);
@@ -233,8 +303,20 @@ void MainWindow::on_sobelPushButton_clicked()
     sobel.exec();
 }
 
+void MainWindow::on_laplacianSpinBox_valueChanged()
+{
+    on_laplacianRadioButton_clicked();
+}
+
+void MainWindow::on_scharrDoubleSpinBox_valueChanged()
+{
+    on_scharrRadioButton_clicked();
+}
+
 void MainWindow::on_contourButton_clicked()
 {
     Contour contour(this);
     contour.exec();
 }
+
+

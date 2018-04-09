@@ -36,8 +36,7 @@ void Sobel::sobelFunction()
     int dy=ui->comboBox_3->currentIndex()+1;
     int ksize=ui->comboBox->currentIndex()*2+1;
     double x_weight=ui->doubleSpinBox->value();
-    QString temp=QString::number(1.0-x_weight,10,2);
-    ui->label_6->setText(temp);
+    ui->label_6->setText(QString::number(1.0-x_weight,10,2));
 
     sobel_set.setValue(dx, dy, ksize, x_weight);
 
