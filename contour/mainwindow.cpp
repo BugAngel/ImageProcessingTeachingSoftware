@@ -9,9 +9,6 @@
 #include "showimage.h"
 #include <QProcess>
 
-using namespace  cv;
-using namespace std;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -80,11 +77,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionOpenImg_triggered()
 {
     file.setFileString(QFileDialog::getOpenFileName(this,tr("打开图像文件"),"/",
-                                                    "PNG图片(*.png);;\
-                                                    JPEG文件 (*.jpeg *.jpg *.jpe);;\
+                                                    tr("PNG图片(*.png);;\
+                                                    JPEG文件 (*.jpg *.jpeg *.jpe);;\
                                                     Windows位图 (*.bmp *.dib);; \
                                                     便携文件格式(*.pbm *.pgm *.ppm);;\
-                                                    TIFF文件 (*.tiff *.tif)"));
+                                                    TIFF文件 (*.tif *.tiff)")));
     if(showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage)==-1){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
@@ -200,6 +197,77 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     }
 }
 
+void MainWindow::on_savePushButton_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+            tr("文件另存为"),
+            tr("未命名.png"),
+            tr( "PNG图片(*.png);;\
+                JPEG文件 (*.jpg *.jpeg *.jpe);;\
+                Windows位图 (*.bmp *.dib);; \
+                便携文件格式(*.pbm *.pgm *.ppm);;\
+                TIFF文件 (*.tif *.tiff)"));
 
+    if(!fileName.isEmpty())
+    {
+        cv::Mat img=cv::imread("temp.jpg");
+        cv::imwrite(fileName.toLocal8Bit().data(),img);
+    }
 
+//    switch(ui->dstImageTabWidget->currentIndex())
+//    {
+//    case 0:
 
+//    }
+
+}
+
+void MainWindow::on_firstOperateCheckBox_stateChanged(int arg1)
+{
+    if(arg1!=0)
+    {
+        ui->secondOperateCheckBox->setEnabled(true);
+    }
+    else
+    {
+        ui->secondOperateCheckBox->setEnabled(false);
+        ui->secondOperateCheckBox->setChecked(false);
+        ui->thirdOperateCheckBox->setEnabled(false);
+        ui->thirdOperateCheckBox->setChecked(false);
+        ui->forthOperateCheckBox->setEnabled(false);
+        ui->forthOperateCheckBox->setChecked(false);
+    }
+}
+
+void MainWindow::on_secondOperateCheckBox_stateChanged(int arg1)
+{
+    if(arg1!=0)
+    {
+        ui->thirdOperateCheckBox->setEnabled(true);
+    }
+    else
+    {
+        ui->thirdOperateCheckBox->setEnabled(false);
+        ui->thirdOperateCheckBox->setChecked(false);
+        ui->forthOperateCheckBox->setEnabled(false);
+        ui->forthOperateCheckBox->setChecked(false);
+    }
+}
+
+void MainWindow::on_thirdOperateCheckBox_stateChanged(int arg1)
+{
+    if(arg1!=0)
+    {
+        ui->forthOperateCheckBox->setEnabled(true);
+    }
+    else
+    {
+        ui->forthOperateCheckBox->setEnabled(false);
+        ui->forthOperateCheckBox->setChecked(false);
+    }
+}
+
+void MainWindow::on_forthOperateCheckBox_stateChanged(int arg1)
+{
+
+}

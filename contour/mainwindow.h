@@ -120,6 +120,16 @@ private slots:
 
     void on_scharrDoubleSpinBox_valueChanged();
 
+    void on_savePushButton_clicked();
+
+    void on_firstOperateCheckBox_stateChanged(int arg1);
+
+    void on_secondOperateCheckBox_stateChanged(int arg1);
+
+    void on_thirdOperateCheckBox_stateChanged(int arg1);
+
+    void on_forthOperateCheckBox_stateChanged(int arg1);
+
 public:
     Ui::MainWindow *ui;
 
