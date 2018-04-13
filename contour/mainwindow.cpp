@@ -62,7 +62,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->morphButtonGroup->setId(ui->morphTopHatRadioButton,5);
     ui->morphButtonGroup->setId(ui->morphBlackHatRadioButton,6);
     ui->erodeRadioButton->setChecked(true);//设置默认选项
-
 }
 
 MainWindow::~MainWindow()
@@ -222,52 +221,3 @@ void MainWindow::on_savePushButton_clicked()
 
 }
 
-void MainWindow::on_firstOperateCheckBox_stateChanged(int arg1)
-{
-    if(arg1!=0)
-    {
-        ui->secondOperateCheckBox->setEnabled(true);
-    }
-    else
-    {
-        ui->secondOperateCheckBox->setEnabled(false);
-        ui->secondOperateCheckBox->setChecked(false);
-        ui->thirdOperateCheckBox->setEnabled(false);
-        ui->thirdOperateCheckBox->setChecked(false);
-        ui->forthOperateCheckBox->setEnabled(false);
-        ui->forthOperateCheckBox->setChecked(false);
-    }
-}
-
-void MainWindow::on_secondOperateCheckBox_stateChanged(int arg1)
-{
-    if(arg1!=0)
-    {
-        ui->thirdOperateCheckBox->setEnabled(true);
-    }
-    else
-    {
-        ui->thirdOperateCheckBox->setEnabled(false);
-        ui->thirdOperateCheckBox->setChecked(false);
-        ui->forthOperateCheckBox->setEnabled(false);
-        ui->forthOperateCheckBox->setChecked(false);
-    }
-}
-
-void MainWindow::on_thirdOperateCheckBox_stateChanged(int arg1)
-{
-    if(arg1!=0)
-    {
-        ui->forthOperateCheckBox->setEnabled(true);
-    }
-    else
-    {
-        ui->forthOperateCheckBox->setEnabled(false);
-        ui->forthOperateCheckBox->setChecked(false);
-    }
-}
-
-void MainWindow::on_forthOperateCheckBox_stateChanged(int arg1)
-{
-
-}

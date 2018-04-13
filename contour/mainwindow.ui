@@ -930,150 +930,140 @@
           <attribute name="title">
            <string>多步操作</string>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout_6">
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="firstOperateCheckBox">
+             <property name="text">
+              <string>第一步</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="firstOperateComboBox">
+             <item>
+              <property name="text">
+               <string>线性与非线性滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>形态学滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>二值化</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>边缘与轮廓</string>
+              </property>
+             </item>
+            </widget>
+           </item>
            <item row="1" column="0">
+            <widget class="QCheckBox" name="secondOperateCheckBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>第二步</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="secondOperateComboBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>形态学滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>二值化</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>边缘与轮廓</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="thirdOperateCheckBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>第三步</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="thirdOperateComboBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>形态学滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>二值化</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>边缘与轮廓</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QCheckBox" name="forthOperateCheckBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>第四步</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="forthOperateComboBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>形态学滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>二值化</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>边缘与轮廓</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
             <widget class="QPushButton" name="multiOperatePushButton">
              <property name="text">
               <string>开始处理</string>
              </property>
             </widget>
-           </item>
-           <item row="0" column="0">
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="firstOperateCheckBox">
-               <property name="text">
-                <string>第一步</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QComboBox" name="comboBox">
-               <item>
-                <property name="text">
-                 <string>线性与非线性滤波</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>形态学滤波</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>二值化</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>边缘与轮廓</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="secondOperateCheckBox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="text">
-                <string>第二步</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="comboBox_2">
-               <item>
-                <property name="text">
-                 <string>线性与非线性滤波</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>形态学滤波</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>二值化</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>边缘与轮廓</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="thirdOperateCheckBox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="text">
-                <string>第三步</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QComboBox" name="comboBox_3">
-               <item>
-                <property name="text">
-                 <string>线性与非线性滤波</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>形态学滤波</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>二值化</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>边缘与轮廓</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="forthOperateCheckBox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="text">
-                <string>第四步</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QComboBox" name="comboBox_4">
-               <item>
-                <property name="text">
-                 <string>线性与非线性滤波</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>形态学滤波</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>二值化</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>边缘与轮廓</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-            </layout>
            </item>
           </layout>
          </widget>
@@ -1140,11 +1130,11 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="srcImageButtonGroup"/>
+  <buttongroup name="BlurButtonGroup"/>
+  <buttongroup name="edgeButtonGroup"/>
   <buttongroup name="morphButtonGroup"/>
   <buttongroup name="dstImageButtonGroup"/>
+  <buttongroup name="srcImageButtonGroup"/>
   <buttongroup name="binaryButtonGroup"/>
-  <buttongroup name="edgeButtonGroup"/>
-  <buttongroup name="BlurButtonGroup"/>
  </buttongroups>
 </ui>

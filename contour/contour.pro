@@ -47,7 +47,9 @@ SOURCES += \
     canny.cpp \
     cannyset.cpp \
     sobel.cpp \
-    sobelset.cpp
+    sobelset.cpp \
+    multioperateset.cpp \
+    multioperate.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -68,7 +70,8 @@ HEADERS += \
     canny.h \
     cannyset.h \
     sobel.h \
-    sobelset.h
+    sobelset.h \
+    multioperateset.h
 
 FORMS += \
         mainwindow.ui \

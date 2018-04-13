@@ -128,7 +128,13 @@ private slots:
 
     void on_thirdOperateCheckBox_stateChanged(int arg1);
 
-    void on_forthOperateCheckBox_stateChanged(int arg1);
+    void on_multiOperatePushButton_clicked();
+
+    void on_firstOperateComboBox_currentIndexChanged();
+
+    void on_secondOperateComboBox_currentIndexChanged();
+
+    void on_thirdOperateComboBox_currentIndexChanged();
 
 public:
     Ui::MainWindow *ui;
