@@ -45,10 +45,12 @@ void MainWindow::on_cannyRadioButton_clicked()
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::Canny(srcImage,srcImage,threshold1,threshold2,apertureSize);
-        cv::imwrite("temp.jpg",srcImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),srcImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -91,6 +93,8 @@ void MainWindow::on_sobelRadioButton_clicked()
         cv::Mat dstImage;//输出图像
         cv::Mat grad_x, grad_y;
         cv::Mat abs_grad_x, abs_grad_y;
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         sobel_set.getValue(dx, dy, ksize, x_weight);
 
@@ -105,8 +109,8 @@ void MainWindow::on_sobelRadioButton_clicked()
 
         cv::addWeighted( abs_grad_x, x_weight, abs_grad_y, 1-x_weight, 0, dstImage );   //合并
 
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -146,10 +150,12 @@ void MainWindow::on_laplacianRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::Laplacian( srcImage, dstImage, -1, ksize, 1, 0, cv::BORDER_DEFAULT );
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
@@ -189,6 +195,8 @@ void MainWindow::on_scharrRadioButton_clicked()
         cv::Mat dstImage;//输出图像
         cv::Mat grad_x, grad_y;
         cv::Mat abs_grad_x, abs_grad_y;
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         x_weight=ui->scharrDoubleSpinBox->value();
 
@@ -203,8 +211,8 @@ void MainWindow::on_scharrRadioButton_clicked()
 
         cv::addWeighted( abs_grad_x, x_weight, abs_grad_y, 1-x_weight, 0, dstImage );   //合并
 
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -256,6 +264,8 @@ void MainWindow::on_contourRadioButton_clicked()
         cv::Mat g_cannyMat_output;
         std::vector<std::vector<cv::Point> > g_vContours;
         std::vector<cv::Vec4i> g_vHierarchy;
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::cvtColor( g_srcImage, g_grayImage, CV_BGR2GRAY );//转成灰度图
 
@@ -283,8 +293,8 @@ void MainWindow::on_contourRadioButton_clicked()
             cv::drawContours( drawing, g_vContours, i, color, 2, 8, g_vHierarchy, 0, cv::Point() );
         }
 
-        cv::imwrite("temp.jpg",drawing);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),drawing);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }

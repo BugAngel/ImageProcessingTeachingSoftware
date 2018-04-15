@@ -44,10 +44,12 @@ void MainWindow::on_boxFilterRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::boxFilter(srcImage, dstImage, -1,cv::Size(width, heigth));
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -82,10 +84,12 @@ void MainWindow::on_blurRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::blur(srcImage, dstImage, cv::Size(width, heigth));
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -124,10 +128,12 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::GaussianBlur(srcImage, dstImage, cv::Size(width, height),sigmaX,sigmaY);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -160,10 +166,12 @@ void MainWindow::on_medianFilterRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::medianBlur(srcImage, dstImage, ksize);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
@@ -199,11 +207,13 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像序号
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::bilateralFilter( srcImage, dstImage, d, sigmaColor, sigmaSpace );
 
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),

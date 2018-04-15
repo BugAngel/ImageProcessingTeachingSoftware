@@ -9,15 +9,15 @@ class MultiOperateSet
 {
 private:
     const static int NUM=4;//多步操作最多有的步数
-//    bool flag[NUM];//标记哪个功能用过了
-//    QString item[NUM];//各个功能的名称
-    QMap<QString, bool> items;
+    QMap<QString, bool> items;//对应Tab选项bool值
+    QMap<QString, int> tabs;//对应Tab选项index值
 
 public:
     MultiOperateSet();
     void itemsAllTrue();
     void setItemFalse(QString qstring);
     QStringList getCurrentItems();
+    int getTabValue(QString qstr);
 };
 
 #endif // MULTIOPERATESET_H

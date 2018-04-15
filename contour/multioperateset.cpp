@@ -2,19 +2,15 @@
 
 MultiOperateSet::MultiOperateSet()
 {
-//    flag[0]=false;
-//    flag[1]=true;
-//    flag[2]=true;
-//    flag[3]=true;
-
-//    item[0]="线性与非线性滤波";
-//    item[1]="形态学滤波";
-//    item[2]="二值化";
-//    item[3]="边缘与轮廓";
     items["线性与非线性滤波"]=true;
     items["形态学滤波"]=true;
     items["二值化"]=true;
     items["边缘与轮廓"]=true;
+
+    tabs["线性与非线性滤波"]=0;
+    tabs["形态学滤波"]=1;
+    tabs["二值化"]=2;
+    tabs["边缘与轮廓"]=3;
 }
 
 void MultiOperateSet::itemsAllTrue()
@@ -43,3 +39,7 @@ QStringList MultiOperateSet::getCurrentItems()
     return tempQStringList;
 }
 
+MultiOperateSet::getTabValue(QString qstr)
+{
+    return tabs[qstr];
+}

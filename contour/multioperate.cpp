@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "multioperateset.h"
-#include <map>
+#include <QMessageBox>
+#include "showimage.h"
 
 MultiOperateSet multiOperate_set;
 
@@ -122,5 +123,30 @@ void MainWindow::on_thirdOperateComboBox_currentIndexChanged()
 
 void MainWindow::on_multiOperatePushButton_clicked()
 {
-
+    int index;//tab的index值
+    if(ui->firstOperateCheckBox->isChecked())
+    {
+       showImg.setCurrentImageNum(1);
+       index=multiOperate_set.getTabValue(ui->firstOperateComboBox->currentText());
+       on_tabWidget_currentChanged(index);
+    }
+    if(ui->secondOperateCheckBox->isChecked())
+    {
+        showImg.setCurrentImageNum(2);
+        index=multiOperate_set.getTabValue(ui->secondOperateComboBox->currentText());
+        on_tabWidget_currentChanged(index);
+    }
+    if(ui->thirdOperateCheckBox->isChecked())
+    {
+        showImg.setCurrentImageNum(3);
+        index=multiOperate_set.getTabValue(ui->thirdOperateComboBox->currentText());
+        on_tabWidget_currentChanged(index);
+    }
+    if(ui->forthOperateCheckBox->isChecked())
+    {
+        showImg.setCurrentImageNum(4);
+        index=multiOperate_set.getTabValue(ui->forthOperateComboBox->currentText());
+        on_tabWidget_currentChanged(index);
+    }
+    showImg.setCurrentImageNum(1);//输出图像序号复位
 }

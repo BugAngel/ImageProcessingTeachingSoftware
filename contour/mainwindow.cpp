@@ -81,7 +81,7 @@ void MainWindow::on_actionOpenImg_triggered()
                                                     Windows位图 (*.bmp *.dib);; \
                                                     便携文件格式(*.pbm *.pgm *.ppm);;\
                                                     TIFF文件 (*.tif *.tiff)")));
-    if(showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage)==-1){
+    if(showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage,0)==-1){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
                                  tr("打开图像失败!"));
@@ -93,8 +93,8 @@ void MainWindow::changeEvent(QEvent *event)
     if(event->type()==QEvent::WindowStateChange)
     {
         try{
-            showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage);
-            showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+            showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage,0);
+            showImg.showImage(ui,QString::number(1)+showImg.ImgSuffix,ShowImage::DSTImage,1);
         }catch(std::exception& e){
             QMessageBox::information(this, tr("打开图像失败"),tr(e.what()));
         }
@@ -209,15 +209,31 @@ void MainWindow::on_savePushButton_clicked()
 
     if(!fileName.isEmpty())
     {
-        cv::Mat img=cv::imread("temp.jpg");
-        cv::imwrite(fileName.toLocal8Bit().data(),img);
+        QString tempFileName;
+        cv::Mat img;
+        switch(ui->dstImageTabWidget->currentIndex())
+        {
+        case 0:
+            tempFileName=QString::number(1)+showImg.ImgSuffix;
+            img=cv::imread(tempFileName.toLocal8Bit().toStdString());
+            cv::imwrite(fileName.toLocal8Bit().data(),img);
+            break;
+        case 1:
+            tempFileName=QString::number(2)+showImg.ImgSuffix;
+            img=cv::imread(tempFileName.toLocal8Bit().toStdString());
+            cv::imwrite(fileName.toLocal8Bit().data(),img);
+            break;
+        case 2:
+            tempFileName=QString::number(3)+showImg.ImgSuffix;
+            img=cv::imread(tempFileName.toLocal8Bit().toStdString());
+            cv::imwrite(fileName.toLocal8Bit().data(),img);
+            break;
+        case 3:
+            tempFileName=QString::number(4)+showImg.ImgSuffix;
+            img=cv::imread(tempFileName.toLocal8Bit().toStdString());
+            cv::imwrite(fileName.toLocal8Bit().data(),img);
+            break;
+        }
     }
-
-//    switch(ui->dstImageTabWidget->currentIndex())
-//    {
-//    case 0:
-
-//    }
-
 }
 

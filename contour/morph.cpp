@@ -42,10 +42,19 @@ void MainWindow::on_erodeRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::erode(srcImage,dstImage,element);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
+
+//        num=num+1;
+//        showImg.setCurrentImageNum(num);//已经成功显示，就加一
+//        if(num==showImg.getImageNum())
+//        {
+//            showImg.clearCurrentImageNum();
+//        }
     }catch(std::exception& e){
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
@@ -86,10 +95,12 @@ void MainWindow::on_dilateRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::dilate(srcImage,dstImage,element);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
@@ -125,10 +136,12 @@ void MainWindow::on_morphOpenRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_OPEN, element);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
@@ -163,10 +176,12 @@ void MainWindow::on_morphCloseRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_CLOSE, element);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
@@ -201,10 +216,12 @@ void MainWindow::on_morphGradientRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_GRADIENT, element);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
@@ -244,10 +261,12 @@ void MainWindow::on_morphTopHatRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_TOPHAT, element);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
@@ -284,10 +303,12 @@ void MainWindow::on_morphBlackHatRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_BLACKHAT, element);
-        cv::imwrite("temp.jpg",dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
     }
