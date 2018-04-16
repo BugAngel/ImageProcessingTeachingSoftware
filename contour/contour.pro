@@ -49,7 +49,8 @@ SOURCES += \
     sobel.cpp \
     sobelset.cpp \
     multioperateset.cpp \
-    multioperate.cpp
+    multioperate.cpp \
+    showimageui.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -89,3 +90,11 @@ INCLUDEPATH += E:\Opencv\QTOpenCV\include \
                E:\Opencv\QTOpenCV\include/opencv2
 
 LIBS += E:\Opencv\QTOpenCV\x64\mingw\lib/libopencv_*
+
+RESOURCES += \
+    projecticon.qrc
+
+RC_FILE += icon.rc
+
+DISTFILES += \
+    icon.rc

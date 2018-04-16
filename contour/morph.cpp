@@ -43,7 +43,7 @@ void MainWindow::on_erodeRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::erode(srcImage,dstImage,element);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -96,7 +96,7 @@ void MainWindow::on_dilateRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::dilate(srcImage,dstImage,element);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -137,7 +137,7 @@ void MainWindow::on_morphOpenRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_OPEN, element);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -177,7 +177,7 @@ void MainWindow::on_morphCloseRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_CLOSE, element);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -217,7 +217,7 @@ void MainWindow::on_morphGradientRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_GRADIENT, element);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -262,7 +262,7 @@ void MainWindow::on_morphTopHatRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_TOPHAT, element);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -304,7 +304,7 @@ void MainWindow::on_morphBlackHatRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::morphologyEx(srcImage,dstImage, cv::MORPH_BLACKHAT, element);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);

@@ -120,7 +120,6 @@ void MainWindow::on_thirdOperateComboBox_currentIndexChanged()
     }
 }
 
-
 void MainWindow::on_multiOperatePushButton_clicked()
 {
     int index;//tab的index值

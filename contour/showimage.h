@@ -13,6 +13,14 @@ private:
     int dstShowImageType=0;//0为饱满缩放，1为按比例缩放，2为原图
     int currentImageNum=1;//标记显示的输出图像序号
 
+    QString ImgSuffix=".jpeg";
+
+    QLabel *srcLabel;
+    QLabel *dstLabel_1;
+    QLabel *dstLabel_2;
+    QLabel *dstLabel_3;
+    QLabel *dstLabel_4;
+
 public:
     const static int SRCImage =0;
     const static int DSTImage =1;
@@ -21,8 +29,9 @@ public:
     const static int KEEPASPECT=1;
     const static int ART=2;
 
-    QString ImgSuffix=".jpeg";
-
+    QString getImageSuffix();
+    void clearSrcImage();
+    void clearDstImage();
     void clearCurrentImageNum();
     void setCurrentImageNum(int num);
     int getCurrentImageNum();

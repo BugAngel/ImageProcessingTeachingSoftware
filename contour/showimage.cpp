@@ -4,8 +4,42 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include "file.h"
+#include <QProcess>
 
 ShowImage showImg;
+
+void ShowImage::clearSrcImage()
+{
+    delete srcLabel;
+
+    QString qstr="del "+QString::number(0)+showImg.getImageSuffix();
+    QProcess p(0);
+    p.start("cmd", QStringList()<<"/c"<<qstr);
+    p.waitForStarted();
+    p.waitForFinished();
+}
+
+void ShowImage::clearDstImage()
+{
+    delete dstLabel_1;
+    delete dstLabel_2;
+    delete dstLabel_3;
+    delete dstLabel_4;
+
+    QString qstr="del "+QString::number(1)+showImg.getImageSuffix()+" "
+                       +QString::number(2)+showImg.getImageSuffix()+" "
+                       +QString::number(3)+showImg.getImageSuffix()+" "
+                       +QString::number(4)+showImg.getImageSuffix()+" ";
+    QProcess p(0);
+    p.start("cmd", QStringList()<<"/c"<<qstr);
+    p.waitForStarted();
+    p.waitForFinished();
+}
+
+QString ShowImage::getImageSuffix()
+{
+    return ImgSuffix;
+}
 
 void ShowImage::clearCurrentImageNum()
 {
@@ -40,114 +74,6 @@ ShowImage::getDstShowImageType(){
     return dstShowImageType;
 }
 
-void MainWindow::on_radioButtonIgnoreAspectRatio_2_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输入图像采用饱满填充");
-    showImg.setSrcShowImageType(ShowImage::IGNORE);
-
-    try{
-        QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,file.getFileString(),showImg.SRCImage,showImg.getCurrentImageNum());
-        delete img;
-    }catch(std::exception& e){
-        QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr(e.what()));
-    }
-}
-
-void MainWindow::on_radioButtonKeepAspectRatio_2_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输入图像采用按比例填充");
-    showImg.setSrcShowImageType(ShowImage::KEEPASPECT);
-
-    try{
-        QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,file.getFileString(),showImg.SRCImage,showImg.getCurrentImageNum());
-        delete img;
-    }catch(std::exception& e){
-        QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr(e.what()));
-    }
-}
-
-void MainWindow::on_radioButtonArtWork_2_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输入图像显示原图");
-    showImg.setSrcShowImageType(ShowImage::ART);
-
-    try{
-        QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,file.getFileString(),showImg.SRCImage,showImg.getCurrentImageNum());
-        delete img;
-    }catch(std::exception& e){
-        QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr(e.what()));
-    }
-}
-
-void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输出图像采用饱满填充");
-    showImg.setDstShowImageType(ShowImage::IGNORE);
-
-    try{
-        int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
-        QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,tempFileName,showImg.DSTImage,showImg.getCurrentImageNum());
-        delete img;
-    }catch(std::exception& e){
-        QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr(e.what()));
-    }
-}
-
-void MainWindow::on_radioButtonKeepAspectRatio_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输出图像采用按比例填充");
-    showImg.setDstShowImageType(ShowImage::KEEPASPECT);
-
-    try{
-        int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
-        QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,tempFileName,showImg.DSTImage,showImg.getCurrentImageNum());
-        delete img;
-    }catch(std::exception& e){
-        QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr(e.what()));
-    }
-}
-
-void MainWindow::on_radioButtonArtWork_clicked()
-{
-    ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("输出图像显示原图");
-    showImg.setDstShowImageType(ShowImage::ART);
-
-    try{
-        int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
-        QImage* img=new QImage;//QT界面显示图像
-        showImg.showImage(ui,tempFileName,showImg.DSTImage,showImg.getCurrentImageNum());
-        delete img;
-    }catch(std::exception& e){
-        QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr(e.what()));
-    }
-}
-
 ShowImage::IgnoreAspectRatio(Ui::MainWindow *ui,QString s,const int type,const int num)
 {
     QImage* img=new QImage;
@@ -157,36 +83,43 @@ ShowImage::IgnoreAspectRatio(Ui::MainWindow *ui,QString s,const int type,const i
     }
 
     QPixmap pixmap = QPixmap::fromImage(*img);
-    QLabel *label = new QLabel();
     if(type==SRCImage){
         int width=ui->scrollAreaSrcImage->width();
         int height=ui->scrollAreaSrcImage->height();
         QPixmap fitpixmap = pixmap.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);  // 饱满填充
 
-        label->setPixmap(fitpixmap);
-        ui->scrollAreaSrcImage->setWidget(label);
+        srcLabel = new QLabel();
+        srcLabel->setPixmap(fitpixmap);
+        ui->scrollAreaSrcImage->setWidget(srcLabel);
     }
     else if(type==DSTImage)
     {
         int width=ui->scrollAreaDstImage->width();
         int height=ui->scrollAreaDstImage->height();
-        QPixmap fitpixmap = pixmap.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);  // 饱满填充
-        label->setPixmap(fitpixmap);
+        QPixmap fitpixmap = pixmap.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);  // 饱满填充        
         if(num==1)
         {
-            ui->scrollAreaDstImage->setWidget(label);
+            dstLabel_1 = new QLabel();
+            dstLabel_1->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage->setWidget(dstLabel_1);
         }
         else if(num==2)
         {
-            ui->scrollAreaDstImage_2->setWidget(label);
+            dstLabel_2 = new QLabel();
+            dstLabel_2->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_2->setWidget(dstLabel_2);
         }
         else if(num==3)
         {
-            ui->scrollAreaDstImage_3->setWidget(label);
+            dstLabel_3 = new QLabel();
+            dstLabel_3->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_3->setWidget(dstLabel_3);
         }
         else if(num==4)
         {
-            ui->scrollAreaDstImage_4->setWidget(label);
+            dstLabel_4 = new QLabel();
+            dstLabel_4->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_4->setWidget(dstLabel_4);
         }
     }
     delete img;
@@ -203,37 +136,44 @@ ShowImage::KeepAspectRatio(Ui::MainWindow *ui, QString s, const int type,const i
     }
 
     QPixmap pixmap = QPixmap::fromImage(*img);
-    QLabel *label = new QLabel();
     if(type==SRCImage)
     {
         int width=ui->scrollAreaSrcImage->width();
         int height=ui->scrollAreaSrcImage->height();
         QPixmap fitpixmap = pixmap.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);  // 按比例填充
 
-        label->setPixmap(fitpixmap);
-        ui->scrollAreaSrcImage->setWidget(label);
+        srcLabel = new QLabel();
+        srcLabel->setPixmap(fitpixmap);
+        ui->scrollAreaSrcImage->setWidget(srcLabel);
     }
     else if(type==DSTImage)
     {
         int width=ui->scrollAreaDstImage->width();
         int height=ui->scrollAreaDstImage->height();
         QPixmap fitpixmap = pixmap.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);  // 按比例填充
-        label->setPixmap(fitpixmap);
         if(num==1)
         {
-            ui->scrollAreaDstImage->setWidget(label);
+            dstLabel_1 = new QLabel();
+            dstLabel_1->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage->setWidget(dstLabel_1);
         }
         else if(num==2)
         {
-            ui->scrollAreaDstImage_2->setWidget(label);
+            dstLabel_2 = new QLabel();
+            dstLabel_2->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_2->setWidget(dstLabel_2);
         }
         else if(num==3)
         {
-            ui->scrollAreaDstImage_3->setWidget(label);
+            dstLabel_3 = new QLabel();
+            dstLabel_3->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_3->setWidget(dstLabel_3);
         }
         else if(num==4)
         {
-            ui->scrollAreaDstImage_4->setWidget(label);
+            dstLabel_4 = new QLabel();
+            dstLabel_4->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_4->setWidget(dstLabel_4);
         }
     }
     delete img;
@@ -246,30 +186,37 @@ ShowImage::ARTWork(Ui::MainWindow *ui, QString s, const int type,const int num){
     {
         return -1;
     }
-    QLabel *label = new QLabel();
     if(type==SRCImage)
     {
-        label->setPixmap(QPixmap::fromImage(*img));
-        ui->scrollAreaSrcImage->setWidget(label);
+        srcLabel = new QLabel();
+        srcLabel->setPixmap(QPixmap::fromImage(*img));
+        ui->scrollAreaSrcImage->setWidget(srcLabel);
     }
     else if(type==DSTImage)
     {
-        label->setPixmap(QPixmap::fromImage(*img));
         if(num==1)
-        {            
-            ui->scrollAreaDstImage->setWidget(label);
+        {
+            dstLabel_1 = new QLabel();
+            dstLabel_1->setPixmap(QPixmap::fromImage(*img));
+            ui->scrollAreaDstImage->setWidget(dstLabel_1);
         }
         else if(num==2)
         {
-            ui->scrollAreaDstImage_2->setWidget(label);
+            dstLabel_2 = new QLabel();
+            dstLabel_2->setPixmap(QPixmap::fromImage(*img));
+            ui->scrollAreaDstImage_2->setWidget(dstLabel_2);
         }
         else if(num==3)
         {
-            ui->scrollAreaDstImage_3->setWidget(label);
+            dstLabel_3 = new QLabel();
+            dstLabel_3->setPixmap(QPixmap::fromImage(*img));
+            ui->scrollAreaDstImage_3->setWidget(dstLabel_3);
         }
         else if(num==4)
         {
-            ui->scrollAreaDstImage_4->setWidget(label);
+            dstLabel_4 = new QLabel();
+            dstLabel_4->setPixmap(QPixmap::fromImage(*img));
+            ui->scrollAreaDstImage_4->setWidget(dstLabel_4);
         }
     }
     delete img;

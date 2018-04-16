@@ -45,7 +45,7 @@ void MainWindow::on_boxFilterRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::boxFilter(srcImage, dstImage, -1,cv::Size(width, heigth));
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -85,7 +85,7 @@ void MainWindow::on_blurRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::blur(srcImage, dstImage, cv::Size(width, heigth));
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -129,7 +129,7 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::GaussianBlur(srcImage, dstImage, cv::Size(width, height),sigmaX,sigmaY);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -167,7 +167,7 @@ void MainWindow::on_medianFilterRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::medianBlur(srcImage, dstImage, ksize);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -208,7 +208,7 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::bilateralFilter( srcImage, dstImage, d, sigmaColor, sigmaSpace );
 

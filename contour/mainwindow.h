@@ -40,8 +40,6 @@ public slots:
     void on_scharrRadioButton_clicked();
 
 private slots:
-    void on_actionOpenImg_triggered();
-
     void on_radioButton_Binary_clicked();
 
     void on_radioButton_BinaryInv_clicked();
@@ -135,6 +133,18 @@ private slots:
     void on_secondOperateComboBox_currentIndexChanged();
 
     void on_thirdOperateComboBox_currentIndexChanged();
+
+    void on_dstImageTabWidget_currentChanged();
+
+    void on_openImagePushButton_clicked();
+
+    void on_openImageAction_triggered();
+
+    void on_saveImageAction_triggered();
+
+    void on_clearSrcImagePushButton_clicked();
+
+    void on_clearDstImagePushButton_clicked();
 
 public:
     Ui::MainWindow *ui;

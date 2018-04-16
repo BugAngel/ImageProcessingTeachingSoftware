@@ -46,7 +46,7 @@ void MainWindow::on_cannyRadioButton_clicked()
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::Canny(srcImage,srcImage,threshold1,threshold2,apertureSize);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),srcImage);
@@ -94,7 +94,7 @@ void MainWindow::on_sobelRadioButton_clicked()
         cv::Mat grad_x, grad_y;
         cv::Mat abs_grad_x, abs_grad_y;
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         sobel_set.getValue(dx, dy, ksize, x_weight);
 
@@ -151,7 +151,7 @@ void MainWindow::on_laplacianRadioButton_clicked()
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::Laplacian( srcImage, dstImage, -1, ksize, 1, 0, cv::BORDER_DEFAULT );
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -196,7 +196,7 @@ void MainWindow::on_scharrRadioButton_clicked()
         cv::Mat grad_x, grad_y;
         cv::Mat abs_grad_x, abs_grad_y;
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         x_weight=ui->scharrDoubleSpinBox->value();
 
@@ -265,7 +265,7 @@ void MainWindow::on_contourRadioButton_clicked()
         std::vector<std::vector<cv::Point> > g_vContours;
         std::vector<cv::Vec4i> g_vHierarchy;
         int num=showImg.getCurrentImageNum();//当前图像序号
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::cvtColor( g_srcImage, g_grayImage, CV_BGR2GRAY );//转成灰度图
 

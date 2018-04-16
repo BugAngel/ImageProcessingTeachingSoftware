@@ -34,7 +34,7 @@ void MainWindow::on_radioButton_Binary_clicked()
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_BINARY);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -67,7 +67,7 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_BINARY_INV);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -100,7 +100,7 @@ void MainWindow::on_radioButton_TRUNC_clicked()
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_TRUNC);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -133,7 +133,7 @@ void MainWindow::on_radioButton_TRZERO_clicked()
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_TOZERO);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -166,7 +166,7 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_TOZERO_INV);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
@@ -208,7 +208,7 @@ void MainWindow::on_adaptiveRadioButton_clicked()
         double C;
         adaptive_set.getValue(method,type,size,C);
         int num=showImg.getCurrentImageNum();//当前图像数目
-        QString tempFileName=QString::number(num)+showImg.ImgSuffix;
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
         adaptiveThreshold(srcImage,dstImage,255,method,type,size,C);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);

@@ -66,134 +66,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    QProcess p(0);
-    p.start("cmd", QStringList()<<"/c"<<"del temp.jpg");
-    p.waitForStarted();
-    p.waitForFinished();
+    showImg.clearSrcImage();
+    showImg.clearDstImage();
     delete ui;
 }
 
-void MainWindow::on_actionOpenImg_triggered()
+void MainWindow::on_openImageAction_triggered()
 {
-    file.setFileString(QFileDialog::getOpenFileName(this,tr("打开图像文件"),"/",
-                                                    tr("PNG图片(*.png);;\
-                                                    JPEG文件 (*.jpg *.jpeg *.jpe);;\
-                                                    Windows位图 (*.bmp *.dib);; \
-                                                    便携文件格式(*.pbm *.pgm *.ppm);;\
-                                                    TIFF文件 (*.tif *.tiff)")));
-    if(showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage,0)==-1){
-        QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr("打开图像失败!"));
-    }
-}
-
-void MainWindow::changeEvent(QEvent *event)
-{
-    if(event->type()==QEvent::WindowStateChange)
-    {
-        try{
-            showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage,0);
-            showImg.showImage(ui,QString::number(1)+showImg.ImgSuffix,ShowImage::DSTImage,1);
-        }catch(std::exception& e){
-            QMessageBox::information(this, tr("打开图像失败"),tr(e.what()));
-        }
-    }
-}
-
-void MainWindow::on_tabWidget_currentChanged(int index)
-{
-    switch(index)
-    {
-    case 0:
-        switch (ui->BlurButtonGroup->checkedId()){
-        case 0:
-            on_boxFilterRadioButton_clicked();
-            break;
-        case 1:
-            on_blurRadioButton_clicked();
-            break;
-        case 2:
-            on_gaussianBlurRadioButton_clicked();
-            break;
-        case 3:
-            on_medianFilterRadioButton_clicked();
-            break;
-        case 4:
-            on_bilateralFilterRadioButton_clicked();
-            break;
-        }
-        break;
-
-    case 1:
-        switch(ui->morphButtonGroup->checkedId()){
-        case 0:
-            on_erodeRadioButton_clicked();
-            break;
-        case 1:
-            on_dilateRadioButton_clicked();
-            break;
-        case 2:
-            on_morphOpenRadioButton_clicked();
-            break;
-        case 3:
-            on_morphCloseRadioButton_clicked();
-            break;
-        case 4:
-            on_morphGradientRadioButton_clicked();
-            break;
-        case 5:
-            on_morphTopHatRadioButton_clicked();
-            break;
-        case 6:
-            on_morphBlackHatRadioButton_clicked();
-            break;
-        }
-        break;
-
-    case 2:
-        switch (ui->binaryButtonGroup->checkedId()){
-        case 0:
-            on_radioButton_Binary_clicked();
-            break;
-        case 1:
-            on_radioButton_BinaryInv_clicked();
-            break;
-        case 2:
-            on_radioButton_TRUNC_clicked();
-            break;
-        case 3:
-            on_radioButton_TRZERO_clicked();
-            break;
-        case 4:
-            on_radioButton_TRZERO_INV_clicked();
-            break;
-        case 5:
-            on_adaptiveRadioButton_clicked();
-            break;
-        }
-        break;
-
-    case 3:
-        switch (ui->edgeButtonGroup->checkedId()){
-        case 0:
-            on_cannyRadioButton_clicked();
-            break;
-        case 1:
-            on_sobelRadioButton_clicked();
-            break;
-        case 2:
-            on_laplacianRadioButton_clicked();
-            break;
-        case 3:
-            on_scharrRadioButton_clicked();
-            break;
-        case 4:
-            on_contourRadioButton_clicked();
-            break;
-        }
-        break;
-    }
+    on_openImagePushButton_clicked();
 }
 
 void MainWindow::on_savePushButton_clicked()
@@ -214,26 +94,31 @@ void MainWindow::on_savePushButton_clicked()
         switch(ui->dstImageTabWidget->currentIndex())
         {
         case 0:
-            tempFileName=QString::number(1)+showImg.ImgSuffix;
+            tempFileName=QString::number(1)+showImg.getImageSuffix();
             img=cv::imread(tempFileName.toLocal8Bit().toStdString());
             cv::imwrite(fileName.toLocal8Bit().data(),img);
             break;
         case 1:
-            tempFileName=QString::number(2)+showImg.ImgSuffix;
+            tempFileName=QString::number(2)+showImg.getImageSuffix();
             img=cv::imread(tempFileName.toLocal8Bit().toStdString());
             cv::imwrite(fileName.toLocal8Bit().data(),img);
             break;
         case 2:
-            tempFileName=QString::number(3)+showImg.ImgSuffix;
+            tempFileName=QString::number(3)+showImg.getImageSuffix();
             img=cv::imread(tempFileName.toLocal8Bit().toStdString());
             cv::imwrite(fileName.toLocal8Bit().data(),img);
             break;
         case 3:
-            tempFileName=QString::number(4)+showImg.ImgSuffix;
+            tempFileName=QString::number(4)+showImg.getImageSuffix();
             img=cv::imread(tempFileName.toLocal8Bit().toStdString());
             cv::imwrite(fileName.toLocal8Bit().data(),img);
             break;
         }
     }
+}
+
+void MainWindow::on_saveImageAction_triggered()
+{
+    on_savePushButton_clicked();
 }
 
