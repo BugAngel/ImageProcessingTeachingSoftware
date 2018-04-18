@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    showimage.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    图像显示相关操作
+  ******************************************************************************
+  */
+
 #include "showimage.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -6,8 +16,15 @@
 #include "file.h"
 #include <QProcess>
 
-ShowImage showImg;
+ShowImage showImg;//这个对象来存储图像显示设置的值
 
+/**
+* @brief  清空输入图像的显示并删除写入磁盘的输入图像临时文件;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void ShowImage::clearSrcImage()
 {
     delete srcLabel;
@@ -19,6 +36,13 @@ void ShowImage::clearSrcImage()
     p.waitForFinished();
 }
 
+/**
+* @brief  清空输出图像的显示并删除写入磁盘的输出图像临时文件;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void ShowImage::clearDstImage()
 {
     delete dstLabel_1;
@@ -36,45 +60,98 @@ void ShowImage::clearDstImage()
     p.waitForFinished();
 }
 
+/**
+* @brief  得到设定的写入磁盘临时文件的后缀;
+* @param  NONE
+* @retval 被设定的写入磁盘临时文件的后缀
+* @author  BugAngel
+* @attention
+*/
 QString ShowImage::getImageSuffix()
 {
     return ImgSuffix;
 }
 
-void ShowImage::clearCurrentImageNum()
-{
-    currentImageNum=0;
-}
-
+/**
+* @brief  设置当前的输出图像序号;
+* @param  num 需要被设置的图像序号
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void ShowImage::setCurrentImageNum(int num)
 {
     currentImageNum=num;
 }
 
-ShowImage::getCurrentImageNum()
+/**
+* @brief  得到当前的输出图像序号;
+* @param  NONE
+* @retval 当前的输出图像序号
+* @author  BugAngel
+* @attention
+*/
+int ShowImage::getCurrentImageNum()
 {
     return currentImageNum;
 }
 
-ShowImage::setSrcShowImageType(int showImageType){
+/**
+* @brief  设置输入图像模式;
+* @param  显示图像模式
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void ShowImage::setSrcShowImageType(int showImageType){
     srcShowImageType=showImageType;
-    return 0;
 }
 
-ShowImage::setDstShowImageType(int showImageType){
+/**
+* @brief  设置输出图像模式;
+* @param  显示图像模式
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void ShowImage::setDstShowImageType(int showImageType){
     dstShowImageType=showImageType;
-    return 0;
 }
 
-ShowImage::getSrcShowImageType(){
+/**
+* @brief  得到当前输入图像显示模式;
+* @param  NONE
+* @retval 当前输入图像显示模式
+* @author  BugAngel
+* @attention
+*/
+int ShowImage::getSrcShowImageType(){
     return srcShowImageType;
 }
 
-ShowImage::getDstShowImageType(){
+/**
+* @brief  得到当前输出图像显示模式;
+* @param  NONE
+* @retval 当前输出图像显示模式
+* @author  BugAngel
+* @attention
+*/
+int ShowImage::getDstShowImageType(){
     return dstShowImageType;
 }
 
-ShowImage::IgnoreAspectRatio(Ui::MainWindow *ui,QString s,const int type,const int num)
+/**
+* @brief  以饱满填充显示模式显示图像;
+* @param  ui 窗口指针
+* @param  s 文件名
+* @param  type 输入图像与输出图像模式
+* @param  num 输入图像序号，仅在type为输出图像时起作用
+* @retval 0 显示成功
+* @retval -1 读取文件失败
+* @author  BugAngel
+* @attention
+*/
+int ShowImage::IgnoreAspectRatio(Ui::MainWindow* ui,QString s,const int type,const int num)
 {
     QImage* img=new QImage;
     if(! ( img->load(s) ) ) //加载图像
@@ -126,7 +203,18 @@ ShowImage::IgnoreAspectRatio(Ui::MainWindow *ui,QString s,const int type,const i
     return 0;
 }
 
-ShowImage::KeepAspectRatio(Ui::MainWindow *ui, QString s, const int type,const int num)
+/**
+* @brief  以按比例填充显示模式显示图像;
+* @param  ui 窗口指针
+* @param  s 文件名
+* @param  type 输入图像与输出图像模式
+* @param  num 输入图像序号，仅在type为输出图像时起作用
+* @retval 0 显示成功
+* @retval -1 读取文件失败
+* @author  BugAngel
+* @attention
+*/
+ShowImage::KeepAspectRatio(Ui::MainWindow* ui, QString s, const int type,const int num)
 {
     QImage* img=new QImage;
 
@@ -180,7 +268,18 @@ ShowImage::KeepAspectRatio(Ui::MainWindow *ui, QString s, const int type,const i
     return 0;
 }
 
-ShowImage::ARTWork(Ui::MainWindow *ui, QString s, const int type,const int num){
+/**
+* @brief  以显示原图显示模式显示图像，如果图像过大，会自动出现滚动条
+* @param  ui 窗口指针
+* @param  s 文件名
+* @param  type 输入图像与输出图像模式
+* @param  num 输入图像序号，仅在type为输出图像时起作用
+* @retval 0 显示成功
+* @retval -1 读取文件失败
+* @author  BugAngel
+* @attention
+*/
+ShowImage::ARTWork(Ui::MainWindow* ui, QString s, const int type,const int num){
     QImage* img=new QImage;
     if(! ( img->load(s) ) ) //加载图像
     {
@@ -223,7 +322,17 @@ ShowImage::ARTWork(Ui::MainWindow *ui, QString s, const int type,const int num){
     return 0;
 }
 
-ShowImage::showImage(Ui::MainWindow *ui, QString s, const int type,const int num){
+/**
+* @brief  以饱满填充显示模式显示图像;
+* @param  ui 窗口指针
+* @param  s 文件名
+* @param  type 输入图像与输出图像模式
+* @param  num 输入图像序号，仅在type为输出图像时起作用
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void ShowImage::showImage(Ui::MainWindow* ui, QString s, const int type,const int num){
     int flag;
     if(type==SRCImage)
     {
@@ -245,5 +354,4 @@ ShowImage::showImage(Ui::MainWindow *ui, QString s, const int type,const int num
     {
         showImg.ARTWork(ui,s,type,num);
     }
-    return 0;
 }

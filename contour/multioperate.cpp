@@ -1,11 +1,28 @@
+/**
+  ******************************************************************************
+  * @file    multioperate.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    多步操作控件功能
+  ******************************************************************************
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "multioperateset.h"
 #include <QMessageBox>
 #include "showimage.h"
 
-MultiOperateSet multiOperate_set;
+MultiOperateSet multiOperate_set;//这个对象来存储多步操作设置的值
 
+/**
+* @brief  第一步操作的checkbox状态改变，选上了使能第二个，取消了失能下面的;
+* @param  arg1 第一步操作的checkbox的状态值
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_firstOperateCheckBox_stateChanged(int arg1)
 {
     if(arg1!=0)
@@ -30,6 +47,13 @@ void MainWindow::on_firstOperateCheckBox_stateChanged(int arg1)
     }
 }
 
+/**
+* @brief  第二步操作的checkbox状态改变，选上了使能第三个，取消了失能下面的;
+* @param  arg1 第二步操作的checkbox的状态值
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_secondOperateCheckBox_stateChanged(int arg1)
 {
     if(arg1!=0)
@@ -50,6 +74,13 @@ void MainWindow::on_secondOperateCheckBox_stateChanged(int arg1)
     }
 }
 
+/**
+* @brief  第三步操作的checkbox状态改变，选上了使能第四个，取消了失能下面的;
+* @param  arg1 第三步操作的checkbox的状态值
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_thirdOperateCheckBox_stateChanged(int arg1)
 {
     if(arg1!=0)
@@ -66,6 +97,13 @@ void MainWindow::on_thirdOperateCheckBox_stateChanged(int arg1)
     }
 }
 
+/**
+* @brief  第一步操作的combobox改变，改变下面的，保证没有重复
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_firstOperateComboBox_currentIndexChanged()
 {
     multiOperate_set.itemsAllTrue();
@@ -88,6 +126,13 @@ void MainWindow::on_firstOperateComboBox_currentIndexChanged()
     }
 }
 
+/**
+* @brief  第二步操作的combobox改变，改变下面的，保证没有重复
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_secondOperateComboBox_currentIndexChanged()
 {
     multiOperate_set.itemsAllTrue();
@@ -106,6 +151,13 @@ void MainWindow::on_secondOperateComboBox_currentIndexChanged()
     }
 }
 
+/**
+* @brief  第三步操作的combobox改变，改变下面的，保证没有重复
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_thirdOperateComboBox_currentIndexChanged()
 {
     multiOperate_set.itemsAllTrue();
@@ -120,6 +172,13 @@ void MainWindow::on_thirdOperateComboBox_currentIndexChanged()
     }
 }
 
+/**
+* @brief  多步操作处理按键按下，根据下拉框的内容依次处理，之后将CurrentImageNum复位
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_multiOperatePushButton_clicked()
 {
     int index;//tab的index值

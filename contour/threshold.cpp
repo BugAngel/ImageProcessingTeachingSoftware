@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    morph.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    主窗口形态学二值化部分控件操作
+  ******************************************************************************
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtDebug>
@@ -13,6 +23,13 @@
 #include "adaptivethreshold.h"
 #include <exception>
 
+/**
+* @brief  Binary单选按钮按下，显示说明，执行Binary;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButton_Binary_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -42,10 +59,17 @@ void MainWindow::on_radioButton_Binary_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  BinaryInv单选按钮按下，显示说明，执行BinaryInv;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButton_BinaryInv_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -75,10 +99,17 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  TRUNC单选按钮按下，显示说明，执行TRUNC;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButton_TRUNC_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -108,10 +139,17 @@ void MainWindow::on_radioButton_TRUNC_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  TRZERO单选按钮按下，显示说明，执行TRZERO;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButton_TRZERO_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -141,10 +179,17 @@ void MainWindow::on_radioButton_TRZERO_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  TRZERO_INV单选按钮按下，显示说明，执行TRZERO_INV;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButton_TRZERO_INV_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -174,10 +219,17 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  自适应二值化单选按钮按下，显示说明，执行自适应二值化;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_adaptiveRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -216,35 +268,77 @@ void MainWindow::on_adaptiveRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  binary对应数字框数字改变;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_binaryDoubleSpinBox_valueChanged()
 {
     on_radioButton_Binary_clicked();
 }
 
+/**
+* @brief  binaryInv对应数字框数字改变;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_binaryInvDoubleSpinBox_valueChanged()
 {
     on_radioButton_BinaryInv_clicked();
 }
 
+/**
+* @brief  trunc对应数字框数字改变;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_truncDoubleSpinBox_valueChanged()
 {
     on_radioButton_TRUNC_clicked();
 }
 
+/**
+* @brief  tozero对应数字框数字改变;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_tozeroDoubleSpinBox_valueChanged()
 {
     on_radioButton_TRZERO_clicked();
 }
 
+/**
+* @brief  tozeroInv对应数字框数字改变;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_tozeroInvDoubleSpinBox_valueChanged()
 {
     on_radioButton_TRZERO_INV_clicked();
 }
 
+/**
+* @brief  自适应二值化对应设置按键按下;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_adaptiveButton_clicked()
 {
     AdaptiveThreshold adaptivethreshold(this);

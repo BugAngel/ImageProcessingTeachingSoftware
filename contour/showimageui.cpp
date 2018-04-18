@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    showimageui.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    图像显示相关控件操作
+  ******************************************************************************
+  */
+
 #include "showimage.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -5,6 +15,13 @@
 #include <QFileDialog>
 #include "file.h"
 
+/**
+* @brief  输入图像部分饱满填充单选按钮按下，将当前图像改为饱满填充;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButtonIgnoreAspectRatio_2_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -18,10 +35,17 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_2_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  输入图像部分按比例填充单选按钮按下，将当前图像改为按比例填充;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButtonKeepAspectRatio_2_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -35,10 +59,17 @@ void MainWindow::on_radioButtonKeepAspectRatio_2_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  输入图像部分原图显示单选按钮按下，将当前图像改为原图显示;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButtonArtWork_2_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -52,10 +83,17 @@ void MainWindow::on_radioButtonArtWork_2_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  输出图像部分饱满填充单选按钮按下，将当前图像改为饱满填充;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -72,7 +110,7 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 1:
@@ -83,7 +121,7 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 2:
@@ -94,7 +132,7 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 3:
@@ -105,12 +143,19 @@ void MainWindow::on_radioButtonIgnoreAspectRatio_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     }
 }
 
+/**
+* @brief  输出图像部分按比例填充单选按钮按下，将当前图像改为按比例填充;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButtonKeepAspectRatio_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -127,7 +172,7 @@ void MainWindow::on_radioButtonKeepAspectRatio_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 1:
@@ -138,7 +183,7 @@ void MainWindow::on_radioButtonKeepAspectRatio_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 2:
@@ -149,7 +194,7 @@ void MainWindow::on_radioButtonKeepAspectRatio_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 3:
@@ -160,12 +205,19 @@ void MainWindow::on_radioButtonKeepAspectRatio_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     }
 }
 
+/**
+* @brief  输出图像部分原图显示单选按钮按下，将当前图像改为原图显示;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_radioButtonArtWork_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -182,7 +234,7 @@ void MainWindow::on_radioButtonArtWork_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 1:
@@ -193,7 +245,7 @@ void MainWindow::on_radioButtonArtWork_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 2:
@@ -204,7 +256,7 @@ void MainWindow::on_radioButtonArtWork_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     case 3:
@@ -215,12 +267,19 @@ void MainWindow::on_radioButtonArtWork_clicked()
         }catch(std::exception& e){
             QMessageBox::information(this,
                                      tr("打开图像失败"),
-                                     tr(e.what()));
+                                     tr("请打开合适的图像"));
         }
         break;
     }
 }
 
+/**
+* @brief  输出图像显示部分选项卡切换，根据显示图像模式显示对应图像;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_dstImageTabWidget_currentChanged()
 {
     int imageMode=ui->dstImageButtonGroup->checkedId();
@@ -238,6 +297,13 @@ void MainWindow::on_dstImageTabWidget_currentChanged()
     }
 }
 
+/**
+* @brief  打开图像按键按下，根据对话框得出文件名并设置显示;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_openImagePushButton_clicked()
 {
     file.setFileString(QFileDialog::getOpenFileName(this,tr("打开图像文件"),"/",
@@ -246,13 +312,16 @@ void MainWindow::on_openImagePushButton_clicked()
                                                     Windows位图 (*.bmp *.dib);; \
                                                     便携文件格式(*.pbm *.pgm *.ppm);;\
                                                     TIFF文件 (*.tif *.tiff)")));
-    if(showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage,0)==-1){
-        QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr("打开图像失败!"));
-    }
+    showImg.showImage(ui,file.getFileString(),ShowImage::SRCImage,0);
 }
 
+/**
+* @brief  窗口大小改变，重新显示图像;
+* @param  event 事件
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::changeEvent(QEvent *event)
 {
     if(event->type()==QEvent::WindowStateChange)
@@ -263,11 +332,18 @@ void MainWindow::changeEvent(QEvent *event)
             showImg.showImage(ui,QString::number(2)+showImg.getImageSuffix(),ShowImage::DSTImage,2);
             showImg.showImage(ui,QString::number(3)+showImg.getImageSuffix(),ShowImage::DSTImage,3);
         }catch(std::exception& e){
-            QMessageBox::information(this, tr("打开图像失败"),tr(e.what()));
+            QMessageBox::information(this, tr("打开图像失败"),tr("请打开合适的图像"));
         }
     }
 }
 
+/**
+* @brief  图像处理部分选项卡改变，根据改变后的选项卡显示当前处理后的图像;
+* @param  index 当前选项卡选中的编号
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_tabWidget_currentChanged(int index)
 {
     switch(index)
@@ -363,11 +439,25 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     }
 }
 
+/**
+* @brief  清空输入图像;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_clearSrcImagePushButton_clicked()
 {
     showImg.clearSrcImage();
 }
 
+/**
+* @brief  清空输出图像;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_clearDstImagePushButton_clicked()
 {
     showImg.clearDstImage();

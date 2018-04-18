@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    showimage.h
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    图像显示相关操作
+  ******************************************************************************
+  */
+
 #ifndef SHOWIMAGE_H
 #define SHOWIMAGE_H
 
@@ -6,6 +16,11 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 
+/**
+* @brief  存储图像显示类型，提供显示图像方法
+* @author  BugAngel
+* @attention
+*/
 class ShowImage
 {
 private:
@@ -32,17 +47,16 @@ public:
     QString getImageSuffix();
     void clearSrcImage();
     void clearDstImage();
-    void clearCurrentImageNum();
     void setCurrentImageNum(int num);
     int getCurrentImageNum();
-    int setSrcShowImageType(int showImageType);
-    int setDstShowImageType(int showImageType);
+    void setSrcShowImageType(int showImageType);
+    void setDstShowImageType(int showImageType);
     int getSrcShowImageType();
     int getDstShowImageType();
-    int showImage(Ui::MainWindow *ui,QString s,const int type,const int num);
     int IgnoreAspectRatio(Ui::MainWindow *ui,QString s,const int type,const int num);//饱满填充
     int KeepAspectRatio(Ui::MainWindow *ui,QString s,const int type,const int num);//按比例缩放
     int ARTWork(Ui::MainWindow *ui,QString s,const int type,const int num);//使用滚动条显示原图
+    void showImage(Ui::MainWindow *ui,QString s,const int type,const int num);
 };
 
 extern ShowImage showImg;

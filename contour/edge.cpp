@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    edge.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    主窗口轮廓检测部分控件操作
+  ******************************************************************************
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "file.h"
@@ -13,6 +23,13 @@
 #include "sobel.h"
 #include "sobelset.h"
 
+/**
+* @brief  canny边缘检测单选按钮按下，显示说明，执行canny边缘检测;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_cannyRadioButton_clicked()
 {   
     ui->helpTextBrowser->clear();
@@ -54,10 +71,17 @@ void MainWindow::on_cannyRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr(e.what()));
+                                          tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  sobel算子单选按钮按下，显示说明，执行sobel算子;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_sobelRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -114,10 +138,17 @@ void MainWindow::on_sobelRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr(e.what()));
+                                          tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  laplacian算子单选按钮按下，显示说明，执行laplacian算子;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_laplacianRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -159,10 +190,17 @@ void MainWindow::on_laplacianRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("打开图像失败"),
-                                 tr(e.what()));
+                                 tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  scharr滤波器单选按钮按下，显示说明，执行scharr滤波器;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_scharrRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -216,10 +254,17 @@ void MainWindow::on_scharrRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr(e.what()));
+                                          tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  轮廓检测单选按钮按下，显示说明，执行轮廓检测;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_contourRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -296,33 +341,68 @@ void MainWindow::on_contourRadioButton_clicked()
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),drawing);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
     }
 
 }
 
+/**
+* @brief  canny边缘检测设置按键按下，显示设置界面;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_cannyButton_clicked()
 {
     Canny canny(this);
     canny.exec();
 }
 
+/**
+* @brief  sobel算子设置按键按下，显示设置界面;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_sobelPushButton_clicked()
 {
     Sobel sobel(this);
     sobel.exec();
 }
 
+/**
+* @brief  laplacian算子对应数字框数字改变，执行laplacian算子单选按钮按下的操作;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_laplacianSpinBox_valueChanged()
 {
     on_laplacianRadioButton_clicked();
 }
 
+/**
+* @brief  scharr滤波器对应数字框数字改变，执行scharr滤波器单选按钮按下的操作;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_scharrDoubleSpinBox_valueChanged()
 {
     on_scharrRadioButton_clicked();
 }
 
+/**
+* @brief  轮廓检测设置按键按下，显示设置界面;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_contourButton_clicked()
 {
     Contour contour(this);

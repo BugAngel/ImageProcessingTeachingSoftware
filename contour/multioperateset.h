@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    multioperateset.h
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    多步操作的设置
+  ******************************************************************************
+  */
+
 #ifndef MULTIOPERATESET_H
 #define MULTIOPERATESET_H
 
@@ -5,6 +15,11 @@
 #include <QStringList>
 #include <QMap>
 
+/**
+* @brief  存储多步操作设置的值
+* @author  BugAngel
+* @attention
+*/
 class MultiOperateSet
 {
 private:

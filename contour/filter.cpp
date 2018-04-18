@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    filter.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    主窗口线性与非线性滤波部分控件操作
+  ******************************************************************************
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "file.h"
@@ -17,6 +27,13 @@
 #include "bilateralfilter.h"
 #include "bilateralfilterset.h"
 
+/**
+* @brief  方框滤波单选按钮按下，显示说明，执行方框滤波;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_boxFilterRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -53,11 +70,18 @@ void MainWindow::on_boxFilterRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr(e.what()));
+                                          tr("请打开合适的图像"));
     }
 
 }
 
+/**
+* @brief  均值滤波单选按钮按下，显示说明，执行均值滤波;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_blurRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -93,11 +117,18 @@ void MainWindow::on_blurRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr(e.what()));
+                                          tr("请打开合适的图像"));
     }
 
 }
 
+/**
+* @brief  高斯滤波单选按钮按下，显示说明，执行高斯滤波;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_gaussianBlurRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -137,10 +168,17 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr(e.what()));
+                                          tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  中值滤波单选按钮按下，显示说明，执行中值滤波;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_medianFilterRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -175,10 +213,17 @@ void MainWindow::on_medianFilterRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr(e.what()));
+                                          tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  双边滤波单选按钮按下，显示说明，执行双边滤波;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_bilateralFilterRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -217,34 +262,69 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
     }catch(std::exception& e){
         QMessageBox::information(this,
                                           tr("打开图像失败"),
-                                          tr(e.what()));
+                                          tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  方框滤波设置按键按下，显示设置界面;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_boxFilterButton_clicked()
 {
     BoxFilter boxfilter(this);
     boxfilter.exec();
 }
 
+/**
+* @brief  均值滤波设置按键按下，显示设置界面;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_blurButton_clicked()
 {
     Blur blur(this);
     blur.exec();
 }
 
+/**
+* @brief  高斯滤波设置按键按下，显示设置界面;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_gaussianBlurButton_clicked()
 {
     GaussianBlur gaussianblur(this);
     gaussianblur.exec();
 }
 
+/**
+* @brief  双边滤波设置按键按下，显示设置界面;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_bilateralFilterButton_clicked()
 {
     BilateralFilter bilateralfilter(this);
     bilateralfilter.exec();
 }
 
+/**
+* @brief  中值滤波对应数字框数字改变，执行中值滤波单选按钮按下的操作;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_medianFilterSpinBox_valueChanged()
 {
     on_medianFilterRadioButton_clicked();

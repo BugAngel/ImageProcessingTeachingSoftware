@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    morph.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    主窗口形态学滤波检测部分控件操作
+  ******************************************************************************
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "file.h"
@@ -7,6 +17,13 @@
 #include <QMessageBox>
 #include "showimage.h"
 
+/**
+* @brief  腐蚀单选按钮按下，显示说明，执行腐蚀;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_erodeRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -48,18 +65,18 @@ void MainWindow::on_erodeRadioButton_clicked()
         cv::erode(srcImage,dstImage,element);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
-
-//        num=num+1;
-//        showImg.setCurrentImageNum(num);//已经成功显示，就加一
-//        if(num==showImg.getImageNum())
-//        {
-//            showImg.clearCurrentImageNum();
-//        }
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  膨胀单选按钮按下，显示说明，执行膨胀;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_dilateRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -102,10 +119,17 @@ void MainWindow::on_dilateRadioButton_clicked()
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  开运算单选按钮按下，显示说明，执行开运算;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_morphOpenRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -143,10 +167,17 @@ void MainWindow::on_morphOpenRadioButton_clicked()
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  闭运算单选按钮按下，显示说明，执行闭运算;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_morphCloseRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -183,10 +214,17 @@ void MainWindow::on_morphCloseRadioButton_clicked()
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  形态学梯度单选按钮按下，显示说明，执行形态学梯度;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_morphGradientRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -223,10 +261,17 @@ void MainWindow::on_morphGradientRadioButton_clicked()
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  顶帽运算单选按钮按下，显示说明，执行顶帽运算;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_morphTopHatRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -268,10 +313,17 @@ void MainWindow::on_morphTopHatRadioButton_clicked()
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  黑帽运算单选按钮按下，显示说明，执行黑帽运算;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_morphBlackHatRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
@@ -310,10 +362,17 @@ void MainWindow::on_morphBlackHatRadioButton_clicked()
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr(e.what()));
+        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
     }
 }
 
+/**
+* @brief  内核形状改变，根据单选按钮的不同执行相应操作;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_morphShapeComboBox_currentIndexChanged()
 {
     switch(ui->morphButtonGroup->checkedId()){
@@ -341,6 +400,13 @@ void MainWindow::on_morphShapeComboBox_currentIndexChanged()
     }
 }
 
+/**
+* @brief  内核长改变，根据单选按钮的不同执行相应操作;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_morphSizeLenghtSpinBox_valueChanged()
 {
     switch(ui->morphButtonGroup->checkedId()){
@@ -368,6 +434,13 @@ void MainWindow::on_morphSizeLenghtSpinBox_valueChanged()
     }
 }
 
+/**
+* @brief  内核宽改变，根据单选按钮的不同执行相应操作;
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_morphSizeHighSpinBox_valueChanged()
 {
     switch(ui->morphButtonGroup->checkedId()){

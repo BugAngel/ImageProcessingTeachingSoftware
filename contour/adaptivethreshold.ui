@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="text">
-      <string>adaptiveMethod</string>
+      <string>自适应方法</string>
      </property>
     </widget>
    </item>
@@ -50,7 +50,7 @@
       </font>
      </property>
      <property name="text">
-      <string>thresholdType</string>
+      <string>阈值方法</string>
      </property>
     </widget>
    </item>
@@ -77,7 +77,7 @@
       </font>
      </property>
      <property name="text">
-      <string>blockSize</string>
+      <string>块大小</string>
      </property>
     </widget>
    </item>
@@ -103,7 +103,7 @@
       </font>
      </property>
      <property name="text">
-      <string>C</string>
+      <string>常数值</string>
      </property>
     </widget>
    </item>

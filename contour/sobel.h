@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    sobel.h
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    sobel算子设置窗体界面的控件操作
+  ******************************************************************************
+  */
+
 #ifndef SOBEL_H
 #define SOBEL_H
 
@@ -7,6 +17,11 @@ namespace Ui {
 class Sobel;
 }
 
+/**
+* @brief  sobel算子设置对话框
+* @author  BugAngel
+* @attention
+*/
 class Sobel : public QDialog
 {
     Q_OBJECT

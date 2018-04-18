@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    contour.h
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    轮廓检测设置窗体界面的控件操作
+  ******************************************************************************
+  */
+
 #ifndef CONTOUR_H
 #define CONTOUR_H
 
@@ -7,6 +17,11 @@ namespace Ui {
 class contour;
 }
 
+/**
+* @brief  边缘检测设置对话框
+* @author  BugAngel
+* @attention
+*/
 class Contour : public QDialog
 {
     Q_OBJECT

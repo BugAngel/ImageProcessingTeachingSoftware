@@ -1,7 +1,21 @@
+/**
+  ******************************************************************************
+  * @file    sobelset.h
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    记录sobel算子设置窗体中设置的值
+  ******************************************************************************
+  */
+
 #ifndef SOBELSET_H
 #define SOBELSET_H
 
-
+/**
+* @brief  存储sobel算子设置的值
+* @author  BugAngel
+* @attention
+*/
 class SobelSet
 {
 private:

@@ -435,7 +435,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>4</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -1144,10 +1144,10 @@ p, li { white-space: pre-wrap; }
  <connections/>
  <buttongroups>
   <buttongroup name="dstImageButtonGroup"/>
-  <buttongroup name="srcImageButtonGroup"/>
+  <buttongroup name="binaryButtonGroup"/>
   <buttongroup name="morphButtonGroup"/>
   <buttongroup name="edgeButtonGroup"/>
-  <buttongroup name="binaryButtonGroup"/>
   <buttongroup name="BlurButtonGroup"/>
+  <buttongroup name="srcImageButtonGroup"/>
  </buttongroups>
 </ui>

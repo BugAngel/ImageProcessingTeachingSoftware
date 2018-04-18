@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    gaussianblur.h
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    高斯滤波设置窗体界面的控件操作
+  ******************************************************************************
+  */
+
 #ifndef GAUSSIANBLUR_H
 #define GAUSSIANBLUR_H
 
@@ -7,6 +17,11 @@ namespace Ui {
 class GaussianBlur;
 }
 
+/**
+* @brief  高斯滤波设置对话框
+* @author  BugAngel
+* @attention
+*/
 class GaussianBlur : public QDialog
 {
     Q_OBJECT

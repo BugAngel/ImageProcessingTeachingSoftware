@@ -1,7 +1,21 @@
+/**
+  ******************************************************************************
+  * @file    blurset.h
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    记录方框滤波设置窗体中设置的值
+  ******************************************************************************
+  */
+
 #ifndef BOXFILTERSET_H
 #define BOXFILTERSET_H
 
-
+/**
+* @brief  存储方框滤波设置的值
+* @author  BugAngel
+* @attention
+*/
 class BoxFilterSet
 {
 private:

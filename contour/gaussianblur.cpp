@@ -1,9 +1,24 @@
+/**
+  ******************************************************************************
+  * @file    gaussianblur.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    高斯滤波设置窗体界面的控件操作
+  ******************************************************************************
+  */
+
 #include "gaussianblur.h"
 #include "ui_gaussianblur.h"
 #include "gaussianblurset.h"
 #include <QMessageBox>
 #include "mainwindow.h"
 
+/**
+* @brief  构造函数，继承自QDialog，设置窗口显示默认值
+* @author  BugAngel
+* @attention
+*/
 GaussianBlur::GaussianBlur(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GaussianBlur)
@@ -23,11 +38,23 @@ GaussianBlur::GaussianBlur(QWidget *parent) :
     ui->doubleSpinBox_2->setValue(sigmaY);
 }
 
+/**
+* @brief  析构函数
+* @author  BugAngel
+* @attention
+*/
 GaussianBlur::~GaussianBlur()
 {
     delete ui;
 }
 
+/**
+* @brief  取得高斯滤波设置窗口的值，并执行高斯滤波操作
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void GaussianBlur::gaussianBlurFunction()
 {
     int width;
@@ -52,21 +79,49 @@ void GaussianBlur::gaussianBlurFunction()
     ptr->on_gaussianBlurRadioButton_clicked();
 }
 
+/**
+* @brief  改变像素宽度对应的数字框，执行gaussianBlurFunction();
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void GaussianBlur::on_spinBox_valueChanged()
 {
     gaussianBlurFunction();
 }
 
+/**
+* @brief  改变像素高度对应的数字框，执行gaussianBlurFunction();
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void GaussianBlur::on_spinBox_2_valueChanged()
 {
     gaussianBlurFunction();
 }
 
+/**
+* @brief  改变sigmaX对应的数字框，执行gaussianBlurFunction();
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void GaussianBlur::on_doubleSpinBox_valueChanged()
 {
     gaussianBlurFunction();
 }
 
+/**
+* @brief  改变sigmaY对应的数字框，执行gaussianBlurFunction();
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void GaussianBlur::on_doubleSpinBox_2_valueChanged()
 {
     gaussianBlurFunction();

@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    mainwindow.h
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    主窗口界面的控件操作
+  ******************************************************************************
+  */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -7,6 +17,11 @@ namespace Ui {
 class MainWindow;
 }
 
+/**
+* @brief  主窗口
+* @author  BugAngel
+* @attention
+*/
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    mainwindow.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    主窗口控件与按钮组默认值设置与菜单栏控件功能
+  ******************************************************************************
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
@@ -9,6 +19,11 @@
 #include "showimage.h"
 #include <QProcess>
 
+/**
+* @brief  构造函数，设置各个按钮组与默认按下的单选按钮
+* @author  BugAngel
+* @attention
+*/
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -64,6 +79,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->erodeRadioButton->setChecked(true);//设置默认选项
 }
 
+/**
+* @brief  析构函数，删除临时产生的文件
+* @author  BugAngel
+* @attention
+*/
 MainWindow::~MainWindow()
 {
     showImg.clearSrcImage();
@@ -71,11 +91,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_openImageAction_triggered()
-{
-    on_openImagePushButton_clicked();
-}
-
+/**
+* @brief  保存图像按键按下，保存正在显示的图像
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_savePushButton_clicked()
 {
     QString fileName = QFileDialog::getSaveFileName(this,
@@ -115,8 +137,33 @@ void MainWindow::on_savePushButton_clicked()
             break;
         }
     }
+    else
+    {
+        QMessageBox::information(this,
+                                tr("保存文件失败"),
+                                tr("请输入文件名"));
+    }
 }
 
+/**
+* @brief  菜单栏中按下打开图像，执行打开图像按键操作
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_openImageAction_triggered()
+{
+    on_openImagePushButton_clicked();
+}
+
+/**
+* @brief  菜单栏中按下保存图像，执行保存图像按键操作
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void MainWindow::on_saveImageAction_triggered()
 {
     on_savePushButton_clicked();

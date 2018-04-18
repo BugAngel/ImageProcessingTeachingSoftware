@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    canny.cpp
+  * @author  BugAngel
+  * @version V1.0
+  * @date    2018.4.17
+  * @note    canny边缘检测设置窗体界面的控件操作
+  ******************************************************************************
+  */
+
 #include "canny.h"
 #include "ui_canny.h"
 #include "cannyset.h"
@@ -5,6 +15,11 @@
 #include "ui_mainwindow.h"
 #include "QMessageBox"
 
+/**
+* @brief  构造函数，继承自QDialog，设置窗口显示默认值
+* @author  BugAngel
+* @attention
+*/
 Canny::Canny(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Canny)
@@ -22,11 +37,23 @@ Canny::Canny(QWidget *parent) :
     ui->comboBox->setCurrentIndex((apertureSize-3)/2);
 }
 
+/**
+* @brief  析构函数
+* @author  BugAngel
+* @attention
+*/
 Canny::~Canny()
 {
     delete ui;
 }
 
+/**
+* @brief  取得canny边缘检测设置窗口的值，并执行canny边缘检测操作
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void Canny::cannyFunction()
 {
     double threshold1=ui->doubleSpinBox->value();
@@ -39,16 +66,37 @@ void Canny::cannyFunction()
     ptr->on_cannyRadioButton_clicked();
 }
 
+/**
+* @brief  改变第一个滞后性阈值对应的数字框，执行cannyFunction();
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void Canny::on_doubleSpinBox_valueChanged()
 {
     cannyFunction();
 }
 
+/**
+* @brief  改变第二个滞后性阈值对应的数字框，执行cannyFunction();
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void Canny::on_doubleSpinBox_2_valueChanged()
 {
     cannyFunction();
 }
 
+/**
+* @brief  改变Sobel算子的孔径大小对应的下拉框，执行cannyFunction();
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
 void Canny::on_comboBox_currentIndexChanged()
 {
     cannyFunction();
