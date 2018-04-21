@@ -49,11 +49,15 @@ void ShowImage::clearDstImage()
     delete dstLabel_2;
     delete dstLabel_3;
     delete dstLabel_4;
+    delete dstLabel_5;
+    delete dstLabel_6;
 
     QString qstr="del "+QString::number(1)+showImg.getImageSuffix()+" "
                        +QString::number(2)+showImg.getImageSuffix()+" "
                        +QString::number(3)+showImg.getImageSuffix()+" "
-                       +QString::number(4)+showImg.getImageSuffix()+" ";
+                       +QString::number(4)+showImg.getImageSuffix()+" "
+                       +QString::number(5)+showImg.getImageSuffix()+" "
+                       +QString::number(6)+showImg.getImageSuffix()+" ";
     QProcess p(0);
     p.start("cmd", QStringList()<<"/c"<<qstr);
     p.waitForStarted();
@@ -198,6 +202,18 @@ int ShowImage::IgnoreAspectRatio(Ui::MainWindow* ui,QString s,const int type,con
             dstLabel_4->setPixmap(fitpixmap);
             ui->scrollAreaDstImage_4->setWidget(dstLabel_4);
         }
+        else if(num==5)
+        {
+            dstLabel_5 = new QLabel();
+            dstLabel_5->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_5->setWidget(dstLabel_5);
+        }
+        else if(num==6)
+        {
+            dstLabel_6 = new QLabel();
+            dstLabel_6->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_6->setWidget(dstLabel_6);
+        }
     }
     delete img;
     return 0;
@@ -263,6 +279,18 @@ ShowImage::KeepAspectRatio(Ui::MainWindow* ui, QString s, const int type,const i
             dstLabel_4->setPixmap(fitpixmap);
             ui->scrollAreaDstImage_4->setWidget(dstLabel_4);
         }
+        else if(num==5)
+        {
+            dstLabel_5 = new QLabel();
+            dstLabel_5->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_5->setWidget(dstLabel_5);
+        }
+        else if(num==6)
+        {
+            dstLabel_6 = new QLabel();
+            dstLabel_6->setPixmap(fitpixmap);
+            ui->scrollAreaDstImage_6->setWidget(dstLabel_6);
+        }
     }
     delete img;
     return 0;
@@ -316,6 +344,18 @@ ShowImage::ARTWork(Ui::MainWindow* ui, QString s, const int type,const int num){
             dstLabel_4 = new QLabel();
             dstLabel_4->setPixmap(QPixmap::fromImage(*img));
             ui->scrollAreaDstImage_4->setWidget(dstLabel_4);
+        }
+        else if(num==5)
+        {
+            dstLabel_5 = new QLabel();
+            dstLabel_5->setPixmap(QPixmap::fromImage(*img));
+            ui->scrollAreaDstImage_5->setWidget(dstLabel_5);
+        }
+        else if(num==6)
+        {
+            dstLabel_6 = new QLabel();
+            dstLabel_6->setPixmap(QPixmap::fromImage(*img));
+            ui->scrollAreaDstImage_6->setWidget(dstLabel_6);
         }
     }
     delete img;

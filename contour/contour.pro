@@ -50,7 +50,8 @@ SOURCES += \
     sobelset.cpp \
     multioperateset.cpp \
     multioperate.cpp \
-    showimageui.cpp
+    showimageui.cpp \
+    transform.cpp
 
 HEADERS += \
         mainwindow.h \

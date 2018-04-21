@@ -23,7 +23,7 @@
 class MultiOperateSet
 {
 private:
-    const static int NUM=4;//多步操作最多有的步数
+    const static int NUM=6;//多步操作最多有的步数
     QMap<QString, bool> items;//对应Tab选项bool值
     QMap<QString, int> tabs;//对应Tab选项index值
 

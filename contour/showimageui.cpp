@@ -72,6 +72,7 @@ void MainWindow::on_radioButtonKeepAspectRatio_2_clicked()
 */
 void MainWindow::on_radioButtonArtWork_2_clicked()
 {
+    ui->radioButtonArtWork_2->setChecked(true);
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("输入图像显示原图");
     showImg.setSrcShowImageType(ShowImage::ART);
@@ -220,6 +221,7 @@ void MainWindow::on_radioButtonKeepAspectRatio_clicked()
 */
 void MainWindow::on_radioButtonArtWork_clicked()
 {
+    ui->radioButtonArtWork->setChecked(true);
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("输出图像显示原图");
     showImg.setDstShowImageType(ShowImage::ART);
@@ -349,6 +351,23 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     switch(index)
     {
     case 0:
+        if(ui->rotateCheckBox->isChecked())
+        {
+            on_rotateCheckBox_stateChanged();
+        }
+        else if(ui->resizeCheckBox->isChecked())
+        {
+            on_resizeCheckBox_stateChanged();
+        }else if(ui->leftRightCheckBox->isChecked())
+        {
+            on_leftRightCheckBox_stateChanged();
+        }else if(ui->upDownCheckBox->isChecked())
+        {
+            on_upDownCheckBox_stateChanged();
+        }
+        break;
+
+    case 1:
         switch (ui->BlurButtonGroup->checkedId()){
         case 0:
             on_boxFilterRadioButton_clicked();
@@ -368,7 +387,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         }
         break;
 
-    case 1:
+    case 2:
         switch(ui->morphButtonGroup->checkedId()){
         case 0:
             on_erodeRadioButton_clicked();
@@ -394,7 +413,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         }
         break;
 
-    case 2:
+    case 3:
         switch (ui->binaryButtonGroup->checkedId()){
         case 0:
             on_radioButton_Binary_clicked();
@@ -414,10 +433,13 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         case 5:
             on_adaptiveRadioButton_clicked();
             break;
+        case 6:
+            on_garyRadioButton_clicked();
+            break;
         }
         break;
 
-    case 3:
+    case 4:
         switch (ui->edgeButtonGroup->checkedId()){
         case 0:
             on_cannyRadioButton_clicked();

@@ -435,8 +435,103 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>6</number>
          </property>
+         <property name="tabBarAutoHide">
+          <bool>false</bool>
+         </property>
+         <widget class="QWidget" name="tab_13">
+          <attribute name="title">
+           <string>缩放旋转与对称</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="leftRightCheckBox">
+             <property name="text">
+              <string>左右对称</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="resizeCheckBox">
+             <property name="text">
+              <string>尺寸缩放</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QDoubleSpinBox" name="resizeDoubleSpinBox">
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="minimum">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QCheckBox" name="rotateCheckBox">
+             <property name="text">
+              <string>缩放旋转</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QSlider" name="warpHorizontalSlider">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>10</number>
+             </property>
+             <property name="pageStep">
+              <number>1</number>
+             </property>
+             <property name="value">
+              <number>5</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksAbove</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QSlider" name="rotateHorizontalSlider">
+             <property name="minimum">
+              <number>-180</number>
+             </property>
+             <property name="maximum">
+              <number>180</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksAbove</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="upDownCheckBox">
+             <property name="text">
+              <string>上下对称</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
            <string>线性与非线性滤波</string>
@@ -685,10 +780,129 @@
          </widget>
          <widget class="QWidget" name="tab">
           <attribute name="title">
-           <string>二值化</string>
+           <string>灰度与二值化</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="0">
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="binaryDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="radioButton_BinaryInv">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>BINARY_INV</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="binaryInvDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="truncDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QRadioButton" name="radioButton_TRZERO">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>TOZERO</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QRadioButton" name="radioButton_TRUNC">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>TRUNC</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QDoubleSpinBox" name="tozeroInvDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QDoubleSpinBox" name="tozeroDoubleSpinBox">
+             <property name="maximum">
+              <double>255.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>127.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QRadioButton" name="radioButton_TRZERO_INV">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>TOZERO_INV</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QPushButton" name="adaptiveButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QRadioButton" name="adaptiveRadioButton">
+             <property name="text">
+              <string>自适应阈值</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">binaryButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="0">
             <widget class="QRadioButton" name="radioButton_Binary">
              <property name="toolTip">
               <string/>
@@ -704,123 +918,14 @@
              </attribute>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QDoubleSpinBox" name="binaryDoubleSpinBox">
-             <property name="maximum">
-              <double>255.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>127.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QRadioButton" name="radioButton_BinaryInv">
-             <property name="toolTip">
-              <string/>
-             </property>
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="garyRadioButton">
              <property name="text">
-              <string>BINARY_INV</string>
+              <string>灰度图</string>
              </property>
              <attribute name="buttonGroup">
               <string notr="true">binaryButtonGroup</string>
              </attribute>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QDoubleSpinBox" name="binaryInvDoubleSpinBox">
-             <property name="maximum">
-              <double>255.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>127.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QRadioButton" name="radioButton_TRUNC">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>TRUNC</string>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">binaryButtonGroup</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QDoubleSpinBox" name="truncDoubleSpinBox">
-             <property name="maximum">
-              <double>255.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>127.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QRadioButton" name="radioButton_TRZERO">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>TOZERO</string>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">binaryButtonGroup</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QDoubleSpinBox" name="tozeroDoubleSpinBox">
-             <property name="maximum">
-              <double>255.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>127.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QRadioButton" name="radioButton_TRZERO_INV">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>TOZERO_INV</string>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">binaryButtonGroup</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QDoubleSpinBox" name="tozeroInvDoubleSpinBox">
-             <property name="maximum">
-              <double>255.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>127.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QRadioButton" name="adaptiveRadioButton">
-             <property name="text">
-              <string>自适应阈值</string>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">binaryButtonGroup</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QPushButton" name="adaptiveButton">
-             <property name="text">
-              <string>设置</string>
-             </property>
             </widget>
            </item>
           </layout>
@@ -926,11 +1031,26 @@
            </item>
           </layout>
          </widget>
+         <widget class="QWidget" name="tab_14">
+          <attribute name="title">
+           <string>实践项目</string>
+          </attribute>
+         </widget>
          <widget class="QWidget" name="tab_12">
           <attribute name="title">
            <string>多步操作</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_5">
+           <item row="4" column="0">
+            <widget class="QCheckBox" name="fifthOperateCheckBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>第五步</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QCheckBox" name="firstOperateCheckBox">
              <property name="text">
@@ -940,6 +1060,95 @@
            </item>
            <item row="0" column="1">
             <widget class="QComboBox" name="firstOperateComboBox">
+             <item>
+              <property name="text">
+               <string>缩放旋转与对称</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>线性与非线性滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>形态学滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>灰度与二值化</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>边缘与轮廓</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>实践项目</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="secondOperateCheckBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>第二步</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="thirdOperateCheckBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>第三步</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="secondOperateComboBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>线性与非线性滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>形态学滤波</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>灰度与二值化</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>边缘与轮廓</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>实践项目</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="forthOperateComboBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <item>
               <property name="text">
                <string>线性与非线性滤波</string>
@@ -962,68 +1171,11 @@
              </item>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="secondOperateCheckBox">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+           <item row="6" column="0" colspan="2">
+            <widget class="QPushButton" name="multiOperatePushButton">
              <property name="text">
-              <string>第二步</string>
+              <string>开始处理</string>
              </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="secondOperateComboBox">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <item>
-              <property name="text">
-               <string>形态学滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>二值化</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>边缘与轮廓</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QCheckBox" name="thirdOperateCheckBox">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>第三步</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QComboBox" name="thirdOperateComboBox">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <item>
-              <property name="text">
-               <string>形态学滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>二值化</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>边缘与轮廓</string>
-              </property>
-             </item>
             </widget>
            </item>
            <item row="3" column="0">
@@ -1036,11 +1188,16 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QComboBox" name="forthOperateComboBox">
+           <item row="2" column="1">
+            <widget class="QComboBox" name="thirdOperateComboBox">
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <item>
+              <property name="text">
+               <string>线性与非线性滤波</string>
+              </property>
+             </item>
              <item>
               <property name="text">
                <string>形态学滤波</string>
@@ -1058,11 +1215,38 @@
              </item>
             </widget>
            </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QPushButton" name="multiOperatePushButton">
-             <property name="text">
-              <string>开始处理</string>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="fifthOperateComboBox">
+             <property name="enabled">
+              <bool>false</bool>
              </property>
+             <item>
+              <property name="text">
+               <string>线性与非线性滤波</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QCheckBox" name="sixthOperateCheckBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>第六步</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QComboBox" name="sixthOperateComboBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>线性与非线性滤波</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>
@@ -1143,11 +1327,11 @@ p, li { white-space: pre-wrap; }
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="binaryButtonGroup"/>
-  <buttongroup name="morphButtonGroup"/>
-  <buttongroup name="edgeButtonGroup"/>
+  <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="BlurButtonGroup"/>
   <buttongroup name="srcImageButtonGroup"/>
+  <buttongroup name="edgeButtonGroup"/>
+  <buttongroup name="morphButtonGroup"/>
  </buttongroups>
 </ui>

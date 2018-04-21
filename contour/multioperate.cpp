@@ -44,6 +44,14 @@ void MainWindow::on_firstOperateCheckBox_stateChanged(int arg1)
         ui->forthOperateCheckBox->setEnabled(false);
         ui->forthOperateCheckBox->setChecked(false);
         ui->forthOperateComboBox->setEnabled(false);//失能下拉框
+
+        ui->fifthOperateCheckBox->setEnabled(false);
+        ui->fifthOperateCheckBox->setChecked(false);
+        ui->fifthOperateComboBox->setEnabled(false);//失能下拉框
+
+        ui->sixthOperateCheckBox->setEnabled(false);
+        ui->sixthOperateCheckBox->setChecked(false);
+        ui->sixthOperateComboBox->setEnabled(false);//失能下拉框
     }
 }
 
@@ -71,6 +79,14 @@ void MainWindow::on_secondOperateCheckBox_stateChanged(int arg1)
         ui->forthOperateCheckBox->setEnabled(false);
         ui->forthOperateCheckBox->setChecked(false);
         ui->forthOperateComboBox->setEnabled(false);//失能下拉框
+
+        ui->fifthOperateCheckBox->setEnabled(false);
+        ui->fifthOperateCheckBox->setChecked(false);
+        ui->fifthOperateComboBox->setEnabled(false);//失能下拉框
+
+        ui->sixthOperateCheckBox->setEnabled(false);
+        ui->sixthOperateCheckBox->setChecked(false);
+        ui->sixthOperateComboBox->setEnabled(false);//失能下拉框
     }
 }
 
@@ -94,6 +110,64 @@ void MainWindow::on_thirdOperateCheckBox_stateChanged(int arg1)
         ui->forthOperateCheckBox->setEnabled(false);
         ui->forthOperateCheckBox->setChecked(false);
         ui->forthOperateComboBox->setEnabled(false);//失能下拉框
+
+        ui->fifthOperateCheckBox->setEnabled(false);
+        ui->fifthOperateCheckBox->setChecked(false);
+        ui->fifthOperateComboBox->setEnabled(false);//失能下拉框
+
+        ui->sixthOperateCheckBox->setEnabled(false);
+        ui->sixthOperateCheckBox->setChecked(false);
+        ui->sixthOperateComboBox->setEnabled(false);//失能下拉框
+    }
+}
+
+/**
+* @brief  第四步操作的checkbox状态改变，选上了使能第五个，取消了失能下面的;
+* @param  arg1 第四步操作的checkbox的状态值
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_forthOperateCheckBox_stateChanged(int arg1)
+{
+    if(arg1!=0)
+    {
+        ui->fifthOperateCheckBox->setEnabled(true);
+        ui->fifthOperateComboBox->setEnabled(true);
+        on_forthOperateComboBox_currentIndexChanged();
+    }
+    else
+    {
+        ui->fifthOperateCheckBox->setEnabled(false);
+        ui->fifthOperateCheckBox->setChecked(false);
+        ui->fifthOperateComboBox->setEnabled(false);//失能下拉框
+
+        ui->sixthOperateCheckBox->setEnabled(false);
+        ui->sixthOperateCheckBox->setChecked(false);
+        ui->sixthOperateComboBox->setEnabled(false);//失能下拉框
+    }
+}
+
+/**
+* @brief  第五步操作的checkbox状态改变，选上了使能第六个，取消了失能下面的;
+* @param  arg1 第五步操作的checkbox的状态值
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_fifthOperateCheckBox_stateChanged(int arg1)
+{
+    if(arg1!=0)
+    {
+        ui->sixthOperateCheckBox->setEnabled(true);
+        ui->sixthOperateComboBox->setEnabled(true);
+        on_fifthOperateComboBox_currentIndexChanged();
+    }
+    else
+    {
+        ui->sixthOperateCheckBox->setEnabled(false);
+        ui->sixthOperateCheckBox->setChecked(false);
+        ui->sixthOperateComboBox->setEnabled(false);//失能下拉框
     }
 }
 
@@ -121,6 +195,16 @@ void MainWindow::on_firstOperateComboBox_currentIndexChanged()
             {
                 ui->forthOperateComboBox->clear();//清空下拉框内容
                 ui->forthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+                if(ui->fifthOperateCheckBox->isEnabled())
+                {
+                    ui->fifthOperateComboBox->clear();//清空下拉框内容
+                    ui->fifthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+                    if(ui->sixthOperateCheckBox->isEnabled())
+                    {
+                        ui->sixthOperateComboBox->clear();//清空下拉框内容
+                        ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+                    }
+                }
             }
         }
     }
@@ -147,6 +231,16 @@ void MainWindow::on_secondOperateComboBox_currentIndexChanged()
         {
             ui->forthOperateComboBox->clear();//清空下拉框内容
             ui->forthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+            if(ui->fifthOperateCheckBox->isEnabled())
+            {
+                ui->fifthOperateComboBox->clear();//清空下拉框内容
+                ui->fifthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+                if(ui->sixthOperateCheckBox->isEnabled())
+                {
+                    ui->sixthOperateComboBox->clear();//清空下拉框内容
+                    ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+                }
+            }
         }
     }
 }
@@ -169,6 +263,52 @@ void MainWindow::on_thirdOperateComboBox_currentIndexChanged()
     {
         ui->forthOperateComboBox->clear();//清空下拉框内容
         ui->forthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+        if(ui->fifthOperateCheckBox->isEnabled())
+        {
+            ui->fifthOperateComboBox->clear();//清空下拉框内容
+            ui->fifthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+            if(ui->sixthOperateCheckBox->isEnabled())
+            {
+                ui->sixthOperateComboBox->clear();//清空下拉框内容
+                ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+            }
+        }
+    }
+}
+
+void MainWindow::on_forthOperateComboBox_currentIndexChanged()
+{
+    multiOperate_set.itemsAllTrue();
+    multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
+    multiOperate_set.setItemFalse(ui->secondOperateComboBox->currentText());
+    multiOperate_set.setItemFalse(ui->thirdOperateComboBox->currentText());
+    multiOperate_set.setItemFalse(ui->forthOperateComboBox->currentText());
+
+    if(ui->fifthOperateCheckBox->isEnabled())
+    {
+        ui->fifthOperateComboBox->clear();//清空下拉框内容
+        ui->fifthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+        if(ui->sixthOperateCheckBox->isEnabled())
+        {
+            ui->sixthOperateComboBox->clear();//清空下拉框内容
+            ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
+        }
+    }
+}
+
+void MainWindow::on_fifthOperateComboBox_currentIndexChanged()
+{
+    multiOperate_set.itemsAllTrue();
+    multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
+    multiOperate_set.setItemFalse(ui->secondOperateComboBox->currentText());
+    multiOperate_set.setItemFalse(ui->thirdOperateComboBox->currentText());
+    multiOperate_set.setItemFalse(ui->forthOperateComboBox->currentText());
+    multiOperate_set.setItemFalse(ui->fifthOperateComboBox->currentText());
+
+    if(ui->sixthOperateCheckBox->isEnabled())
+    {
+        ui->sixthOperateComboBox->clear();//清空下拉框内容
+        ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
     }
 }
 
@@ -203,6 +343,18 @@ void MainWindow::on_multiOperatePushButton_clicked()
     if(ui->forthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(4);
+        index=multiOperate_set.getTabValue(ui->forthOperateComboBox->currentText());
+        on_tabWidget_currentChanged(index);
+    }
+    if(ui->fifthOperateCheckBox->isChecked())
+    {
+        showImg.setCurrentImageNum(5);
+        index=multiOperate_set.getTabValue(ui->forthOperateComboBox->currentText());
+        on_tabWidget_currentChanged(index);
+    }
+    if(ui->sixthOperateCheckBox->isChecked())
+    {
+        showImg.setCurrentImageNum(6);
         index=multiOperate_set.getTabValue(ui->forthOperateComboBox->currentText());
         on_tabWidget_currentChanged(index);
     }

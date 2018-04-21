@@ -24,6 +24,52 @@
 #include <exception>
 
 /**
+* @brief  显示灰度图
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention 注意灰度按钮的ID是6
+*/
+void MainWindow::on_garyRadioButton_clicked()
+{
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("cvtColor()函数是openCV里的颜色空间转换函数，可以实现RGB颜色向HSV,HSI等颜色空间的转换，也可以转换为灰度图像，由src输入，dst输出\n\n"
+                                         "函数原型为：\n"
+                                         "void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)"
+                                         "第一个参数，InputArray类型的src，输入图像 \n\n"
+                                         "第二个参数，OutputArray类型的dst，输出图像\n\n"
+                                         "第三个参数，int类型的code，颜色空间转换的标识符\n"
+                                         "转换关系与标识符的对应关系有\n"
+                                         "RGB<->GRAY : CV_BGR2GRAY, CV_RGB2GRAY, CV_GRAY2BGR, CV_GRAY2RGB \n\n"
+                                         "RGB<->CIE XYZ : CV_BGR2XYZ, CV_RGB2XYZ, CV_XYZ2BGR, CV_XYZ2RGB \n\n"
+                                         "RGB<->YCrCb(YUV) JPEG (或 YCC) : CV_BGR2YCrCb, CV_RGB2YCrCb, CV_YCrCb2BGR, CV_YCrCb2RGB \n\n"
+                                         "RGB<->HSV : CV_BGR2HSV, CV_RGB2HSV, CV_HSV2BGR, CV_HSV2RGB \n\n"
+                                         "RGB<->HLS : CV_BGR2HLS, CV_RGB2HLS, CV_HLS2BGR, CV_HLS2RGB \n\n"
+                                         "RGB<->CIE L*a*b* : CV_BGR2Lab, CV_RGB2Lab, CV_Lab2BGR, CV_Lab2RGB \n\n"
+                                         "RGB<->CIE L*u*v* : CV_BGR2Luv, CV_RGB2Luv, CV_Luv2BGR, CV_Luv2RGB \n\n"
+                                         "Bayer<->RGB : CV_BayerBG2BGR, CV_BayerGB2BGR, CV_BayerRG2BGR, CV_BayerGR2BGR, CV_BayerBG2RGB, "
+                                         "CV_BayerGB2RGB, CV_BayerRG2RGB, CV_BayerGR2RGB \n\n"
+                                         "第四个参数，int类型的dstCn，目标图像的通道数，若该参数为0，表示目标图像取源图像的通道数\n\n");
+    ui->garyRadioButton->setChecked(true);
+
+    try{
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        cv::Mat dstImage;//输出图像
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
+
+        cv::cvtColor(srcImage,dstImage,CV_RGB2GRAY);
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
+    }catch(std::exception& e){
+        QMessageBox::information(this,
+                                 tr("打开图像失败"),
+                                 tr("请打开合适的图像"));
+    }
+}
+
+/**
 * @brief  Binary单选按钮按下，显示说明，执行Binary;
 * @param  NONE
 * @retval NONE
@@ -37,7 +83,7 @@ void MainWindow::on_radioButton_Binary_clicked()
                                          "函数原型为：\n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval, THRESH_BINARY)"
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，InputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
+                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
                                          "且和第一个参数中的Mat变量有一样的尺寸和类型"
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
@@ -77,7 +123,7 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
                                          "函数原型为： \n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval, THRESH_BINARY_INV) "
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，InputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
+                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
                                          "且和第一个参数中的Mat变量有一样的尺寸和类型"
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
@@ -117,7 +163,7 @@ void MainWindow::on_radioButton_TRUNC_clicked()
                                          "函数原型为： \n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TRUNC) "
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，InputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
+                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
                                          "且和第一个参数中的Mat变量有一样的尺寸和类型"
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
@@ -157,7 +203,7 @@ void MainWindow::on_radioButton_TRZERO_clicked()
                                          "函数原型为： \n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TOZERO) "
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，InputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
+                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
                                          "且和第一个参数中的Mat变量有一样的尺寸和类型"
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
@@ -197,7 +243,7 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
                                          "函数原型为： \n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TOZERO_INV) "
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，InputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
+                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
                                          "且和第一个参数中的Mat变量有一样的尺寸和类型"
                                          "第三个参数，double类型的thresh,阈值的具体值\n\n"
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
@@ -239,7 +285,7 @@ void MainWindow::on_adaptiveRadioButton_clicked()
                                          "int adaptiveMethod, int thresholdType,int blockSize,double C)\n\n"
 
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，InputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
+                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
                                          "第三个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第四个参数为int类型的adaptiveMethod,用于指定要使用的自适应阈值算法，可取值为"
                                          "ADAPTIVE_THRESH_MEAN_C 或 ADAPTIVE_THRESH_GUSSIAN_C\n"

@@ -37,13 +37,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->helpTextBrowser->insertPlainText("所有功能参数均经过严格测试，默认值即可使用，非法参数最大程度设置无法输入\n\n");
     ui->helpTextBrowser->insertPlainText("所有非法操作均有提示\n\n");
 
-    ui->binaryButtonGroup->setId(ui->radioButton_Binary,0);//设置二值化按钮组的ID值
+    ui->binaryButtonGroup->setId(ui->radioButton_Binary,0);//设置灰度与二值化按钮组的ID值
     ui->binaryButtonGroup->setId(ui->radioButton_BinaryInv,1);
     ui->binaryButtonGroup->setId(ui->radioButton_TRUNC,2);
     ui->binaryButtonGroup->setId(ui->radioButton_TRZERO,3);
     ui->binaryButtonGroup->setId(ui->radioButton_TRZERO_INV,4);
     ui->binaryButtonGroup->setId(ui->adaptiveRadioButton,5);
-    ui->radioButton_Binary->setChecked(true);//设置默认选项
+    ui->binaryButtonGroup->setId(ui->garyRadioButton,6);
+    ui->garyRadioButton->setChecked(true);//设置默认选项
 
     ui->edgeButtonGroup->setId(ui->cannyRadioButton,0);
     ui->edgeButtonGroup->setId(ui->sobelRadioButton,1);

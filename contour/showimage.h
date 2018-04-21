@@ -35,6 +35,8 @@ private:
     QLabel *dstLabel_2;
     QLabel *dstLabel_3;
     QLabel *dstLabel_4;
+    QLabel *dstLabel_5;
+    QLabel *dstLabel_6;
 
 public:
     const static int SRCImage =0;

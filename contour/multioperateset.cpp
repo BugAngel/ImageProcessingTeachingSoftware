@@ -17,15 +17,19 @@
 */
 MultiOperateSet::MultiOperateSet()
 {
+    items["缩放旋转与对称"]=true;
     items["线性与非线性滤波"]=true;
     items["形态学滤波"]=true;
-    items["二值化"]=true;
+    items["灰度与二值化"]=true;
     items["边缘与轮廓"]=true;
+    items["实践项目"]=true;
 
-    tabs["线性与非线性滤波"]=0;
-    tabs["形态学滤波"]=1;
-    tabs["二值化"]=2;
-    tabs["边缘与轮廓"]=3;
+    tabs["缩放旋转与对称"]=0;
+    tabs["线性与非线性滤波"]=1;
+    tabs["形态学滤波"]=2;
+    tabs["灰度与二值化"]=3;
+    tabs["边缘与轮廓"]=4;
+    tabs["实践项目"]=5;
 }
 
 /**

@@ -54,6 +54,12 @@ public slots:
 
     void on_scharrRadioButton_clicked();
 
+    void on_garyRadioButton_clicked();
+
+    void on_resizeCheckBox_stateChanged();
+
+    void on_rotateCheckBox_stateChanged();
+
 private slots:
     void on_radioButton_Binary_clicked();
 
@@ -160,6 +166,24 @@ private slots:
     void on_clearSrcImagePushButton_clicked();
 
     void on_clearDstImagePushButton_clicked();
+
+    void on_upDownCheckBox_stateChanged();
+
+    void on_leftRightCheckBox_stateChanged();
+
+    void on_resizeDoubleSpinBox_valueChanged();
+
+    void on_warpHorizontalSlider_valueChanged();
+
+    void on_rotateHorizontalSlider_valueChanged();
+
+    void on_fifthOperateCheckBox_stateChanged(int arg1);
+
+    void on_forthOperateCheckBox_stateChanged(int arg1);
+
+    void on_forthOperateComboBox_currentIndexChanged();
+
+    void on_fifthOperateComboBox_currentIndexChanged();
 
 public:
     Ui::MainWindow *ui;
