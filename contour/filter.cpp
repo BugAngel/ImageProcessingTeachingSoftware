@@ -60,6 +60,13 @@ void MainWindow::on_boxFilterRadioButton_clicked()
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
@@ -69,8 +76,8 @@ void MainWindow::on_boxFilterRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 
 }
@@ -107,6 +114,13 @@ void MainWindow::on_blurRadioButton_clicked()
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
@@ -116,8 +130,8 @@ void MainWindow::on_blurRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 
 }
@@ -158,6 +172,13 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
@@ -167,8 +188,8 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 }
 
@@ -203,6 +224,13 @@ void MainWindow::on_medianFilterRadioButton_clicked()
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
@@ -212,8 +240,8 @@ void MainWindow::on_medianFilterRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 }
 
@@ -251,6 +279,13 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
@@ -261,8 +296,8 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 }
 

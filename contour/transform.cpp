@@ -24,11 +24,18 @@
 * @author  BugAngel
 * @attention 不管哪个控件状态改变，都执行这个函数出图
 */
-void transform(Ui::MainWindow* ui)
+void MainWindow::transform()
 {
     cv::Mat src,dst_1,dst_2,dst_3,dst_4;//依次为输入图像，第一步，第二步，第三步，第四步的输出图像
     std::string fileString=file.getFileString().toLocal8Bit().toStdString();
     src=cv::imread(fileString);//输入图像
+    if(!src.data )
+    {
+        QMessageBox::information(this,
+                                 tr("打开图像失败"),
+                                 tr("请打开合适的图像！"));
+        return;
+    }
     int num=showImg.getCurrentImageNum();//当前图像数目
     QString tempFileName=QString::number(num)+showImg.getImageSuffix();//输出图像文件名
     cv::Mat map_x, map_y;
@@ -175,11 +182,11 @@ void MainWindow::on_upDownCheckBox_stateChanged()
 
     try
     {
-        transform(ui);
+        transform();
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr("请打开合适的图像"));
+                                 tr("图像处理失败"),
+                                 tr("操作过程出错！"));
     }
 }
 
@@ -226,11 +233,11 @@ void MainWindow::on_leftRightCheckBox_stateChanged()
 
     try
     {
-        transform(ui);
+        transform();
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr("请打开合适的图像"));
+                                 tr("图像处理失败"),
+                                 tr("操作过程出错！"));
     }
 }
 
@@ -277,11 +284,11 @@ void MainWindow::on_resizeCheckBox_stateChanged()
 
     try
     {
-        transform(ui);
+        transform();
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr("请打开合适的图像"));
+                                 tr("图像处理失败"),
+                                 tr("操作过程出错！"));
     }
 }
 
@@ -345,11 +352,11 @@ void MainWindow::on_rotateCheckBox_stateChanged()
 
     try
     {
-        transform(ui);
+        transform();
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr("请打开合适的图像"));
+                                 tr("图像处理失败"),
+                                 tr("操作过程出错！"));
     }
 }
 

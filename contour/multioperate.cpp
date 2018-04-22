@@ -349,13 +349,13 @@ void MainWindow::on_multiOperatePushButton_clicked()
     if(ui->fifthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(5);
-        index=multiOperate_set.getTabValue(ui->forthOperateComboBox->currentText());
+        index=multiOperate_set.getTabValue(ui->fifthOperateComboBox->currentText());
         on_tabWidget_currentChanged(index);
     }
     if(ui->sixthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(6);
-        index=multiOperate_set.getTabValue(ui->forthOperateComboBox->currentText());
+        index=multiOperate_set.getTabValue(ui->sixthOperateComboBox->currentText());
         on_tabWidget_currentChanged(index);
     }
     showImg.setCurrentImageNum(1);//输出图像序号复位

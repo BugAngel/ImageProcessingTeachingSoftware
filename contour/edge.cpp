@@ -62,6 +62,13 @@ void MainWindow::on_cannyRadioButton_clicked()
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 
@@ -70,8 +77,8 @@ void MainWindow::on_cannyRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 }
 
@@ -124,6 +131,13 @@ void MainWindow::on_sobelRadioButton_clicked()
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
 
         cv::Sobel( srcImage, grad_x, -1, dx, 0, ksize, 1, 1, cv::BORDER_DEFAULT ); //x方向
         cv::convertScaleAbs( grad_x, abs_grad_x );
@@ -137,8 +151,8 @@ void MainWindow::on_sobelRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 }
 
@@ -180,6 +194,13 @@ void MainWindow::on_laplacianRadioButton_clicked()
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
         cv::Mat dstImage;//输出图像
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
@@ -189,8 +210,8 @@ void MainWindow::on_laplacianRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                 tr("打开图像失败"),
-                                 tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 }
 
@@ -240,6 +261,13 @@ void MainWindow::on_scharrRadioButton_clicked()
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
+        if(!srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
 
         cv::Scharr( srcImage, grad_x, -1, 1, 0, 1, 1, cv::BORDER_DEFAULT ); //x方向
         cv::convertScaleAbs( grad_x, abs_grad_x );
@@ -253,8 +281,8 @@ void MainWindow::on_scharrRadioButton_clicked()
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
-                                          tr("打开图像失败"),
-                                          tr("请打开合适的图像"));
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 }
 
@@ -302,16 +330,23 @@ void MainWindow::on_contourRadioButton_clicked()
     contour_set.getValue(thresh,mode,method);
 
     try{
-        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
-        cv::Mat g_srcImage=cv::imread(fileString);//输入图像
         cv::Mat g_grayImage;
         cv::RNG g_rng(12345);
         cv::Mat g_cannyMat_output;
         std::vector<std::vector<cv::Point> > g_vContours;
         std::vector<cv::Vec4i> g_vHierarchy;
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat g_srcImage=cv::imread(fileString);//输入图像
+        if(!g_srcImage.data )
+        {
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
+        }
+
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
-
         cv::cvtColor( g_srcImage, g_grayImage, CV_BGR2GRAY );//转成灰度图
 
         // 使用Canndy检测边缘
@@ -341,7 +376,9 @@ void MainWindow::on_contourRadioButton_clicked()
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),drawing);
         showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
-        QMessageBox::information(this,tr("打开图像失败"),tr("请打开合适的图像"));
+        QMessageBox::information(this,
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 
 }

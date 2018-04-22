@@ -136,6 +136,16 @@ void MainWindow::on_savePushButton_clicked()
             img=cv::imread(tempFileName.toLocal8Bit().toStdString());
             cv::imwrite(fileName.toLocal8Bit().data(),img);
             break;
+        case 4:
+            tempFileName=QString::number(5)+showImg.getImageSuffix();
+            img=cv::imread(tempFileName.toLocal8Bit().toStdString());
+            cv::imwrite(fileName.toLocal8Bit().data(),img);
+            break;
+        case 5:
+            tempFileName=QString::number(6)+showImg.getImageSuffix();
+            img=cv::imread(tempFileName.toLocal8Bit().toStdString());
+            cv::imwrite(fileName.toLocal8Bit().data(),img);
+            break;
         }
     }
     else
@@ -169,4 +179,3 @@ void MainWindow::on_saveImageAction_triggered()
 {
     on_savePushButton_clicked();
 }
-

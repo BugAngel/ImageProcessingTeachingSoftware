@@ -33,6 +33,9 @@ public:
 protected:
     void changeEvent(QEvent * event);
 
+private:
+    void transform();
+
 public slots:
     void on_boxFilterRadioButton_clicked();
 
@@ -184,6 +187,16 @@ private slots:
     void on_forthOperateComboBox_currentIndexChanged();
 
     void on_fifthOperateComboBox_currentIndexChanged();
+
+    void on_maxContourCenterRadioButton_clicked();
+
+    void on_maxContourCenterHorizontalSlider_valueChanged();
+
+    void on_regularPolygonRadioButton_clicked();
+
+    void on_digitalVerificationCodeRadioButton_clicked();
+
+    void on_faceDetectionRadioButton_clicked();
 
 public:
     Ui::MainWindow *ui;

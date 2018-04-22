@@ -51,7 +51,8 @@ SOURCES += \
     multioperateset.cpp \
     multioperate.cpp \
     showimageui.cpp \
-    transform.cpp
+    transform.cpp \
+    practical.cpp
 
 HEADERS += \
         mainwindow.h \
