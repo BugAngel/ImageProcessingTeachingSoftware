@@ -458,6 +458,20 @@ void MainWindow::on_tabWidget_currentChanged(int index)
             break;
         }
         break;
+
+    case 5:
+        switch (ui->practicalButtonGroup->checkedId()){
+        case 0:
+            on_maxContourCenterRadioButton_clicked();
+            break;
+        case 1:
+            on_searchPolygonRadioButton_clicked();
+            break;
+        case 2:
+            on_faceDetectionRadioButton_clicked();
+            break;
+        }
+        break;
     }
 }
 

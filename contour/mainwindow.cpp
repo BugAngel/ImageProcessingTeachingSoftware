@@ -78,6 +78,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->morphButtonGroup->setId(ui->morphTopHatRadioButton,5);
     ui->morphButtonGroup->setId(ui->morphBlackHatRadioButton,6);
     ui->erodeRadioButton->setChecked(true);//设置默认选项
+
+    ui->practicalButtonGroup->setId(ui->maxContourCenterRadioButton,0);
+    ui->practicalButtonGroup->setId(ui->searchPolygonRadioButton,1);
+    ui->practicalButtonGroup->setId(ui->faceDetectionRadioButton,2);
+    ui->maxContourCenterRadioButton->setChecked(true);//设置默认选项
 }
 
 /**

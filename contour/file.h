@@ -25,6 +25,7 @@ private:
     QString FileString;//文件路径
 public:
     void setFileString(QString fileString);
+    void setFileString();
     QString getFileString();
 };
 

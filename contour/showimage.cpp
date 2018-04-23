@@ -373,7 +373,7 @@ ShowImage::ARTWork(Ui::MainWindow* ui, QString s, const int type,const int num){
 * @attention
 */
 void ShowImage::showImage(Ui::MainWindow* ui, QString s, const int type,const int num){
-    int flag;
+    int flag=-1;
     if(type==SRCImage)
     {
         flag=srcShowImageType;

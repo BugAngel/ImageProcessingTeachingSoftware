@@ -152,11 +152,11 @@ private slots:
 
     void on_multiOperatePushButton_clicked();
 
-    void on_firstOperateComboBox_currentIndexChanged();
+//    void on_firstOperateComboBox_currentIndexChanged();
 
-    void on_secondOperateComboBox_currentIndexChanged();
+//    void on_secondOperateComboBox_currentIndexChanged();
 
-    void on_thirdOperateComboBox_currentIndexChanged();
+//    void on_thirdOperateComboBox_currentIndexChanged();
 
     void on_dstImageTabWidget_currentChanged();
 
@@ -184,19 +184,27 @@ private slots:
 
     void on_forthOperateCheckBox_stateChanged(int arg1);
 
-    void on_forthOperateComboBox_currentIndexChanged();
-
-    void on_fifthOperateComboBox_currentIndexChanged();
-
     void on_maxContourCenterRadioButton_clicked();
 
     void on_maxContourCenterHorizontalSlider_valueChanged();
 
-    void on_regularPolygonRadioButton_clicked();
-
-    void on_digitalVerificationCodeRadioButton_clicked();
-
     void on_faceDetectionRadioButton_clicked();
+
+    void on_searchPolygonComboBox_currentIndexChanged();
+
+    void on_searchPolygonRadioButton_clicked();
+
+    void on_firstOperateComboBox_currentTextChanged();
+
+    void on_secondOperateComboBox_currentTextChanged();
+
+    void on_thirdOperateComboBox_currentTextChanged();
+
+    void on_forthOperateComboBox_currentTextChanged();
+
+    void on_fifthOperateComboBox_currentTextChanged();
+
+    void on_sixthOperateCheckBox_stateChanged(int arg1);
 
 public:
     Ui::MainWindow *ui;

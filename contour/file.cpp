@@ -36,6 +36,19 @@ void File::setFileString(QString fileString)
 }
 
 /**
+* @brief  设置文件名;
+* @param  num 输出图像序号
+* @retval NONE
+* @author  BugAngel
+* @attention 读取文件，重新设置文件名为ShowImage类中CurrentImageNum值减一，后缀为ShowImage类中ImgSuffix
+*/
+void File::setFileString()
+{
+    showImg.getCurrentImageNum();
+    FileString=QString::number(showImg.getCurrentImageNum()-1)+showImg.getImageSuffix();
+}
+
+/**
 * @brief  返回类中保存的文件名;
 * @param  NONE
 * @retval 类中保存的文件名

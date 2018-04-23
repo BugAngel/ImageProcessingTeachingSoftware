@@ -14,6 +14,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/objdetect/objdetect.hpp>
 #include <QMessageBox>
 #include "file.h"
 #include "showimage.h"
@@ -105,7 +106,7 @@ void MainWindow::on_maxContourCenterRadioButton_clicked()
         sprintf(s,"面积最大轮廓的中心矩x坐标：%f  y坐标：%f\r\n", mc.x, mc.y);
         ui->helpTextBrowser->insertPlainText(s);
 
-        dstImage = cv::Mat::zeros( g_cannyMat_output.size(), CV_8UC3 );
+        dstImage=srcImage.clone();
         cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
         cv::drawContours( dstImage, g_vContours, example[0].id, color, 2, 8, g_vHierarchy, 0, cv::Point() );//绘制外层和内层轮廓
 
@@ -149,17 +150,31 @@ double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0)
 }
 
 /**
-* @brief  采用多边形逼近检测，通过约束条件寻找多边形
-* @param  srcImage 原图像
-* @param  minarea，maxarea 检测多边形的最小/最大面积
-* @param  minangle,maxangle 检测多边形边夹角范围，单位为角度
-* @param  shape 多边形边数
-* @retval 多边形序列
+* @brief  寻找多边形单选按钮按下
+* @param  NONE
+* @retval NONE
 * @author  BugAngel
-* @attention
+* @attention 使用求内角和的方法找到多边形
 */
-CvSeq* findSquares(cv::Mat srcImage, int minarea, int maxarea, int minangle, int maxangle,int shape)
+void MainWindow::on_searchPolygonRadioButton_clicked()
 {
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("此功能实现过程为：\n"
+                                         "首先读入图片，将其转换为灰度图后使用canny边缘检测，使用边缘图得到轮廓\n"
+                                         "之后使用多边形逼近函数逼近轮廓，判断每个多边形是否为凸多边形并且满足面积要求，"
+                                         "若满足，计算内角和，内角和也满足则则画出多边形轮廓\n"
+                                         "此过程核心函数原型为:"
+                                         "void approxPolyDP( InputArray curve,OutputArray approxCurve,double epsilon,bool closed);\n\n"
+                                         "第一个参数，InputArray类型的curve，输入的二维点集，可以为std::vector或Mat类型 \n\n"
+                                         "第二个参数，OutputArray类型的approxCurve，多边形逼近的结果，其类型应该和输入的二维点集的类型一致 \n\n"
+                                         "第三个参数，double类型的epsilon，逼近的精度，为原始曲线和即近似曲线之间的最大值\n\n"
+                                         "第四个参数，bool类型的closed,如果其为真，则近似的曲线为封闭曲线，否则曲线不封闭 \n\n");
+    ui->searchPolygonRadioButton->setChecked(true);
+
+    double minArea=1000;//最小面积
+    double maxArea=120000;//最大面积
+    unsigned int shape=ui->searchPolygonComboBox->currentIndex()+3;//多边形边数
+    cv::RNG g_rng(12345);
     cv::Mat grayImage;
     cv::Mat cannyMat_output;
     std::vector<std::vector<cv::Point>> contours;
@@ -167,56 +182,207 @@ CvSeq* findSquares(cv::Mat srcImage, int minarea, int maxarea, int minangle, int
 
     int thresh = 100;
 
-    double t;
-    double s;
-
-    cv::cvtColor(srcImage,grayImage,CV_RGB2GRAY);
-
-    // 用Canny算子检测边缘
-    cv::Canny( grayImage, cannyMat_output, thresh, thresh*2, 3 );
-
-    // 寻找轮廓
-    cv::findContours( cannyMat_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0) );
-
-    //多边形逼近轮廓
-    std::vector<std::vector<cv::Point>> contours_poly(contours.size());
-
-    for(unsigned int i=0;i<contours.size();i++)
+    try
     {
-        cv::approxPolyDP(contours[i], contours_poly[i], 3, true);//多边形逼近
-        double tempArea=cv::contourArea(contours_poly[i]);
-        //如果是凸多边形并且面积在范围内,并且是凸的
-        if (contours_poly[i].size() == shape &&  tempArea > minarea  && tempArea < maxarea &&  cv::isContourConvex(contours_poly[i]))
+        std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+        cv::Mat srcImage=cv::imread(fileString);//输入图像
+        if(!srcImage.data )
         {
-            s = 0;
-            //判断每一条边
-            for (int i = 2; i < shape + 1; i++)
-            {
-                t = fabs(angle((CvPoint*)cvGetSeqElem(result, i), (CvPoint*)cvGetSeqElem(result, i - 2), (CvPoint*)cvGetSeqElem(result, i - 1)));
-                s = s > t ? s : t;
-            }
-            //这里的S为直角判定条件 单位为角度
-            if (s > minangle && s < maxangle)
-                for (int i = 0; i < shape; i++)
-                    cvSeqPush(squares, (CvPoint*)cvGetSeqElem(result, i));
+            QMessageBox::information(this,
+                                     tr("打开图像失败"),
+                                     tr("请打开合适的图像！"));
+            return;
         }
-        contours = contours->h_next;
+
+        int num=showImg.getCurrentImageNum();//当前图像数目
+        QString tempFileName=QString::number(num)+showImg.getImageSuffix();
+
+        cv::Mat dstImage=srcImage.clone();
+
+        cv::cvtColor(srcImage,grayImage,CV_RGB2GRAY);
+
+        // 用Canny算子检测边缘
+        cv::Canny( grayImage, cannyMat_output, thresh, thresh*2, 3 );
+
+        // 寻找轮廓
+        cv::findContours( cannyMat_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0) );
+
+        //多边形逼近轮廓
+        std::vector<std::vector<cv::Point>> contours_poly(contours.size());
+
+        for(unsigned int i=0;i<contours.size();i++)
+        {
+            cv::approxPolyDP(contours[i], contours_poly[i], 3, true);//多边形逼近
+            double tempArea=cv::contourArea(contours_poly[i]);
+            //如果是凸多边形并且面积在范围内,并且是凸的
+            if (contours_poly[i].size() == shape &&  tempArea > minArea  && tempArea < maxArea &&  cv::isContourConvex(contours_poly[i]))
+            {
+                int sumAngel=0;
+                if(shape==3)
+                {
+                    double angel_1 = fabs(angle(contours_poly[i][0], contours_poly[i][1], contours_poly[i][2]));
+                    double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
+                    double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][2], contours_poly[i][0]));
+                    sumAngel=angel_1+angel_2+angel_3;
+                    if (sumAngel > 170 && sumAngel < 190)//判断内角和
+                    {
+                        cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+                        cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
+                    }
+                }
+                else if(shape==4)
+                {
+                    double angel_1 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][0]));
+                    double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
+                    double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][2]));
+                    double angel_4 = fabs(angle(contours_poly[i][2], contours_poly[i][0], contours_poly[i][3]));
+                    sumAngel=angel_1+angel_2+angel_3+angel_4;
+                    if (sumAngel > 340 && sumAngel < 380)//判断内角和
+                    {
+                        cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+                        cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
+                    }
+                }
+                else if(shape==5)
+                {
+                    double angel_1 = fabs(angle(contours_poly[i][1], contours_poly[i][4], contours_poly[i][0]));
+                    double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
+                    double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][2]));
+                    double angel_4 = fabs(angle(contours_poly[i][2], contours_poly[i][4], contours_poly[i][3]));
+                    double angel_5 = fabs(angle(contours_poly[i][3], contours_poly[i][0], contours_poly[i][4]));
+                    sumAngel=angel_1+angel_2+angel_3+angel_4+angel_5;
+                    if (sumAngel > 520 && sumAngel < 560)//判断内角和
+                    {
+                        cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+                        cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
+                    }
+                }
+                else if(shape==6)
+                {
+                    double angel_1 = fabs(angle(contours_poly[i][1], contours_poly[i][5], contours_poly[i][0]));
+                    double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
+                    double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][2]));
+                    double angel_4 = fabs(angle(contours_poly[i][2], contours_poly[i][4], contours_poly[i][3]));
+                    double angel_5 = fabs(angle(contours_poly[i][3], contours_poly[i][5], contours_poly[i][4]));
+                    double angel_6 = fabs(angle(contours_poly[i][4], contours_poly[i][0], contours_poly[i][5]));
+                    sumAngel=angel_1+angel_2+angel_3+angel_4+angel_5+angel_6;
+                    if (sumAngel > 700 && sumAngel < 740)//判断内角和
+                    {
+                        cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+                        cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
+                    }
+                }
+            }
+        }
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
+    }catch(std::exception& e){
+        QMessageBox::information(this,
+                                          tr("图像处理失败"),
+                                          tr("操作过程出错！"));
     }
 
-    return squares;
 }
 
-void MainWindow::on_regularPolygonRadioButton_clicked()
+/**
+* @brief  改变寻找多边形边数
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_searchPolygonComboBox_currentIndexChanged()
 {
-
+    on_searchPolygonRadioButton_clicked();
 }
 
-void MainWindow::on_digitalVerificationCodeRadioButton_clicked()
-{
-
-}
-
+/**
+* @brief  人脸检测单选按钮按下
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention 使用CascadeClassifier完成,haarcascade_frontalface_default.xml在opencv的data文件夹下
+*/
 void MainWindow::on_faceDetectionRadioButton_clicked()
 {
+    ui->helpTextBrowser->clear();
+    ui->helpTextBrowser->insertPlainText("此功能实现过程为：\n"
+                                         "首先加载人脸检测器，之后读入图像并将图像转为灰度图\n"
+                                         "使用人脸检测器检测图像，若有人脸，则在原图上画出矩形框标定人脸位置\n"
+                                         "此过程核心函数原型为:"
+                                         "void detectMultiScale( InputArray image,CV_OUT std::vector<Rect>& objects,CV_OUT std::vector<int>& rejectLevels,"
+                                         "CV_OUT std::vector<double>& levelWeights,double scaleFactor = 1.1,int minNeighbors = 3, int flags = 0,"
+                                         "Size minSize = Size(), Size maxSize = Size(),bool outputRejectLevels = false );\n\n"
+                                         "参数1：image–待检测图片，一般为灰度图像； \n\n"
+                                         "参数2：objects–被检测物体的矩形框向量组；为输出量，如人脸检测矩阵Mat \n\n"
+                                         "参数3：scaleFactor–表示在前后两次相继的扫描中，搜索窗口的比例系数。默认为1.1即每次搜索窗口依次扩大10%;一般设置为1.1 \n\n"
+                                         "参数4：minNeighbors–表示构成检测目标的相邻矩形的最小个数(默认为3个)。如果组成检测目标的小矩形的个数和小于 min_neighbors - 1 都会被排除。"
+                                         "如果min_neighbors 为 0, 则函数不做任何操作就返回所有的被检候选矩形框，这种设定值一般用在用户自定义对检测结果的组合程序上； \n\n"
+                                         "参数5：flags–要么使用默认值，要么使用CV_HAAR_DO_CANNY_PRUNING，如果设置为CV_HAAR_DO_CANNY_PRUNING，"
+                                         "那么函数将会使用Canny边缘检测来排除边缘过多或过少的区域，因此这些区域通常不会是人脸所在区域； \n\n"
+                                         "参数6、7：minSize和maxSize用来限制得到的目标区域的范围。也就是我本次训练得到实际项目尺寸大小 \n\n");
+    ui->faceDetectionRadioButton->setChecked(true);
 
+    cv::Mat grayImage;
+    //加载Haar或LBP对象或人脸检测器
+    cv::CascadeClassifier  faceDetector;
+    std::string faceCascadeFilename = "haarcascade_frontalface_default.xml";
+
+    //友好错误信息提示
+    try{
+        faceDetector.load(faceCascadeFilename);
+    }catch (cv::Exception e){
+        QMessageBox::information(this,
+                                          tr("文件缺失"),
+                                          tr("人脸检测器文件缺失！"));
+        return;
+    }
+
+    if (faceDetector.empty())
+    {
+        QMessageBox::information(this,
+                                          tr("脸部检测器不能加载"),
+                                          tr("脸部检测器不能加载！"));
+        return;
+    }
+
+    std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+    cv::Mat srcImage=cv::imread(fileString);//输入图像
+    if(!srcImage.data )
+    {
+        QMessageBox::information(this,
+                                 tr("打开图像失败"),
+                                 tr("请打开合适的图像！"));
+        return;
+    }
+
+    int num=showImg.getCurrentImageNum();//当前图像数目
+    QString tempFileName=QString::number(num)+showImg.getImageSuffix();
+
+    try
+    {
+        cv::Mat dstImage=srcImage.clone();
+        cv::cvtColor(srcImage,grayImage,CV_RGB2GRAY);
+
+        //int flags = CASCADE_FIND_BIGGEST_OBJECT|CASCADE_DO_ROUGH_SEARCH;    //只检测脸最大的人
+        int flags = cv::CASCADE_SCALE_IMAGE;  //检测多个人
+        cv::Size minFeatureSize(30, 30);
+        float searchScaleFactor = 1.1f;
+        int minNeighbors = 4;
+        std::vector<cv::Rect> faces;
+        faceDetector.detectMultiScale(grayImage, faces, searchScaleFactor, minNeighbors, flags, minFeatureSize);
+
+        //画矩形框
+        for(std::vector<cv::Rect>::const_iterator iter=faces.begin();iter!=faces.end();iter++)
+        {
+            cv::rectangle(dstImage,*iter,cv::Scalar(0,0,255),2,8); //画出脸部矩形
+        }
+
+        cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
+    }catch(std::exception& e){
+        QMessageBox::information(this,
+                                 tr("图像处理失败"),
+                                 tr("操作过程出错！"));
+    }
 }

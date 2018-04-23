@@ -13,6 +13,7 @@
 #include "multioperateset.h"
 #include <QMessageBox>
 #include "showimage.h"
+#include "file.h"
 
 MultiOperateSet multiOperate_set;//这个对象来存储多步操作设置的值
 
@@ -28,11 +29,13 @@ void MainWindow::on_firstOperateCheckBox_stateChanged(int arg1)
     if(arg1!=0)
     {
         ui->secondOperateCheckBox->setEnabled(true);
-        ui->secondOperateComboBox->setEnabled(true);
-        on_firstOperateComboBox_currentIndexChanged();
+        ui->firstOperateComboBox->setEnabled(true);
+        on_firstOperateComboBox_currentTextChanged();
     }
     else
     {
+        ui->firstOperateComboBox->setEnabled(false);
+
         ui->secondOperateCheckBox->setEnabled(false);
         ui->secondOperateCheckBox->setChecked(false);
         ui->secondOperateComboBox->setEnabled(false);//失能下拉框
@@ -67,11 +70,13 @@ void MainWindow::on_secondOperateCheckBox_stateChanged(int arg1)
     if(arg1!=0)
     {
         ui->thirdOperateCheckBox->setEnabled(true);
-        ui->thirdOperateComboBox->setEnabled(true);
-        on_secondOperateComboBox_currentIndexChanged();
+        ui->secondOperateComboBox->setEnabled(true);
+        on_secondOperateComboBox_currentTextChanged();
     }
     else
     {
+        ui->secondOperateComboBox->setEnabled(false);
+
         ui->thirdOperateCheckBox->setEnabled(false);
         ui->thirdOperateCheckBox->setChecked(false);
         ui->thirdOperateComboBox->setEnabled(false);//失能下拉框
@@ -102,11 +107,13 @@ void MainWindow::on_thirdOperateCheckBox_stateChanged(int arg1)
     if(arg1!=0)
     {
         ui->forthOperateCheckBox->setEnabled(true);
-        ui->forthOperateComboBox->setEnabled(true);
-        on_thirdOperateComboBox_currentIndexChanged();
+        ui->thirdOperateComboBox->setEnabled(true);
+        on_thirdOperateComboBox_currentTextChanged();
     }
     else
     {
+        ui->thirdOperateComboBox->setEnabled(false);
+
         ui->forthOperateCheckBox->setEnabled(false);
         ui->forthOperateCheckBox->setChecked(false);
         ui->forthOperateComboBox->setEnabled(false);//失能下拉框
@@ -133,11 +140,13 @@ void MainWindow::on_forthOperateCheckBox_stateChanged(int arg1)
     if(arg1!=0)
     {
         ui->fifthOperateCheckBox->setEnabled(true);
-        ui->fifthOperateComboBox->setEnabled(true);
-        on_forthOperateComboBox_currentIndexChanged();
+        ui->forthOperateComboBox->setEnabled(true);
+        on_forthOperateComboBox_currentTextChanged();
     }
     else
     {
+        ui->forthOperateComboBox->setEnabled(false);
+
         ui->fifthOperateCheckBox->setEnabled(false);
         ui->fifthOperateCheckBox->setChecked(false);
         ui->fifthOperateComboBox->setEnabled(false);//失能下拉框
@@ -160,14 +169,28 @@ void MainWindow::on_fifthOperateCheckBox_stateChanged(int arg1)
     if(arg1!=0)
     {
         ui->sixthOperateCheckBox->setEnabled(true);
-        ui->sixthOperateComboBox->setEnabled(true);
-        on_fifthOperateComboBox_currentIndexChanged();
+        ui->fifthOperateComboBox->setEnabled(true);
+        on_fifthOperateComboBox_currentTextChanged();
     }
     else
     {
+        ui->fifthOperateComboBox->setEnabled(false);
+
         ui->sixthOperateCheckBox->setEnabled(false);
         ui->sixthOperateCheckBox->setChecked(false);
         ui->sixthOperateComboBox->setEnabled(false);//失能下拉框
+    }
+}
+
+void MainWindow::on_sixthOperateCheckBox_stateChanged(int arg1)
+{
+    if(arg1!=0)
+    {
+        ui->sixthOperateComboBox->setEnabled(true);
+    }
+    else
+    {
+        ui->sixthOperateComboBox->setEnabled(false);
     }
 }
 
@@ -178,7 +201,7 @@ void MainWindow::on_fifthOperateCheckBox_stateChanged(int arg1)
 * @author  BugAngel
 * @attention
 */
-void MainWindow::on_firstOperateComboBox_currentIndexChanged()
+void MainWindow::on_firstOperateComboBox_currentTextChanged()
 {
     multiOperate_set.itemsAllTrue();
     multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
@@ -217,7 +240,7 @@ void MainWindow::on_firstOperateComboBox_currentIndexChanged()
 * @author  BugAngel
 * @attention
 */
-void MainWindow::on_secondOperateComboBox_currentIndexChanged()
+void MainWindow::on_secondOperateComboBox_currentTextChanged()
 {
     multiOperate_set.itemsAllTrue();
     multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
@@ -252,7 +275,7 @@ void MainWindow::on_secondOperateComboBox_currentIndexChanged()
 * @author  BugAngel
 * @attention
 */
-void MainWindow::on_thirdOperateComboBox_currentIndexChanged()
+void MainWindow::on_thirdOperateComboBox_currentTextChanged()
 {
     multiOperate_set.itemsAllTrue();
     multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
@@ -276,7 +299,14 @@ void MainWindow::on_thirdOperateComboBox_currentIndexChanged()
     }
 }
 
-void MainWindow::on_forthOperateComboBox_currentIndexChanged()
+/**
+* @brief  第四步操作的combobox改变，改变下面的，保证没有重复
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_forthOperateComboBox_currentTextChanged()
 {
     multiOperate_set.itemsAllTrue();
     multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
@@ -296,7 +326,14 @@ void MainWindow::on_forthOperateComboBox_currentIndexChanged()
     }
 }
 
-void MainWindow::on_fifthOperateComboBox_currentIndexChanged()
+/**
+* @brief  第五步操作的combobox改变，改变下面的，保证没有重复
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_fifthOperateComboBox_currentTextChanged()
 {
     multiOperate_set.itemsAllTrue();
     multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
@@ -325,38 +362,45 @@ void MainWindow::on_multiOperatePushButton_clicked()
     if(ui->firstOperateCheckBox->isChecked())
     {
        showImg.setCurrentImageNum(1);
+       file.setFileString();
        index=multiOperate_set.getTabValue(ui->firstOperateComboBox->currentText());
        on_tabWidget_currentChanged(index);
     }
     if(ui->secondOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(2);
+        file.setFileString();
         index=multiOperate_set.getTabValue(ui->secondOperateComboBox->currentText());
         on_tabWidget_currentChanged(index);
     }
     if(ui->thirdOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(3);
+        file.setFileString();
         index=multiOperate_set.getTabValue(ui->thirdOperateComboBox->currentText());
         on_tabWidget_currentChanged(index);
     }
     if(ui->forthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(4);
+        file.setFileString();
         index=multiOperate_set.getTabValue(ui->forthOperateComboBox->currentText());
         on_tabWidget_currentChanged(index);
     }
     if(ui->fifthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(5);
+        file.setFileString();
         index=multiOperate_set.getTabValue(ui->fifthOperateComboBox->currentText());
         on_tabWidget_currentChanged(index);
     }
     if(ui->sixthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(6);
+        file.setFileString();
         index=multiOperate_set.getTabValue(ui->sixthOperateComboBox->currentText());
         on_tabWidget_currentChanged(index);
     }
     showImg.setCurrentImageNum(1);//输出图像序号复位
+    file.setFileString();//文件名复位
 }
