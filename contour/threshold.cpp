@@ -31,7 +31,7 @@
 * @attention 注意灰度按钮的ID是6
 */
 void MainWindow::on_garyRadioButton_clicked()
-{
+{   
     ui->helpTextBrowser->clear();
     ui->helpTextBrowser->insertPlainText("cvtColor()函数是openCV里的颜色空间转换函数，可以实现RGB颜色向HSV,HSI等颜色空间的转换，也可以转换为灰度图像，由src输入，dst输出\n\n"
                                          "函数原型为：\n"
@@ -85,8 +85,14 @@ void MainWindow::on_garyRadioButton_clicked()
 */
 void MainWindow::on_radioButton_Binary_clicked()
 {
+    double thresh=ui->binaryDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("当前点值大于阈值时，取最大值，否则设置为0 ，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "当前点值大于阈值时，取最大值，否则设置为0 ，由src输入，dst输出\n\n"
                                          "函数原型为：\n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval, THRESH_BINARY)"
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
@@ -96,8 +102,6 @@ void MainWindow::on_radioButton_Binary_clicked()
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
     ui->radioButton_Binary->setChecked(true);
-
-    double thresh=ui->binaryDoubleSpinBox->value();
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -132,8 +136,14 @@ void MainWindow::on_radioButton_Binary_clicked()
 */
 void MainWindow::on_radioButton_BinaryInv_clicked()
 {
+    double thresh=ui->binaryDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("当前点值大于阈值时，设置为0，否则取最大值 ，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "当前点值大于阈值时，设置为0，否则取最大值 ，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval, THRESH_BINARY_INV) "
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
@@ -143,8 +153,6 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
     ui->radioButton_BinaryInv->setChecked(true);
-
-    double thresh=ui->binaryInvDoubleSpinBox->value();
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -179,8 +187,14 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
 */
 void MainWindow::on_radioButton_TRUNC_clicked()
 {
+    double thresh=ui->binaryDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("当前点值大于阈值时，设置为阈值，否则不改变，由src输入，dst输出 \n\n"
+    char temp[200];
+    sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "当前点值大于阈值时，设置为阈值，否则不改变，由src输入，dst输出 \n\n"
                                          "函数原型为： \n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TRUNC) "
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
@@ -190,8 +204,6 @@ void MainWindow::on_radioButton_TRUNC_clicked()
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
     ui->radioButton_TRUNC->setChecked(true);
-
-    double thresh=ui->truncDoubleSpinBox->value();
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -226,8 +238,14 @@ void MainWindow::on_radioButton_TRUNC_clicked()
 */
 void MainWindow::on_radioButton_TRZERO_clicked()
 {
+    double thresh=ui->binaryDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("当前点值大于阈值时，不改变，否则设置为0 ，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "当前点值大于阈值时，不改变，否则设置为0 ，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TOZERO) "
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
@@ -237,8 +255,6 @@ void MainWindow::on_radioButton_TRZERO_clicked()
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
     ui->radioButton_TRZERO->setChecked(true);
-
-    double thresh=ui->tozeroDoubleSpinBox->value();
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -273,8 +289,14 @@ void MainWindow::on_radioButton_TRZERO_clicked()
 */
 void MainWindow::on_radioButton_TRZERO_INV_clicked()
 {
+    double thresh=ui->binaryDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("当前点值大于阈值时，不改变，否则设置为0，由src输入，dst输出 \n\n"
+    char temp[200];
+    sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "当前点值大于阈值时，不改变，否则设置为0，由src输入，dst输出 \n\n"
                                          "函数原型为： \n"
                                          "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TOZERO_INV) "
                                          "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
@@ -284,8 +306,6 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
                                          "第四个参数，double类型的maxval，阈值的最大值\n\n"
                                          "第五个参数，阈值类型\n\n");
     ui->radioButton_TRZERO_INV->setChecked(true);
-
-    int thresh=ui->tozeroInvDoubleSpinBox->value();
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -320,8 +340,27 @@ void MainWindow::on_radioButton_TRZERO_INV_clicked()
 */
 void MainWindow::on_adaptiveRadioButton_clicked()
 {
+    int method;
+    int type;
+    int size;
+    double C;
+    char adaptiveMethod[2][30]={"ADAPTIVE_THRESH_MEAN_C","ADAPTIVE_THRESH_GUSSIAN_C"};
+    char threshType[2][30]={"THRESH_BINARY","THRESH_BINARY_INV"};
+
+    adaptive_set.getValue(method,type,size,C);
+
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("采用自适应阈值操作，，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "自适应方法:%s\n"
+                 "阈值方法:%s\n"
+                 "块大小:%d\n"
+                 "常数值:%.2f\n\n",
+            adaptiveMethod[method], threshType[type],size,C);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "采用自适应阈值操作，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "void adaptiveThreshold(InputArray src, OutputArray dst, double maxval, "
                                          "int adaptiveMethod, int thresholdType,int blockSize,double C)\n\n"
@@ -351,9 +390,7 @@ void MainWindow::on_adaptiveRadioButton_clicked()
             return;
         }
         cv::Mat dstImage;//输出图像
-        int method,type,size;
-        double C;
-        adaptive_set.getValue(method,type,size,C);
+
         int num=showImg.getCurrentImageNum();//当前图像数目
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
 

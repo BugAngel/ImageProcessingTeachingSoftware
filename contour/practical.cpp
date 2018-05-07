@@ -45,14 +45,19 @@ bool cmp(Example a,Example b)
 void MainWindow::on_maxContourCenterRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("此功能实现过程为：\n"
+    int g_nThresh = ui->maxContourCenterHorizontalSlider->value();
+    char Temp[200];
+    sprintf(Temp,"滑动条表示边缘阈值,其值为:%d\n\n",g_nThresh);
+    ui->helpTextBrowser->insertPlainText(Temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "此功能实现过程为：\n"
                                          "首先读入图片，将其转换为灰度图后使用canny边缘检测，使用边缘图得到轮廓\n"
                                          "将得到的轮廓按面积大小由大到小排序，将面积最大的轮廓画出\n"
                                          "之后计算图像中心矩并输出\n\n");
     ui->maxContourCenterRadioButton->setChecked(true);
 
     cv::Mat grayImage;
-    int g_nThresh = ui->maxContourCenterHorizontalSlider->value();
     cv::RNG g_rng(12345);
     cv::Mat g_cannyMat_output;
     std::vector<std::vector<cv::Point>> g_vContours;
@@ -95,6 +100,8 @@ void MainWindow::on_maxContourCenterRadioButton_clicked()
 
         //对example数组排序
         sort(example.begin(), example.end(), cmp);
+        //之所以使用排序是因为在实际项目中，最大的不一定是满足要求的，排序完了之后还要从大到小筛选，
+        //这样写好，以后移植的时候方便
 
         // 计算矩
         cv::Moments mu = cv::moments( example[0].Contours, false );
@@ -150,6 +157,25 @@ double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0)
 }
 
 /**
+* @brief  判断角度是否在范围内
+* @param  angle为输入角度，rangeMin，rangeMax分别为范围的下限和上限
+* @retval 在范围内返回true，不在返回false
+* @author  BugAngel
+* @attention
+*/
+bool angleRange(double angle,int rangeMin,int rangeMax)
+{
+    if(angle > rangeMin && angle < rangeMax)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/**
 * @brief  寻找多边形单选按钮按下
 * @param  NONE
 * @retval NONE
@@ -159,11 +185,20 @@ double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0)
 void MainWindow::on_searchPolygonRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("此功能实现过程为：\n"
+    char shapeString[8][30]={"三角形","正三角形","四边形","矩形",
+                            "五边形","正五边形","六边形","正六边形"};
+    int shapeIndex = ui->searchPolygonComboBox->currentIndex();
+    char Temp[200];
+    sprintf(Temp,"当前选择检测形状为:%s\n\n",shapeString[shapeIndex]);
+    ui->helpTextBrowser->insertPlainText(Temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "此功能实现过程为：\n"
                                          "首先读入图片，将其转换为灰度图后使用canny边缘检测，使用边缘图得到轮廓\n"
                                          "之后使用多边形逼近函数逼近轮廓，判断每个多边形是否为凸多边形并且满足面积要求，"
-                                         "若满足，计算内角和，内角和也满足则则画出多边形轮廓\n"
-                                         "此过程核心函数原型为:"
+                                         "普通多边形若满足，计算内角和，内角和也满足则画出多边形轮廓\n"
+                                         "正多边形若满足，对每个角度检测范围，满足则画出多边形轮廓\n"
+                                         "此过程核心函数原型为:\n"
                                          "void approxPolyDP( InputArray curve,OutputArray approxCurve,double epsilon,bool closed);\n\n"
                                          "第一个参数，InputArray类型的curve，输入的二维点集，可以为std::vector或Mat类型 \n\n"
                                          "第二个参数，OutputArray类型的approxCurve，多边形逼近的结果，其类型应该和输入的二维点集的类型一致 \n\n"
@@ -173,7 +208,7 @@ void MainWindow::on_searchPolygonRadioButton_clicked()
 
     double minArea=1000;//最小面积
     double maxArea=120000;//最大面积
-    unsigned int shape=ui->searchPolygonComboBox->currentIndex()+3;//多边形边数
+    unsigned int shape;//多边形边数
     cv::RNG g_rng(12345);
     cv::Mat grayImage;
     cv::Mat cannyMat_output;
@@ -182,6 +217,33 @@ void MainWindow::on_searchPolygonRadioButton_clicked()
 
     int thresh = 100;
 
+    switch(shapeIndex)
+    {
+    case 0:
+        shape=3;
+        break;
+    case 1:
+        shape=13;//前面那个1表示正
+        break;
+    case 2:
+        shape=4;
+        break;
+    case 3:
+        shape=14;//前面那个1表示正
+        break;
+    case 4:
+        shape=5;
+        break;
+    case 5:
+        shape=15;//前面那个1表示正
+        break;
+    case 6:
+        shape=6;
+        break;
+    case 7:
+        shape=16;//前面那个1表示正
+        break;
+    }
     try
     {
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -215,7 +277,7 @@ void MainWindow::on_searchPolygonRadioButton_clicked()
             cv::approxPolyDP(contours[i], contours_poly[i], 3, true);//多边形逼近
             double tempArea=cv::contourArea(contours_poly[i]);
             //如果是凸多边形并且面积在范围内,并且是凸的
-            if (contours_poly[i].size() == shape &&  tempArea > minArea  && tempArea < maxArea &&  cv::isContourConvex(contours_poly[i]))
+            if ((contours_poly[i].size() == shape || contours_poly[i].size() == (shape-10)) &&  tempArea > minArea  && tempArea < maxArea &&  cv::isContourConvex(contours_poly[i]))
             {
                 int sumAngel=0;
                 if(shape==3)
@@ -224,7 +286,7 @@ void MainWindow::on_searchPolygonRadioButton_clicked()
                     double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
                     double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][2], contours_poly[i][0]));
                     sumAngel=angel_1+angel_2+angel_3;
-                    if (sumAngel > 170 && sumAngel < 190)//判断内角和
+                    if (angleRange(sumAngel,170,190))//判断内角和
                     {
                         cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
                         cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
@@ -237,7 +299,7 @@ void MainWindow::on_searchPolygonRadioButton_clicked()
                     double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][2]));
                     double angel_4 = fabs(angle(contours_poly[i][2], contours_poly[i][0], contours_poly[i][3]));
                     sumAngel=angel_1+angel_2+angel_3+angel_4;
-                    if (sumAngel > 340 && sumAngel < 380)//判断内角和
+                    if (angleRange(sumAngel,350,370))//判断内角和
                     {
                         cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
                         cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
@@ -251,7 +313,7 @@ void MainWindow::on_searchPolygonRadioButton_clicked()
                     double angel_4 = fabs(angle(contours_poly[i][2], contours_poly[i][4], contours_poly[i][3]));
                     double angel_5 = fabs(angle(contours_poly[i][3], contours_poly[i][0], contours_poly[i][4]));
                     sumAngel=angel_1+angel_2+angel_3+angel_4+angel_5;
-                    if (sumAngel > 520 && sumAngel < 560)//判断内角和
+                    if (angleRange(sumAngel,530,550))//判断内角和
                     {
                         cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
                         cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
@@ -266,7 +328,57 @@ void MainWindow::on_searchPolygonRadioButton_clicked()
                     double angel_5 = fabs(angle(contours_poly[i][3], contours_poly[i][5], contours_poly[i][4]));
                     double angel_6 = fabs(angle(contours_poly[i][4], contours_poly[i][0], contours_poly[i][5]));
                     sumAngel=angel_1+angel_2+angel_3+angel_4+angel_5+angel_6;
-                    if (sumAngel > 700 && sumAngel < 740)//判断内角和
+                    if (angleRange(sumAngel,710,730))//判断内角和
+                    {
+                        cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+                        cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
+                    }
+                }
+                else if(shape==13)
+                {
+                    double angel_1 = fabs(angle(contours_poly[i][0], contours_poly[i][1], contours_poly[i][2]));
+                    double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
+                    double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][2], contours_poly[i][0]));
+                    if (angleRange(angel_1,50,70) && angleRange(angel_2,50,70) && angleRange(angel_3,50,70))//判断内角和
+                    {
+                        cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+                        cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
+                    }
+                }
+                else if(shape==14)
+                {
+                    double angel_1 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][0]));
+                    double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
+                    double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][2]));
+                    double angel_4 = fabs(angle(contours_poly[i][2], contours_poly[i][0], contours_poly[i][3]));
+                    if (angleRange(angel_1,80,100)&&angleRange(angel_2,80,100)&&angleRange(angel_3,80,100)&&angleRange(angel_4,80,100))//判断内角和
+                    {
+                        cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+                        cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
+                    }
+                }
+                else if(shape==15)
+                {
+                    double angel_1 = fabs(angle(contours_poly[i][1], contours_poly[i][4], contours_poly[i][0]));
+                    double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
+                    double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][2]));
+                    double angel_4 = fabs(angle(contours_poly[i][2], contours_poly[i][4], contours_poly[i][3]));
+                    double angel_5 = fabs(angle(contours_poly[i][3], contours_poly[i][0], contours_poly[i][4]));
+                    if (angleRange(angel_1,98,118)&&angleRange(angel_2,98,118)&&angleRange(angel_3,98,118)&&angleRange(angel_4,98,118)&&angleRange(angel_5,98,118))//判断内角和
+                    {
+                        cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
+                        cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
+                    }
+                }
+                else if(shape==16)
+                {
+                    double angel_1 = fabs(angle(contours_poly[i][1], contours_poly[i][5], contours_poly[i][0]));
+                    double angel_2 = fabs(angle(contours_poly[i][0], contours_poly[i][2], contours_poly[i][1]));
+                    double angel_3 = fabs(angle(contours_poly[i][1], contours_poly[i][3], contours_poly[i][2]));
+                    double angel_4 = fabs(angle(contours_poly[i][2], contours_poly[i][4], contours_poly[i][3]));
+                    double angel_5 = fabs(angle(contours_poly[i][3], contours_poly[i][5], contours_poly[i][4]));
+                    double angel_6 = fabs(angle(contours_poly[i][4], contours_poly[i][0], contours_poly[i][5]));
+                    if (angleRange(angel_1,110,130)&&angleRange(angel_2,110,130)&&angleRange(angel_3,110,130)&&angleRange(angel_4,110,130)&&angleRange(angel_5,110,130)&&angleRange(angel_6,110,130))//判断内角和
                     {
                         cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );//随机生成颜色值
                         cv::polylines(dstImage,contours_poly[i],true,color,5, CV_AA, 0);//画出多边形轮廓
@@ -306,10 +418,17 @@ void MainWindow::on_searchPolygonComboBox_currentIndexChanged()
 void MainWindow::on_faceDetectionRadioButton_clicked()
 {
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("此功能实现过程为：\n"
+    char faceString[2][30]={"单个人脸", "多个人脸"};
+    int faceIndex = ui->faceDetectionComboBox->currentIndex();
+    char Temp[200];
+    sprintf(Temp,"当前选择检测人脸模式为:%s\n\n",faceString[faceIndex]);
+    ui->helpTextBrowser->insertPlainText(Temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "此功能实现过程为：\n"
                                          "首先加载人脸检测器，之后读入图像并将图像转为灰度图\n"
                                          "使用人脸检测器检测图像，若有人脸，则在原图上画出矩形框标定人脸位置\n"
-                                         "此过程核心函数原型为:"
+                                         "此过程核心函数原型为:\n"
                                          "void detectMultiScale( InputArray image,CV_OUT std::vector<Rect>& objects,CV_OUT std::vector<int>& rejectLevels,"
                                          "CV_OUT std::vector<double>& levelWeights,double scaleFactor = 1.1,int minNeighbors = 3, int flags = 0,"
                                          "Size minSize = Size(), Size maxSize = Size(),bool outputRejectLevels = false );\n\n"
@@ -364,8 +483,15 @@ void MainWindow::on_faceDetectionRadioButton_clicked()
         cv::Mat dstImage=srcImage.clone();
         cv::cvtColor(srcImage,grayImage,CV_RGB2GRAY);
 
-        //int flags = CASCADE_FIND_BIGGEST_OBJECT|CASCADE_DO_ROUGH_SEARCH;    //只检测脸最大的人
-        int flags = cv::CASCADE_SCALE_IMAGE;  //检测多个人
+        int flags;
+        if(faceIndex==0)
+        {
+            flags = cv::CASCADE_FIND_BIGGEST_OBJECT|cv::CASCADE_DO_ROUGH_SEARCH;    //只检测脸最大的人
+        }
+        else
+        {
+            flags = cv::CASCADE_SCALE_IMAGE;  //检测多个人
+        }
         cv::Size minFeatureSize(30, 30);
         float searchScaleFactor = 1.1f;
         int minNeighbors = 4;
@@ -385,4 +511,16 @@ void MainWindow::on_faceDetectionRadioButton_clicked()
                                  tr("图像处理失败"),
                                  tr("操作过程出错！"));
     }
+}
+
+/**
+* @brief  改变人脸检测模式
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_faceDetectionComboBox_currentIndexChanged()
+{
+    on_faceDetectionRadioButton_clicked();
 }

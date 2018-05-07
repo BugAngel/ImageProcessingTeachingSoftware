@@ -20,8 +20,8 @@ class BilateralFilterSet
 {
 private:
     int d=25;
-    double sigmaColor=25*2;
-    double sigmaSpace=25/2;
+    double sigmaColor=50;
+    double sigmaSpace=12.5;
 
 public:
     void setValue(int &d,double &sigmaColor, double &sigmaSpace);

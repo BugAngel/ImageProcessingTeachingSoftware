@@ -254,8 +254,15 @@ void MainWindow::on_resizeCheckBox_stateChanged()
     {
         on_radioButtonArtWork_clicked();
         on_radioButtonArtWork_2_clicked();
+
+        double resize=ui->resizeDoubleSpinBox->value();
         ui->helpTextBrowser->clear();
-        ui->helpTextBrowser->insertPlainText("resize( )为OpenCV中专职调整图像大小的函数。此函数将源图像精确地转换为指定尺寸的目标图像。\n"
+        char temp[200];
+        sprintf(temp,"数字框的值为尺寸缩放倍数,其值为:%.2f\n\n",resize);
+        ui->helpTextBrowser->insertPlainText(temp);
+
+        ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                             "resize( )为OpenCV中专职调整图像大小的函数。此函数将源图像精确地转换为指定尺寸的目标图像。\n"
                                              "如果源图像中设置了ROI（Region Of Interest ，感兴趣区域），那么resize( )函数会对源图像的ROI区域进行调整图像尺寸的操作，"
                                              "来输出到目标图像中。若目标图像中已经设置ROI区域，不难理解resize( )将会对源图像进行尺寸调整并填充到目标图像的ROI中。\n"
                                              "很多时候，我们并不用考虑第二个参数dst的初始图像尺寸和类型（即直接定义一个Mat类型，不用对其初始化），"
@@ -315,10 +322,17 @@ void MainWindow::on_rotateCheckBox_stateChanged()
 {
     if(ui->rotateCheckBox->isChecked())
     {
-        on_radioButtonArtWork_clicked();
-        on_radioButtonArtWork_2_clicked();
         ui->helpTextBrowser->clear();
-        ui->helpTextBrowser->insertPlainText("缩放旋转为仿射变换操作\n"
+        int angle = ui->rotateHorizontalSlider->value();
+        double scale = ((double)ui->warpHorizontalSlider->value())/10;
+        char temp[200];
+        sprintf(temp,"左边滑动条表示缩放倍数,其值为:%.1f\n"
+                     "右边滑动条表示旋转角度,其值为:%d\n\n",
+                scale,angle);
+        ui->helpTextBrowser->insertPlainText(temp);
+
+        ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                             "缩放旋转为仿射变换操作\n"
                                              "OpenCV仿射变换相关的函数一般涉及到warpAffine和getRotationMatrix2D这两个：\n"
                                              "使用OpenCV函数warpAffine 来实现一些简单的重映射.\n"
                                              "使用OpenCV函数getRotationMatrix2D 来获得旋转矩阵。\n"

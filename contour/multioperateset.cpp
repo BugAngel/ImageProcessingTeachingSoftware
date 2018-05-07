@@ -18,15 +18,15 @@
 MultiOperateSet::MultiOperateSet()
 {
     items["缩放旋转与对称"]=true;
-    items["线性与非线性滤波"]=true;
-    items["形态学滤波"]=true;
+    items["图像滤波"]=true;
+    items["形态学处理"]=true;
     items["灰度与二值化"]=true;
     items["边缘与轮廓"]=true;
     items["实践项目"]=true;
 
     tabs["缩放旋转与对称"]=0;
-    tabs["线性与非线性滤波"]=1;
-    tabs["形态学滤波"]=2;
+    tabs["图像滤波"]=1;
+    tabs["形态学处理"]=2;
     tabs["灰度与二值化"]=3;
     tabs["边缘与轮廓"]=4;
     tabs["实践项目"]=5;
@@ -41,10 +41,16 @@ MultiOperateSet::MultiOperateSet()
 */
 void MultiOperateSet::itemsAllTrue()
 {
-    for(QMap<QString,bool>::iterator it=items.begin();it!=items.end();it++)
-    {
-        it.value()=true;
-    }
+//    for(QMap<QString,bool>::iterator it=items.begin();it!=items.end();it++)
+//    {
+//        it.value()=true;
+//    }
+    items["缩放旋转与对称"]=true;
+    items["图像滤波"]=true;
+    items["形态学处理"]=true;
+    items["灰度与二值化"]=true;
+    items["边缘与轮廓"]=true;
+    items["实践项目"]=true;
 }
 
 /**
@@ -69,12 +75,36 @@ void MultiOperateSet::setItemFalse(QString qstring)
 QStringList MultiOperateSet::getCurrentItems()
 {
     QStringList tempQStringList;
-    for(QMap<QString,bool>::iterator it=items.begin();it!=items.end();it++)
+//    for(QMap<QString,bool>::iterator it=items.begin();it!=items.end();it++) //最后一个值无法访问等一堆神奇的BUG
+//    {
+//        if(it.value() && it.key()!="")//不知道为什么会出现空字符串
+//        {
+//            tempQStringList<<it.key();
+//        }
+//    }
+    if(items["缩放旋转与对称"]==true)
     {
-        if(it.value() && it.key()!="")//不知道为什么会出现空字符串
-        {
-            tempQStringList<<it.key();
-        }
+        tempQStringList<<"缩放旋转与对称";
+    }
+    if(items["图像滤波"]==true)
+    {
+        tempQStringList<<"图像滤波";
+    }
+    if(items["形态学处理"]==true)
+    {
+        tempQStringList<<"形态学处理";
+    }
+    if(items["灰度与二值化"]==true)
+    {
+        tempQStringList<<"灰度与二值化";
+    }
+    if(items["边缘与轮廓"]==true)
+    {
+        tempQStringList<<"边缘与轮廓";
+    }
+    if(items["实践项目"]==true)
+    {
+        tempQStringList<<"实践项目";
     }
     return tempQStringList;
 }

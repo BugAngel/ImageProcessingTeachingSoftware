@@ -32,8 +32,23 @@
 */
 void MainWindow::on_cannyRadioButton_clicked()
 {   
+    double threshold1;
+    double threshold2;
+    int apertureSize;
+
+    canny_set.getValue(threshold1,threshold2,apertureSize);
+
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("Canny边缘检测算子是John F.Canny于 1986 年开发出来的一个多级边缘检测算法。"
+    char temp[200];
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "第一个滞后性阈值:%.2f\n"
+                 "第一个滞后性阈值:%.2f\n"
+                 "Sobel算子的孔径大小:%d\n\n",
+            threshold1, threshold2,apertureSize);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "Canny边缘检测算子是John F.Canny于 1986 年开发出来的一个多级边缘检测算法。"
                                          "更为重要的是 Canny 创立了边缘检测计算理论（Computational theory ofedge detection），"
                                          "解释了这项技术是如何工作的。Canny边缘检测算法以Canny的名字命名，被很多人推崇为当今最优的边缘检测的算法。"
                                          "Canny 边缘检测的步骤:\n"
@@ -54,12 +69,6 @@ void MainWindow::on_cannyRadioButton_clicked()
     ui->cannyRadioButton->setChecked(true);
 
     try{
-        double threshold1;
-        double threshold2;
-        int apertureSize;
-
-        canny_set.getValue(threshold1,threshold2,apertureSize);
-
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString,0);//输入图像
         if(!srcImage.data )
@@ -91,8 +100,26 @@ void MainWindow::on_cannyRadioButton_clicked()
 */
 void MainWindow::on_sobelRadioButton_clicked()
 {
+    int dx;
+    int dy;
+    int ksize;
+    double x_weight;
+
+    sobel_set.getValue(dx, dy, ksize, x_weight);
+
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("Sobel算子是一个主要用作边缘检测的离散微分算子 (discrete differentiation operator)。 "
+    char temp[200];
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "X方向差分阶数:%d\n"
+                 "Y方向差分阶数:%d\n"
+                 "Sobel核大小:%d\n"
+                 "X方向差分结果所占权重:%.2f\n"
+                 "Y方向差分结果所占权重:%.2f\n\n",
+            dx, dy,ksize,x_weight,1-x_weight);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "Sobel算子是一个主要用作边缘检测的离散微分算子 (discrete differentiation operator)。 "
                                          "它结合了高斯平滑和微分求导，用来计算图像灰度函数的近似梯度。在图像的任何一点使用此算子，"
                                          "将会产生对应的梯度矢量或是其法矢量。\n\n"
                                          "函数原型为： \n"
@@ -116,18 +143,11 @@ void MainWindow::on_sobelRadioButton_clicked()
     ui->sobelRadioButton->setChecked(true);
 
     try{
-        int dx;
-        int dy;
-        int ksize;
-        double x_weight;
-
         cv::Mat dstImage;//输出图像
         cv::Mat grad_x, grad_y;
         cv::Mat abs_grad_x, abs_grad_y;
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
-
-        sobel_set.getValue(dx, dy, ksize, x_weight);
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
@@ -165,8 +185,13 @@ void MainWindow::on_sobelRadioButton_clicked()
 */
 void MainWindow::on_laplacianRadioButton_clicked()
 {
+    int ksize=ui->laplacianSpinBox->value();
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("数字为滤波器孔径尺寸\n"
+    char temp[200];
+    sprintf(temp,"数字框的值为滤波器孔径尺寸，其值为:%d\n\n",ksize);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
                                          "Laplacian 算子是n维欧几里德空间中的一个二阶微分算子，定义为梯度grad（）的散度div（）。\n"
                                          "需要点破的是，由于 Laplacian使用了图像梯度，它内部的代码其实是调用了 Sobel 算子的。\n\n"
                                          "函数原型为： \n"
@@ -180,8 +205,6 @@ void MainWindow::on_laplacianRadioButton_clicked()
                                          "第六个参数，double类型的delta，表示在结果存入目标图（第二个参数dst）之前可选的delta值，有默认值0。\n\n"
                                          "第七个参数， int类型的borderType，边界模式，默认值为BORDER_DEFAULT。这个参数可以在官方文档中borderInterpolate()处得到更详细的信息。\n\n");
     ui->laplacianRadioButton->setChecked(true);
-
-    int ksize=ui->laplacianSpinBox->value();
 
     if(ksize%2==0){
         QMessageBox::information(this,
@@ -224,8 +247,13 @@ void MainWindow::on_laplacianRadioButton_clicked()
 */
 void MainWindow::on_scharrRadioButton_clicked()
 {
+    double x_weight=ui->scharrDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("数字为X方向差分所占权重\n"
+    char temp[200];
+    sprintf(temp,"数字框的值为X方向差分所占权重,其值为:%.2f\n\n",x_weight);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
                                          "实践中一般直接称scharr为滤波器而不是算子，它在OPENCV中主要是配合Sobel算子的运算而存在的。\n"
                                          "Scharr(src, dst, ddepth, dx, dy, scale,delta, borderType)与"
                                          "Sobel(src, dst, ddepth, dx, dy, CV_SCHARR,scale, delta, borderType)完全等价\n\n"
@@ -249,15 +277,11 @@ void MainWindow::on_scharrRadioButton_clicked()
     ui->scharrRadioButton->setChecked(true);
 
     try{
-        double x_weight;
-
         cv::Mat dstImage;//输出图像
         cv::Mat grad_x, grad_y;
         cv::Mat abs_grad_x, abs_grad_y;
         int num=showImg.getCurrentImageNum();//当前图像序号
         QString tempFileName=QString::number(num)+showImg.getImageSuffix();
-
-        x_weight=ui->scharrDoubleSpinBox->value();
 
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
@@ -295,8 +319,25 @@ void MainWindow::on_scharrRadioButton_clicked()
 */
 void MainWindow::on_contourRadioButton_clicked()
 {
+    double thresh;
+    int mode;
+    int method;
+    char searchMode[4][20]={"CV_RETR_EXTERNAL","CV_RETR_LIST","CV_RETE_CCOMP","CV_RETE_TREE"};
+    char searchMethod[4][30]={"CV_CHAIN_APPROX_NONE","CV_CHAIN_APPROX_SIMPLE","CV_CHAIN_APPROX_TC89_L1","CV_CHAIN_APPROX_TC89_KCOS"};
+
+    contour_set.getValue(thresh,mode,method);
+
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("一个轮廓一般对应一系列的点，也就是图像中的一条曲线，其表示方法可能根据不同的情况而有所不同，"
+    char temp[200];
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "边缘查找阈值:%.2f\n"
+                 "轮廓检索模式:%s\n"
+                 "轮廓近似办法:%s\n\n",
+            thresh, searchMode[mode],searchMethod[method]);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "一个轮廓一般对应一系列的点，也就是图像中的一条曲线，其表示方法可能根据不同的情况而有所不同，"
                                          "本例使用canny算子求得边缘，使用边缘得到轮廓，进而使用图形的矩求得轮廓的周长与面积,"
                                          "本例中canny阈值采用1:2\n"
                                          "opencv中，可以用findContours()函数从二值图像中查找轮廓\n\n"
@@ -320,14 +361,8 @@ void MainWindow::on_contourRadioButton_clicked()
                                          "第二种是CV_CHAIN_APPROX_SIMPLE，压缩水平方向，垂直方向，对角线方向的元素，只保留该方向的终点坐标，例如一个矩形轮廓只需四个点来保存轮廓信息\n"
                                          "第三种和第四种是CV_CHAIN_APPROX_TC89_L1和CV_CHAIN_APPROX_TC89_KCOS,使用Teh-Chinl链逼近算法中一个\n\n"
                                          "第六个参数，Point类型的offset，每个轮廓点的可选偏移量，有默认值Point()。对ROI图像中找出的轮廓，并要在整个图像中进行分析时，这个参数便可派上用场\n\n");
-    ui->helpTextBrowser->insertPlainText("\t 输出内容: 轮廓的面积和长度\n");
+    ui->helpTextBrowser->insertPlainText("\t 轮廓的面积和长度\n");
     ui->contourRadioButton->setChecked(true);
-
-    double thresh;
-    int mode;
-    int method;
-
-    contour_set.getValue(thresh,mode,method);
 
     try{
         cv::Mat g_grayImage;
@@ -366,7 +401,7 @@ void MainWindow::on_contourRadioButton_clicked()
         for(unsigned  int i = 0; i< g_vContours.size(); i++ )
         {
             char s[200];
-            sprintf(s," >轮廓[%d]的面积: %.2f , 长度: %.2f \n\n",
+            sprintf(s,"轮廓[%d]的面积: %.2f , 长度: %.2f \n\n",
                     i, cv::contourArea(g_vContours[i]), cv::arcLength( g_vContours[i], true ));
             ui->helpTextBrowser->insertPlainText(s);
             cv::Scalar color = cv::Scalar( g_rng.uniform(0, 255), g_rng.uniform(0,255), g_rng.uniform(0,255) );

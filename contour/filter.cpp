@@ -36,8 +36,20 @@
 */
 void MainWindow::on_boxFilterRadioButton_clicked()
 {
+    int width;
+    int heigth;
+    boxfilter_set.getValue(width,heigth);
+
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("使用方框滤波来处理一张图片，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "像素宽度:%d\n"
+                 "像素高度:%d\n\n",
+            width,heigth);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "使用方框滤波来处理一张图片，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "void boxFilter(InputArray src, OutputArray dst, int ddepth, "
                                          "Size ksize, Point anchor=Point(-1,-1), boolnormalize=true, int borderType=BORDER_DEFAULT)\n\n"
@@ -54,10 +66,6 @@ void MainWindow::on_boxFilterRadioButton_clicked()
     ui->boxFilterRadioButton->setChecked(true);
 
     try{
-        int width;
-        int heigth;
-        boxfilter_set.getValue(width,heigth);
-
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         if(!srcImage.data )
@@ -91,8 +99,20 @@ void MainWindow::on_boxFilterRadioButton_clicked()
 */
 void MainWindow::on_blurRadioButton_clicked()
 {
+    int width;
+    int heigth;
+    blur_set.getValue(width,heigth);
+
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("使用均值滤波来处理一张图片\n\n"
+    char temp[200];
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "像素宽度:%d\n"
+                 "像素高度:%d\n\n",
+            width,heigth);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "使用均值滤波来处理一张图片\n\n"
                                          "函数原型为： \n"
                                          "void blur(InputArray src, OutputArraydst, Size ksize, Point anchor=Point(-1,-1), "
                                          "int borderType=BORDER_DEFAULT )  \n\n"
@@ -108,10 +128,6 @@ void MainWindow::on_blurRadioButton_clicked()
     ui->blurRadioButton->setChecked(true);
 
     try{
-        int width;
-        int heigth;
-        blur_set.getValue(width,heigth);
-
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         if(!srcImage.data )
@@ -145,8 +161,24 @@ void MainWindow::on_blurRadioButton_clicked()
 */
 void MainWindow::on_gaussianBlurRadioButton_clicked()
 {
+    int width;
+    int height;
+    double sigmaX;
+    double sigmaY;
+    gaussianblur_set.getValue(width, height, sigmaX, sigmaY);
+
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("使用高斯滤波来处理一张图片\n\n"
+    char temp[200];
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "像素宽度:%d\n"
+                 "像素高度:%d\n"
+                 "sigmaX:%.2f\n"
+                 "sigmaY:%.2f\n\n",
+            width,height,sigmaX,sigmaY);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "使用高斯滤波来处理一张图片\n\n"
                                          "函数原型为： \n"
                                          "void GaussianBlur(InputArray src,OutputArray dst, Size ksize, double sigmaX, "
                                          "double sigmaY=0, intborderType=BORDER_DEFAULT ) \n\n"
@@ -164,12 +196,6 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
     ui->gaussianBlurRadioButton->setChecked(true);
 
     try{
-        int width;
-        int height;
-        double sigmaX;
-        double sigmaY;
-        gaussianblur_set.getValue(width, height, sigmaX, sigmaY);
-
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         if(!srcImage.data )
@@ -202,8 +228,14 @@ void MainWindow::on_gaussianBlurRadioButton_clicked()
 */
 void MainWindow::on_medianFilterRadioButton_clicked()
 {
+    int ksize=ui->medianFilterSpinBox->value();
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("使用中值滤波来处理一张图片\n\n"
+    char temp[200];
+    sprintf(temp,"数字框的值为孔径的线性尺寸,其值为:%d\n\n",ksize);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "使用中值滤波来处理一张图片\n\n"
                                          "函数原型为： \n"
                                          "void medianBlur(InputArray src,OutputArray dst, int ksize)\n\n"
                                          "第一个参数，InputArray类型的src，函数的输入参数，填1、3或者4通道的Mat类型的图像；"
@@ -214,7 +246,6 @@ void MainWindow::on_medianFilterRadioButton_clicked()
                                          "注意这个参数必须是大于1的奇数，比如：3，5，7，9 ...");
     ui->medianFilterRadioButton->setChecked(true);
 
-    int ksize=ui->medianFilterSpinBox->value();
     if(ksize<3 || ksize%2==0){
         QMessageBox::information(this,
                                           tr("输入数据错误"),
@@ -254,8 +285,22 @@ void MainWindow::on_medianFilterRadioButton_clicked()
 */
 void MainWindow::on_bilateralFilterRadioButton_clicked()
 {
+    int d;
+    double sigmaColor;
+    double sigmaSpace;
+    bilateralfilter_set.getValue(d,sigmaColor,sigmaSpace);
+
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("使用双边滤波来处理一张图片\n\n"
+    char temp[200];
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "像素邻域的直径:%d\n"
+                 "颜色空间滤波器的sigma值:%.2f\n"
+                 "坐标空间滤波器的sigma值:%.2f\n\n",
+            d,sigmaColor,sigmaSpace);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "使用双边滤波来处理一张图片\n\n"
                                          "这个算法有点卡，用起来要注意\n\n"
                                          "函数原型为：\n"
                                          "void bilateralFilter(InputArray src, OutputArraydst, int d, double sigmaColor, double sigmaSpace, "
@@ -272,11 +317,6 @@ void MainWindow::on_bilateralFilterRadioButton_clicked()
     ui->bilateralFilterRadioButton->setChecked(true);
 
     try{
-        int d;
-        double sigmaColor;
-        double sigmaSpace;
-        bilateralfilter_set.getValue(d,sigmaColor,sigmaSpace);
-
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
         cv::Mat srcImage=cv::imread(fileString);//输入图像
         if(!srcImage.data )

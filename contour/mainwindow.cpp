@@ -83,6 +83,23 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->practicalButtonGroup->setId(ui->searchPolygonRadioButton,1);
     ui->practicalButtonGroup->setId(ui->faceDetectionRadioButton,2);
     ui->maxContourCenterRadioButton->setChecked(true);//设置默认选项
+
+    ui->tabWidget->setCurrentIndex(0);//设置图像操作Tab的默认显示
+    ui->dstImageTabWidget->setCurrentIndex(0);//设置图像显示Tab的默认显示
+
+    QStringList tempQStringList;
+    tempQStringList<<"缩放旋转与对称";
+    tempQStringList<<"图像滤波";
+    tempQStringList<<"形态学处理";
+    tempQStringList<<"灰度与二值化";
+    tempQStringList<<"边缘与轮廓";
+    tempQStringList<<"实践项目";
+    ui->firstOperateComboBox->addItems(tempQStringList);
+    ui->secondOperateComboBox->addItems(tempQStringList);
+    ui->thirdOperateComboBox->addItems(tempQStringList);
+    ui->forthOperateComboBox->addItems(tempQStringList);
+    ui->fifthOperateComboBox->addItems(tempQStringList);
+    ui->sixthOperateComboBox->addItems(tempQStringList);
 }
 
 /**

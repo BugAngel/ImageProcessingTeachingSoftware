@@ -194,17 +194,19 @@ private slots:
 
     void on_searchPolygonRadioButton_clicked();
 
-    void on_firstOperateComboBox_currentTextChanged();
+//    void on_firstOperateComboBox_currentTextChanged();
 
-    void on_secondOperateComboBox_currentTextChanged();
+//    void on_secondOperateComboBox_currentTextChanged();
 
-    void on_thirdOperateComboBox_currentTextChanged();
+//    void on_thirdOperateComboBox_currentTextChanged();
 
-    void on_forthOperateComboBox_currentTextChanged();
+//    void on_forthOperateComboBox_currentTextChanged();
 
-    void on_fifthOperateComboBox_currentTextChanged();
+//    void on_fifthOperateComboBox_currentTextChanged();
 
     void on_sixthOperateCheckBox_stateChanged(int arg1);
+
+    void on_faceDetectionComboBox_currentIndexChanged();
 
 public:
     Ui::MainWindow *ui;

@@ -26,8 +26,20 @@
 */
 void MainWindow::on_erodeRadioButton_clicked()
 {
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+    char shape[3][30]={"矩形","交叉形","椭圆形"};
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("腐蚀就是求局部最小值的操作,使用腐蚀操作来处理一张图片，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"此操作内核形状为:%s\n"
+                 "内核长为:%d\n"
+                 "内核宽为:%d\n\n",
+            shape[value],length,height);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "腐蚀就是求局部最小值的操作,使用腐蚀操作来处理一张图片，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "void erode(InputArray src,   OutputArray dst,  InputArray kernel,  Point anchor=Point(-1,-1),"
                                          "int iterations=1,int borderType=BORDER_CONSTANT, const Scalar& borderValue=morphologyDefaultBorderValue() )\n\n"
@@ -48,10 +60,6 @@ void MainWindow::on_erodeRadioButton_clicked()
                                          "第七个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->erodeRadioButton->setChecked(true);
-
-    int length=ui->morphSizeLenghtSpinBox->value();
-    int height=ui->morphSizeHighSpinBox->value();
-    int value=ui->morphShapeComboBox->currentIndex();
 
     cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
 
@@ -88,8 +96,20 @@ void MainWindow::on_erodeRadioButton_clicked()
 */
 void MainWindow::on_dilateRadioButton_clicked()
 {
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+    char shape[3][30]={"矩形","交叉形","椭圆形"};
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("膨胀就是求局部最大值的操作,使用膨胀操作来处理一张图片，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"此操作内核形状为:%s\n"
+                 "内核长为:%d\n"
+                 "内核宽为:%d\n\n",
+            shape[value],length,height);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "膨胀就是求局部最大值的操作,使用膨胀操作来处理一张图片，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "void dilate(InputArray src,OutputArray dst,InputArray kernel,Point anchor=Point(-1,-1),int iterations=1,"
                                          "int borderType=BORDER_CONSTANT,const Scalar& borderValue=morphologyDefaultBorderValue());  \n\n"
@@ -110,10 +130,6 @@ void MainWindow::on_dilateRadioButton_clicked()
                                          "第七个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->dilateRadioButton->setChecked(true);
-
-    int length=ui->morphSizeLenghtSpinBox->value();
-    int height=ui->morphSizeHighSpinBox->value();
-    int value=ui->morphShapeComboBox->currentIndex();
 
     cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
 
@@ -150,8 +166,20 @@ void MainWindow::on_dilateRadioButton_clicked()
 */
 void MainWindow::on_morphOpenRadioButton_clicked()
 {
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+    char shape[3][30]={"矩形","交叉形","椭圆形"};
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("开运算其实就是先腐蚀后膨胀的过程,开运算可以用来消除小物体、在纤细点处分离物体、平滑较大物体的边界的同时并不明显改变其面积。"
+    char temp[200];
+    sprintf(temp,"此操作内核形状为:%s\n"
+                 "内核长为:%d\n"
+                 "内核宽为:%d\n\n",
+            shape[value],length,height);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "开运算其实就是先腐蚀后膨胀的过程,开运算可以用来消除小物体、在纤细点处分离物体、平滑较大物体的边界的同时并不明显改变其面积。"
                                          "使用开运算操作来处理一张图片，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "void morphologyEx(InputArray src,OutputArray dst, int op, InputArray kernel,Pointanchor=Point(-1,-1),"
@@ -167,10 +195,6 @@ void MainWindow::on_morphOpenRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphOpenRadioButton->setChecked(true);
-
-    int length=ui->morphSizeLenghtSpinBox->value();
-    int height=ui->morphSizeHighSpinBox->value();
-    int value=ui->morphShapeComboBox->currentIndex();
 
     cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
 
@@ -207,8 +231,20 @@ void MainWindow::on_morphOpenRadioButton_clicked()
 */
 void MainWindow::on_morphCloseRadioButton_clicked()
 {
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+    char shape[3][30]={"矩形","交叉形","椭圆形"};
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("闭运算就是先膨胀后腐蚀的过程,闭运算能够排除小型黑洞(黑色区域),使用闭运算操作来处理一张图片，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"此操作内核形状为:%s\n"
+                 "内核长为:%d\n"
+                 "内核宽为:%d\n\n",
+            shape[value],length,height);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "闭运算就是先膨胀后腐蚀的过程,闭运算能够排除小型黑洞(黑色区域),使用闭运算操作来处理一张图片，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "void morphologyEx(InputArray src,OutputArray dst, int op, InputArray kernel,Pointanchor=Point(-1,-1),"
                                          "intiterations=1,intborderType=BORDER_CONSTANT, constScalar& borderValue=morphologyDefaultBorderValue() )  \n\n"
@@ -223,10 +259,6 @@ void MainWindow::on_morphCloseRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphCloseRadioButton->setChecked(true);
-
-    int length=ui->morphSizeLenghtSpinBox->value();
-    int height=ui->morphSizeHighSpinBox->value();
-    int value=ui->morphShapeComboBox->currentIndex();
 
     cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
 
@@ -263,8 +295,20 @@ void MainWindow::on_morphCloseRadioButton_clicked()
 */
 void MainWindow::on_morphGradientRadioButton_clicked()
 {
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+    char shape[3][30]={"矩形","交叉形","椭圆形"};
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("形态学梯度为膨胀图与腐蚀图之差,对二值图像进行这一操作可以将团块的边缘突出出来,使用形态学梯度操作来处理一张图片，由src输入，dst输出\n\n"
+    char temp[200];
+    sprintf(temp,"此操作内核形状为:%s\n"
+                 "内核长为:%d\n"
+                 "内核宽为:%d\n\n",
+            shape[value],length,height);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "形态学梯度为膨胀图与腐蚀图之差,对二值图像进行这一操作可以将团块的边缘突出出来,使用形态学梯度操作来处理一张图片，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
                                          "void morphologyEx(InputArray src,OutputArray dst, int op, InputArray kernel,Pointanchor=Point(-1,-1),"
                                          "intiterations=1,intborderType=BORDER_CONSTANT, constScalar& borderValue=morphologyDefaultBorderValue() )  \n\n"
@@ -279,10 +323,6 @@ void MainWindow::on_morphGradientRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphGradientRadioButton->setChecked(true);
-
-    int length=ui->morphSizeLenghtSpinBox->value();
-    int height=ui->morphSizeHighSpinBox->value();
-    int value=ui->morphShapeComboBox->currentIndex();
 
     cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
 
@@ -319,8 +359,20 @@ void MainWindow::on_morphGradientRadioButton_clicked()
 */
 void MainWindow::on_morphTopHatRadioButton_clicked()
 {
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+    char shape[3][30]={"矩形","交叉形","椭圆形"};
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("顶帽运算又常常被译为”礼帽“运算,为原图像与开运算的结果图之差。"
+    char temp[200];
+    sprintf(temp,"此操作内核形状为:%s\n"
+                 "内核长为:%d\n"
+                 "内核宽为:%d\n\n",
+            shape[value],length,height);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "顶帽运算又常常被译为”礼帽“运算,为原图像与开运算的结果图之差。"
                                          "因为开运算带来的结果是放大了裂缝或者局部低亮度的区域，因此，从原图中减去开运算后的图，"
                                          "得到的效果图突出了比原图轮廓周围的区域更明亮的区域，且这一操作和选择的核的大小相关。"
                                          "顶帽运算往往用来分离比邻近点亮一些的斑块。当一幅图像具有大幅的背景的时候，"
@@ -340,10 +392,6 @@ void MainWindow::on_morphTopHatRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphTopHatRadioButton->setChecked(true);
-
-    int length=ui->morphSizeLenghtSpinBox->value();
-    int height=ui->morphSizeHighSpinBox->value();
-    int value=ui->morphShapeComboBox->currentIndex();
 
     cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
 
@@ -380,8 +428,20 @@ void MainWindow::on_morphTopHatRadioButton_clicked()
 */
 void MainWindow::on_morphBlackHatRadioButton_clicked()
 {
+    int length=ui->morphSizeLenghtSpinBox->value();
+    int height=ui->morphSizeHighSpinBox->value();
+    int value=ui->morphShapeComboBox->currentIndex();
+    char shape[3][30]={"矩形","交叉形","椭圆形"};
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("黑帽运算操作为闭运算结果图与原图像之差，黑帽运算用来分离比邻近点暗一些的斑块,"
+    char temp[200];
+    sprintf(temp,"此操作内核形状为:%s\n"
+                 "内核长为:%d\n"
+                 "内核宽为:%d\n\n",
+            shape[value],length,height);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
+                                         "黑帽运算操作为闭运算结果图与原图像之差，黑帽运算用来分离比邻近点暗一些的斑块,"
                                          "运算后的效果图突出了比原图轮廓周围的区域更暗的区域，且这一操作和选择的核的大小相关。\n"
                                          "使用黑帽操作来处理一张图片，由src输入，dst输出\n\n"
                                          "函数原型为： \n"
@@ -398,10 +458,6 @@ void MainWindow::on_morphBlackHatRadioButton_clicked()
                                          "第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。"
                                          "需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。");
     ui->morphBlackHatRadioButton->setChecked(true);
-
-    int length=ui->morphSizeLenghtSpinBox->value();
-    int height=ui->morphSizeHighSpinBox->value();
-    int value=ui->morphShapeComboBox->currentIndex();
 
     cv::Mat element=cv::getStructuringElement(value,cv::Size(length,height));
 

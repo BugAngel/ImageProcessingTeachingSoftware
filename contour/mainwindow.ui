@@ -405,7 +405,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>6</number>
          </property>
          <property name="tabBarAutoHide">
           <bool>false</bool>
@@ -504,7 +504,7 @@
          </widget>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
-           <string>线性与非线性滤波</string>
+           <string>图像滤波</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
@@ -605,7 +605,7 @@
          </widget>
          <widget class="QWidget" name="tab_4">
           <attribute name="title">
-           <string>形态学滤波</string>
+           <string>形态学处理</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
@@ -1051,7 +1051,17 @@
              </item>
              <item>
               <property name="text">
-               <string>正方形</string>
+               <string>正三角形</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>四边形</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>矩形</string>
               </property>
              </item>
              <item>
@@ -1061,7 +1071,17 @@
              </item>
              <item>
               <property name="text">
+               <string>正五边形</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
                <string>六边形</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>正六边形</string>
               </property>
              </item>
             </widget>
@@ -1074,6 +1094,20 @@
              <attribute name="buttonGroup">
               <string notr="true">practicalButtonGroup</string>
              </attribute>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="faceDetectionComboBox">
+             <item>
+              <property name="text">
+               <string>单个人脸</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>多个人脸</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>
@@ -1105,36 +1139,6 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
-             <item>
-              <property name="text">
-               <string>缩放旋转与对称</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>线性与非线性滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>形态学滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>灰度与二值化</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>边缘与轮廓</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>实践项目</string>
-              </property>
-             </item>
             </widget>
            </item>
            <item row="1" column="0">
@@ -1162,31 +1166,6 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
-             <item>
-              <property name="text">
-               <string>线性与非线性滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>形态学滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>灰度与二值化</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>边缘与轮廓</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>实践项目</string>
-              </property>
-             </item>
             </widget>
            </item>
            <item row="3" column="1">
@@ -1194,26 +1173,6 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
-             <item>
-              <property name="text">
-               <string>线性与非线性滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>形态学滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>二值化</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>边缘与轮廓</string>
-              </property>
-             </item>
             </widget>
            </item>
            <item row="6" column="0" colspan="2">
@@ -1238,26 +1197,6 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
-             <item>
-              <property name="text">
-               <string>线性与非线性滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>形态学滤波</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>二值化</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>边缘与轮廓</string>
-              </property>
-             </item>
             </widget>
            </item>
            <item row="4" column="1">
@@ -1265,11 +1204,6 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
-             <item>
-              <property name="text">
-               <string>线性与非线性滤波</string>
-              </property>
-             </item>
             </widget>
            </item>
            <item row="5" column="0">
@@ -1287,11 +1221,6 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
-             <item>
-              <property name="text">
-               <string>线性与非线性滤波</string>
-              </property>
-             </item>
             </widget>
            </item>
           </layout>
@@ -1372,12 +1301,12 @@ p, li { white-space: pre-wrap; }
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="edgeButtonGroup"/>
-  <buttongroup name="srcImageButtonGroup"/>
-  <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="practicalButtonGroup"/>
   <buttongroup name="binaryButtonGroup"/>
-  <buttongroup name="morphButtonGroup"/>
+  <buttongroup name="srcImageButtonGroup"/>
+  <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="BlurButtonGroup"/>
+  <buttongroup name="edgeButtonGroup"/>
+  <buttongroup name="morphButtonGroup"/>
  </buttongroups>
 </ui>
