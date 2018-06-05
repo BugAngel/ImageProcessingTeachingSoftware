@@ -20,14 +20,14 @@ MultiOperateSet::MultiOperateSet()
     items["缩放旋转与对称"]=true;
     items["图像滤波"]=true;
     items["形态学处理"]=true;
-    items["灰度与二值化"]=true;
+    items["灰度与阈值化"]=true;
     items["边缘与轮廓"]=true;
     items["实践项目"]=true;
 
     tabs["缩放旋转与对称"]=0;
     tabs["图像滤波"]=1;
     tabs["形态学处理"]=2;
-    tabs["灰度与二值化"]=3;
+    tabs["灰度与阈值化"]=3;
     tabs["边缘与轮廓"]=4;
     tabs["实践项目"]=5;
 }
@@ -48,7 +48,7 @@ void MultiOperateSet::itemsAllTrue()
     items["缩放旋转与对称"]=true;
     items["图像滤波"]=true;
     items["形态学处理"]=true;
-    items["灰度与二值化"]=true;
+    items["灰度与阈值化"]=true;
     items["边缘与轮廓"]=true;
     items["实践项目"]=true;
 }
@@ -94,9 +94,9 @@ QStringList MultiOperateSet::getCurrentItems()
     {
         tempQStringList<<"形态学处理";
     }
-    if(items["灰度与二值化"]==true)
+    if(items["灰度与阈值化"]==true)
     {
-        tempQStringList<<"灰度与二值化";
+        tempQStringList<<"灰度与阈值化";
     }
     if(items["边缘与轮廓"]==true)
     {

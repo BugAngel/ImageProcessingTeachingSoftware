@@ -1,0 +1,42 @@
+以下为讲解部分:
+缩放旋转为仿射变换操作
+OpenCV仿射变换相关的函数一般涉及到warpAffine和getRotationMatrix2D这两个：
+使用OpenCV函数warpAffine 来实现一些简单的重映射.
+使用OpenCV函数getRotationMatrix2D 来获得旋转矩阵。
+下面分别对其进行讲解。
+
+warpAffine函数的作用是对图像做仿射变换。
+函数原型为:
+void warpAffine(InputArray src,OutputArray dst, InputArray M, Size dsize, int flags=INTER_LINEAR, intborderMode=BORDER_CONSTANT, const Scalar& borderValue=Scalar())  
+
+第一个参数，InputArray类型的src，输入图像，即源图像，填Mat类的对象即可。
+
+第二个参数，OutputArray类型的dst，函数调用后的运算结果存在这里，需和源图片有一样的尺寸和类型。
+
+第三个参数，InputArray类型的M，2×3的变换矩阵。
+
+第四个参数，Size类型的dsize，表示输出图像的尺寸。
+
+第五个参数，int类型的flags，插值方法的标识符。此参数有默认值INTER_LINEAR(线性插值)，可选的插值方式如下：
+INTER_NEAREST - 最近邻插值
+INTER_LINEAR - 线性插值（默认值）
+INTER_AREA - 区域插值
+INTER_CUBIC –三次样条插值
+INTER_LANCZOS4 -Lanczos插值
+CV_WARP_FILL_OUTLIERS - 填充所有输出图像的象素。如果部分象素落在输入图像的边界外，那么它们的值设定为 fillval.
+CV_WARP_INVERSE_MAP –表示M为输出图像到输入图像的反变换，即 。因此可以直接用来做象素插值。否则, warpAffine函数从M矩阵得到反变换。
+
+第六个参数，int类型的borderMode，边界像素模式，默认值为BORDER_CONSTANT。
+
+第七个参数，const Scalar&类型的borderValue，在恒定的边界情况下取的值，默认值为Scalar()，即0。
+
+getRotationMatrix2D函数的作用是计算二维旋转变换矩阵。变换会将旋转中心映射到它自身。
+
+函数原型为:
+Mat getRotationMatrix2D(Point2fcenter, double angle, double scale)  
+
+第一个参数，Point2f类型的center，表示源图像的旋转中心。
+
+第二个参数，double类型的angle，旋转角度。角度为正值表示向逆时针旋转（坐标原点是左上角）。
+
+第三个参数，double类型的scale，缩放系数。

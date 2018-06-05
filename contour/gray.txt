@@ -1,0 +1,28 @@
+cvtColor()函数是openCV里的颜色空间转换函数，可以实现RGB颜色向HSV,HSI等颜色空间的转换，也可以转换为灰度图像，由src输入，dst输出
+
+灰度数字图像是每个像素只有一个采样颜色的图像。这类图像通常显示为从最暗黑色到最亮的白色的灰度，尽管理论上这个采样可以任何颜色的不同深浅，甚至可以是不同亮度上的不同颜色。灰度图像与黑白图像不同，在计算机图像领域中黑白图像只有黑白两种颜色，灰度图像在黑色与白色之间还有许多级的颜色深度，例如单通道数组的取值范围为0-255。
+
+函数原型为：
+void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)第一个参数，InputArray类型的src，输入图像 
+
+第二个参数，OutputArray类型的dst，输出图像
+
+第三个参数，int类型的code，颜色空间转换的标识符
+转换关系与标识符的对应关系有
+RGB<->GRAY : CV_BGR2GRAY, CV_RGB2GRAY, CV_GRAY2BGR, CV_GRAY2RGB 
+
+RGB<->CIE XYZ : CV_BGR2XYZ, CV_RGB2XYZ, CV_XYZ2BGR, CV_XYZ2RGB 
+
+RGB<->YCrCb(YUV) JPEG (或 YCC) : CV_BGR2YCrCb, CV_RGB2YCrCb, CV_YCrCb2BGR, CV_YCrCb2RGB 
+
+RGB<->HSV : CV_BGR2HSV, CV_RGB2HSV, CV_HSV2BGR, CV_HSV2RGB 
+
+RGB<->HLS : CV_BGR2HLS, CV_RGB2HLS, CV_HLS2BGR, CV_HLS2RGB 
+
+RGB<->CIE L*a*b* : CV_BGR2Lab, CV_RGB2Lab, CV_Lab2BGR, CV_Lab2RGB 
+
+RGB<->CIE L*u*v* : CV_BGR2Luv, CV_RGB2Luv, CV_Luv2BGR, CV_Luv2RGB 
+
+Bayer<->RGB : CV_BayerBG2BGR, CV_BayerGB2BGR, CV_BayerRG2BGR, CV_BayerGR2BGR, CV_BayerBG2RGB, CV_BayerGB2RGB, CV_BayerRG2RGB, CV_BayerGR2RGB 
+
+第四个参数，int类型的dstCn，目标图像的通道数，若该参数为0，表示目标图像取源图像的通道数

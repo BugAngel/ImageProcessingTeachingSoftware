@@ -1,0 +1,19 @@
+以下为讲解部分:
+形态学梯度为膨胀图与腐蚀图之差,对二值图像进行这一操作可以将团块的边缘突出出来,使用形态学梯度操作来处理一张图片，由src输入，dst输出
+
+函数原型为： 
+void morphologyEx(InputArray src,OutputArray dst, int op, InputArray kernel,Pointanchor=Point(-1,-1),intiterations=1,intborderType=BORDER_CONSTANT, constScalar& borderValue=morphologyDefaultBorderValue() )  
+
+第一个参数，InputArray类型的src，输入图像，即源图像，填Mat类的对象即可。图像位深应该为以下五种之一：CV_8U, CV_16U,CV_16S, CV_32F 或CV_64F。
+
+第二个参数，OutputArray类型的dst，即目标图像，函数的输出参数，需要和源图片有一样的尺寸和类型。
+
+第三个参数，这里选择宏定义MORPH_GRADIENT,表示形态学梯度
+
+第四个参数，InputArray类型的kernel，形态学运算的内核。
+
+第五个参数，Point类型的anchor，锚的位置，其有默认值（-1，-1），表示锚位于中心。
+
+第六个参数，int类型的iterations，迭代使用函数的次数，默认值为1。
+
+第七个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。注意它有默认值BORDER_ CONSTANT。第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。

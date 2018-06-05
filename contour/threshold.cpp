@@ -10,18 +10,17 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QtDebug>
-#include <QFileDialog>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
-#include <QTextCodec>
+#include <QFile>
+#include <QTextStream>
 #include <QMessageBox>
 #include "file.h"
 #include "showimage.h"
+
 #include "adaptiveset.h"
 #include "adaptivethreshold.h"
-#include <exception>
 
 /**
 * @brief  显示灰度图
@@ -30,27 +29,28 @@
 * @author  BugAngel
 * @attention 注意灰度按钮的ID是6
 */
-void MainWindow::on_garyRadioButton_clicked()
+void MainWindow::on_grayRadioButton_clicked()
 {   
     ui->helpTextBrowser->clear();
-    ui->helpTextBrowser->insertPlainText("cvtColor()函数是openCV里的颜色空间转换函数，可以实现RGB颜色向HSV,HSI等颜色空间的转换，也可以转换为灰度图像，由src输入，dst输出\n\n"
-                                         "函数原型为：\n"
-                                         "void cvtColor(InputArray src, OutputArray dst, int code, int dstCn=0)"
-                                         "第一个参数，InputArray类型的src，输入图像 \n\n"
-                                         "第二个参数，OutputArray类型的dst，输出图像\n\n"
-                                         "第三个参数，int类型的code，颜色空间转换的标识符\n"
-                                         "转换关系与标识符的对应关系有\n"
-                                         "RGB<->GRAY : CV_BGR2GRAY, CV_RGB2GRAY, CV_GRAY2BGR, CV_GRAY2RGB \n\n"
-                                         "RGB<->CIE XYZ : CV_BGR2XYZ, CV_RGB2XYZ, CV_XYZ2BGR, CV_XYZ2RGB \n\n"
-                                         "RGB<->YCrCb(YUV) JPEG (或 YCC) : CV_BGR2YCrCb, CV_RGB2YCrCb, CV_YCrCb2BGR, CV_YCrCb2RGB \n\n"
-                                         "RGB<->HSV : CV_BGR2HSV, CV_RGB2HSV, CV_HSV2BGR, CV_HSV2RGB \n\n"
-                                         "RGB<->HLS : CV_BGR2HLS, CV_RGB2HLS, CV_HLS2BGR, CV_HLS2RGB \n\n"
-                                         "RGB<->CIE L*a*b* : CV_BGR2Lab, CV_RGB2Lab, CV_Lab2BGR, CV_Lab2RGB \n\n"
-                                         "RGB<->CIE L*u*v* : CV_BGR2Luv, CV_RGB2Luv, CV_Luv2BGR, CV_Luv2RGB \n\n"
-                                         "Bayer<->RGB : CV_BayerBG2BGR, CV_BayerGB2BGR, CV_BayerRG2BGR, CV_BayerGR2BGR, CV_BayerBG2RGB, "
-                                         "CV_BayerGB2RGB, CV_BayerRG2RGB, CV_BayerGR2RGB \n\n"
-                                         "第四个参数，int类型的dstCn，目标图像的通道数，若该参数为0，表示目标图像取源图像的通道数\n\n");
-    ui->garyRadioButton->setChecked(true);
+
+    QFile txtFile("gray.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
+    ui->grayRadioButton->setChecked(true);
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -91,16 +91,23 @@ void MainWindow::on_radioButton_Binary_clicked()
     sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
     ui->helpTextBrowser->insertPlainText(temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "当前点值大于阈值时，取最大值，否则设置为0 ，由src输入，dst输出\n\n"
-                                         "函数原型为：\n"
-                                         "double threshold(InputArray src, OutputArray dst, double thresh, double maxval, THRESH_BINARY)"
-                                         "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
-                                         "且和第一个参数中的Mat变量有一样的尺寸和类型"
-                                         "第三个参数，double类型的thresh,阈值的具体值\n\n"
-                                         "第四个参数，double类型的maxval，阈值的最大值\n\n"
-                                         "第五个参数，阈值类型\n\n");
+    QFile txtFile("binary.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
     ui->radioButton_Binary->setChecked(true);
 
     try{
@@ -136,22 +143,29 @@ void MainWindow::on_radioButton_Binary_clicked()
 */
 void MainWindow::on_radioButton_BinaryInv_clicked()
 {
-    double thresh=ui->binaryDoubleSpinBox->value();
+    double thresh=ui->binaryInvDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
     char temp[200];
     sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
     ui->helpTextBrowser->insertPlainText(temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "当前点值大于阈值时，设置为0，否则取最大值 ，由src输入，dst输出\n\n"
-                                         "函数原型为： \n"
-                                         "double threshold(InputArray src, OutputArray dst, double thresh, double maxval, THRESH_BINARY_INV) "
-                                         "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
-                                         "且和第一个参数中的Mat变量有一样的尺寸和类型"
-                                         "第三个参数，double类型的thresh,阈值的具体值\n\n"
-                                         "第四个参数，double类型的maxval，阈值的最大值\n\n"
-                                         "第五个参数，阈值类型\n\n");
+    QFile txtFile("binaryinv.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
     ui->radioButton_BinaryInv->setChecked(true);
 
     try{
@@ -170,7 +184,7 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
 
         cv::threshold(srcImage,dstImage,thresh,255,cv::THRESH_BINARY_INV);
         cv::imwrite(tempFileName.toLocal8Bit().toStdString(),dstImage);
-        showImg.showImage(ui,"temp.jpg",ShowImage::DSTImage,num);
+        showImg.showImage(ui,tempFileName,ShowImage::DSTImage,num);
     }catch(std::exception& e){
         QMessageBox::information(this,
                                  tr("图像处理失败"),
@@ -187,22 +201,29 @@ void MainWindow::on_radioButton_BinaryInv_clicked()
 */
 void MainWindow::on_radioButton_TRUNC_clicked()
 {
-    double thresh=ui->binaryDoubleSpinBox->value();
+    double thresh=ui->truncDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
     char temp[200];
     sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
     ui->helpTextBrowser->insertPlainText(temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "当前点值大于阈值时，设置为阈值，否则不改变，由src输入，dst输出 \n\n"
-                                         "函数原型为： \n"
-                                         "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TRUNC) "
-                                         "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
-                                         "且和第一个参数中的Mat变量有一样的尺寸和类型"
-                                         "第三个参数，double类型的thresh,阈值的具体值\n\n"
-                                         "第四个参数，double类型的maxval，阈值的最大值\n\n"
-                                         "第五个参数，阈值类型\n\n");
+    QFile txtFile("trunc.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
     ui->radioButton_TRUNC->setChecked(true);
 
     try{
@@ -236,25 +257,32 @@ void MainWindow::on_radioButton_TRUNC_clicked()
 * @author  BugAngel
 * @attention
 */
-void MainWindow::on_radioButton_TRZERO_clicked()
+void MainWindow::on_radioButton_TOZERO_clicked()
 {
-    double thresh=ui->binaryDoubleSpinBox->value();
+    double thresh=ui->tozeroDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
     char temp[200];
     sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
     ui->helpTextBrowser->insertPlainText(temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "当前点值大于阈值时，不改变，否则设置为0 ，由src输入，dst输出\n\n"
-                                         "函数原型为： \n"
-                                         "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TOZERO) "
-                                         "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
-                                         "且和第一个参数中的Mat变量有一样的尺寸和类型"
-                                         "第三个参数，double类型的thresh,阈值的具体值\n\n"
-                                         "第四个参数，double类型的maxval，阈值的最大值\n\n"
-                                         "第五个参数，阈值类型\n\n");
-    ui->radioButton_TRZERO->setChecked(true);
+    QFile txtFile("tozero.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
+    ui->radioButton_TOZERO->setChecked(true);
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -287,25 +315,32 @@ void MainWindow::on_radioButton_TRZERO_clicked()
 * @author  BugAngel
 * @attention
 */
-void MainWindow::on_radioButton_TRZERO_INV_clicked()
+void MainWindow::on_radioButton_TOZERO_INV_clicked()
 {
-    double thresh=ui->binaryDoubleSpinBox->value();
+    double thresh=ui->tozeroInvDoubleSpinBox->value();
     ui->helpTextBrowser->clear();
     char temp[200];
     sprintf(temp,"数字框的值为阈值,其值为:%.2f\n\n",thresh);
     ui->helpTextBrowser->insertPlainText(temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "当前点值大于阈值时，不改变，否则设置为0，由src输入，dst输出 \n\n"
-                                         "函数原型为： \n"
-                                         "double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TOZERO_INV) "
-                                         "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
-                                         "且和第一个参数中的Mat变量有一样的尺寸和类型"
-                                         "第三个参数，double类型的thresh,阈值的具体值\n\n"
-                                         "第四个参数，double类型的maxval，阈值的最大值\n\n"
-                                         "第五个参数，阈值类型\n\n");
-    ui->radioButton_TRZERO_INV->setChecked(true);
+    QFile txtFile("tozeroinv.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
+    ui->radioButton_TOZERO_INV->setChecked(true);
 
     try{
         std::string fileString=file.getFileString().toLocal8Bit().toStdString();
@@ -359,24 +394,23 @@ void MainWindow::on_adaptiveRadioButton_clicked()
             adaptiveMethod[method], threshType[type],size,C);
     ui->helpTextBrowser->insertPlainText(temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "采用自适应阈值操作，由src输入，dst输出\n\n"
-                                         "函数原型为： \n"
-                                         "void adaptiveThreshold(InputArray src, OutputArray dst, double maxval, "
-                                         "int adaptiveMethod, int thresholdType,int blockSize,double C)\n\n"
+    QFile txtFile("adaptive.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
 
-                                         "第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 \n\n"
-                                         "第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，\n\n"
-                                         "第三个参数，double类型的maxval，阈值的最大值\n\n"
-                                         "第四个参数为int类型的adaptiveMethod,用于指定要使用的自适应阈值算法，可取值为"
-                                         "ADAPTIVE_THRESH_MEAN_C 或 ADAPTIVE_THRESH_GUSSIAN_C\n"
-                                         "前者阈值T(x,y)为blockSize*blockSize邻域内(x,y)减去第七个参数C的平均值\n"
-                                         "后者阈值T(x,y)为blockSize*blockSize邻域内(x,y)减去第七个参数C与高斯窗交叉相关的加权总和\n\n"
-                                         "第五个参数为thresholdType，表示阈值类型，取值为THRESH_BINARY或THRESH_BINARY_INV\n"
-                                         "这两者的说明见第一个和第二个单选框\n\n"
-                                         "第六个参数为blockSize，用于计算阈值大小的一个像素的邻域尺寸，取值为3,5,7等\n\n"
-                                         "第七个参数为C，为减去平均或加权平均值后的常数值，通常为正数，但少数情况下也可以为负数或0\n\n"
-                                         );
     ui->adaptiveRadioButton->setChecked(true);//设置被选上
 
     try{
@@ -449,7 +483,7 @@ void MainWindow::on_truncDoubleSpinBox_valueChanged()
 */
 void MainWindow::on_tozeroDoubleSpinBox_valueChanged()
 {
-    on_radioButton_TRZERO_clicked();
+    on_radioButton_TOZERO_clicked();
 }
 
 /**
@@ -461,7 +495,7 @@ void MainWindow::on_tozeroDoubleSpinBox_valueChanged()
 */
 void MainWindow::on_tozeroInvDoubleSpinBox_valueChanged()
 {
-    on_radioButton_TRZERO_INV_clicked();
+    on_radioButton_TOZERO_INV_clicked();
 }
 
 /**

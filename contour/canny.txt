@@ -1,0 +1,27 @@
+以下为讲解部分:
+Canny边缘检测算子是John F.Canny于 1986 年开发出来的一个多级边缘检测算法。更为重要的是 Canny 创立了边缘检测计算理论（Computational theory ofedge detection），解释了这项技术是如何工作的。Canny边缘检测算法以Canny的名字命名，被很多人推崇为当今最优的边缘检测的算法。Canny 边缘检测的步骤:
+1.消除噪声。
+2.计算梯度幅值和方向。
+3.非极大值抑制。 这一步排除非边缘像素， 仅仅保留了一些细线条作为候选边缘。
+4.滞后阈值。最后一步，Canny 使用了滞后阈值，滞后阈值需要两个阈值,分别为高阈值和低阈值:
+Ⅰ.如果某一像素位置的幅值超过高阈值,该像素被保留为边缘像素。
+Ⅱ.如果某一像素位置的幅值小于低阈值,该像素被排除。
+Ⅲ.如果某一像素位置的幅值在两个阈值之间,该像素仅仅在连接到一个高于高阈值的像素时被保留。
+需要注意的是，这个函数threshold1和threshold2两者的小者用于边缘连接，而大者用来控制强边缘的初始段，推荐的高低阈值比在2:1到3:1之间。
+
+
+函数原型为： 
+void Canny(InputArray image,OutputArray edges, double threshold1, double threshold2, int apertureSize=3,bool L2gradient=false ) 
+
+第一个参数，InputArray类型的image，输入图像，即源图像，填Mat类的对象即可，且需为单通道8位图像。
+
+第二个参数，OutputArray类型的edges，输出的边缘图，需要和源图片有一样的尺寸和类型。
+
+第三个参数，double类型的threshold1，第一个滞后性阈值。
+
+第四个参数，double类型的threshold2，第二个滞后性阈值。
+
+第五个参数，int类型的apertureSize，表示应用Sobel算子的孔径大小，其有默认值3。
+
+第六个参数，bool类型的L2gradient，一个计算图像梯度幅值的标识，有默认值false。
+

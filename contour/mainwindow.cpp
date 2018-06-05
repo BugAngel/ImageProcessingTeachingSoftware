@@ -10,7 +10,6 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QFileDialog>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -18,6 +17,9 @@
 #include "file.h"
 #include "showimage.h"
 #include <QProcess>
+#include <QFile>
+#include <QTextStream>
+#include <QFileDialog>
 
 /**
 * @brief  构造函数，设置各个按钮组与默认按下的单选按钮
@@ -32,19 +34,32 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->helpTextBrowser->setFontPointSize(14);
     ui->helpTextBrowser->setFontFamily("楷体");
-    ui->helpTextBrowser->insertPlainText("王容出品，必属精品\n\n");
-    ui->helpTextBrowser->insertPlainText("点击即可立即处理图像，无需任何繁杂操作\n\n");
-    ui->helpTextBrowser->insertPlainText("所有功能参数均经过严格测试，默认值即可使用，非法参数最大程度设置无法输入\n\n");
-    ui->helpTextBrowser->insertPlainText("所有非法操作均有提示\n\n");
+
+    QFile txtFile("initializtion.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
 
     ui->binaryButtonGroup->setId(ui->radioButton_Binary,0);//设置灰度与二值化按钮组的ID值
     ui->binaryButtonGroup->setId(ui->radioButton_BinaryInv,1);
     ui->binaryButtonGroup->setId(ui->radioButton_TRUNC,2);
-    ui->binaryButtonGroup->setId(ui->radioButton_TRZERO,3);
-    ui->binaryButtonGroup->setId(ui->radioButton_TRZERO_INV,4);
+    ui->binaryButtonGroup->setId(ui->radioButton_TOZERO,3);
+    ui->binaryButtonGroup->setId(ui->radioButton_TOZERO_INV,4);
     ui->binaryButtonGroup->setId(ui->adaptiveRadioButton,5);
-    ui->binaryButtonGroup->setId(ui->garyRadioButton,6);
-    ui->garyRadioButton->setChecked(true);//设置默认选项
+    ui->binaryButtonGroup->setId(ui->grayRadioButton,6);
+    ui->grayRadioButton->setChecked(true);//设置默认选项
 
     ui->edgeButtonGroup->setId(ui->cannyRadioButton,0);
     ui->edgeButtonGroup->setId(ui->sobelRadioButton,1);
@@ -91,7 +106,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tempQStringList<<"缩放旋转与对称";
     tempQStringList<<"图像滤波";
     tempQStringList<<"形态学处理";
-    tempQStringList<<"灰度与二值化";
+    tempQStringList<<"灰度与阈值化";
     tempQStringList<<"边缘与轮廓";
     tempQStringList<<"实践项目";
     ui->firstOperateComboBox->addItems(tempQStringList);

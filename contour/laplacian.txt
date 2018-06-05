@@ -1,0 +1,23 @@
+以下为讲解部分：
+Laplacian算子是n维欧几里德空间中的一个二阶微分算子，定义为梯度grad的散度div。根据图像处理的原理我们知道，二阶导数可以用来进行检测边缘。因为图像是“二维”，我们需要在两个方向进行求导。使用Laplacian算子将会使求导过程变得简单。
+
+OpenCV中Laplacian函数可以计算出图像经过拉普拉斯变换后的结果。本软件关于此函数的可设置参数为二阶导数的滤波器的孔径尺寸，大小必须为正奇数，且有默认值1。
+
+函数原型为：
+void Laplacian(InputArray src,OutputArray dst, int ddepth, int ksize=1, double scale=1, double delta=0, intborderType=BORDER_DEFAULT ); 
+
+各参数含义为：
+
+第一个参数，InputArray类型的image，输入图像，即源图像，填Mat类的对象即可，且需为单通道8位图像。
+
+第二个参数，OutputArray类型的edges，输出的边缘图，需要和源图片有一样的尺寸和通道数。
+
+第三个参数，int类型的ddept，目标图像的深度。
+
+第四个参数，int类型的ksize，用于计算二阶导数的滤波器的孔径尺寸，大小必须为正奇数，且有默认值1。
+
+第五个参数，double类型的scale，计算拉普拉斯值的时候可选的比例因子，有默认值1。
+
+第六个参数，double类型的delta，表示在结果存入目标图（第二个参数dst）之前可选的delta值，有默认值0。
+
+第七个参数， int类型的borderType，边界模式，默认值为BORDER_DEFAULT。这个参数可以在官方文档中borderInterpolate()处得到更详细的信息。

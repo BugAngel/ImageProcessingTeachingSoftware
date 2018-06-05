@@ -1,0 +1,28 @@
+以下为讲解部分:
+
+人脸检测是自动人脸识别系统中的一个关键环节。早期的人脸识别研究主要针对具有较强约束条件的人脸图像,如无背景的图像，往往假设人脸位置一直或者容易获得，因此人脸检测问题并未受到重视。
+
+随着电子商务等应用的发展，人脸识别成为最有潜力的生物身份验证手段，这种应用背景要求自动人脸识别系统能够对一般图像具有一定的识别能力，由此所面临的一系列问题使得人脸检测开始作为一个独立的课题受到研究者的重视。今天，人脸检测的应用背景已经远远超出了人脸识别系统的范畴，在基于内容的检索、数字视频处理、视频检测等方面有着重要的应用价值。
+
+早期的人脸检测方法是利用人工提取特征，训练分类器，进行人脸检测。例如本软件使用的opencv源码中自带的人脸检测器就是利用haar特征进行的人脸检测。这类方法的缺点就是在环境变化强烈的时候检测效果不理想，例如弱光条件，人脸不全。
+
+本软件检测人脸时，首先，在OpenCV目录下按路径\sources\data\haarcascades找到 Haarcascades_frontalface_default.xml，复制放入工程文件夹。程序首先加载人脸检测器，加载成功后读入图像并将图像转为灰度图。使用人脸检测器检测图像，检测使用的函数为detectMultiScale()，若有人脸，则在原图上画出矩形框标定人脸位置。
+
+检测过程中，已训练好的分类器会用不同的尺度遍历输入图像的每一个像素，以检测不同大小的人脸。detectMultiScale函数中参数 scalingFactor 决定每次遍历分类器后尺度会变大多少倍。参数minNeighbors 指定一个符合条件的人脸区域应该有多少个符合条件的邻居像素才被认为是一个可能的人脸区域；如果一个符合条件的人脸区域只移动了一个像素就不再触发分类器，那么这个区域非常可能并不是我们想要的结果。拥有少于minNeighbors 个符合条件的邻居像素的人脸区域会被拒绝掉。如果minNeighbors 被设置为 0，所有可能的人脸区域都会被返回回来。参数flags 是 OpenCV 1.x 版本 API 的遗留物，应该始终把它设置为 0。最后，参数minimumSize 指定我们所寻找的人脸区域大小的最小值。faceRects 向量中将会包含对img 进行人脸识别获得的所有人脸区域。识别的人脸图像可以通过cv::Mat 的()运算符提取出来，调用方式为cv::Mat faceImg = img(aFaceRect)，只要获得了至少一个人脸区域，就可以对图像中的人进行识别。
+
+
+此过程核心函数原型为:
+void detectMultiScale( InputArray image,CV_OUT std::vector<Rect>& objects,CV_OUT std::vector<int>& rejectLevels,CV_OUT std::vector<double>& levelWeights,double scaleFactor = 1.1,int minNeighbors = 3, int flags = 0,Size minSize = Size(), Size maxSize = Size(),bool outputRejectLevels = false );
+
+参数1：image–待检测图片，一般为灰度图像； 
+
+参数2：objects–被检测物体的矩形框向量组；为输出量，如人脸检测矩阵Mat 
+
+参数3：scaleFactor–表示在前后两次相继的扫描中，搜索窗口的比例系数。默认为1.1即每次搜索窗口依次扩大10%;一般设置为1.1 
+
+参数4：minNeighbors–表示构成检测目标的相邻矩形的最小个数(默认为3个)。如果组成检测目标的小矩形的个数和小于 min_neighbors - 1 都会被排除。如果min_neighbors 为 0, 则函数不做任何操作就返回所有的被检候选矩形框，这种设定值一般用在用户自定义对检测结果的组合程序上； 
+
+参数5：flags–要么使用默认值，要么使用CV_HAAR_DO_CANNY_PRUNING，如果设置为CV_HAAR_DO_CANNY_PRUNING，那么函数将会使用Canny边缘检测来排除边缘过多或过少的区域，因此这些区域通常不会是人脸所在区域； 
+
+参数6、7：minSize和maxSize用来限制得到的目标区域的范围。也就是我本次训练得到实际项目尺寸大小 
+

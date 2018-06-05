@@ -93,10 +93,8 @@ INCLUDEPATH += E:\Opencv\QTOpenCV\include \
 
 LIBS += E:\Opencv\QTOpenCV\x64\mingw\lib/libopencv_*
 
-RESOURCES += \
-    projecticon.qrc
-
-RC_FILE += icon.rc
+RC_FILE+=icon.rc
 
 DISTFILES += \
     icon.rc
+

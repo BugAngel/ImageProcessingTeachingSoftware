@@ -1,0 +1,13 @@
+以下为讲解部分:
+当前点值超过阈值则被置为0 ，由src输入，dst输出
+
+函数原型为： 
+double threshold(InputArray src, OutputArray dst, double thresh, double maxval,THRESH_TOZERO) 第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 
+
+第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，
+
+且和第一个参数中的Mat变量有一样的尺寸和类型第三个参数，double类型的thresh,阈值的具体值
+
+第四个参数，double类型的maxval，阈值的最大值
+
+第五个参数，阈值类型

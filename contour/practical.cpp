@@ -10,7 +10,6 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QFileDialog>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -21,6 +20,8 @@
 #include <QProcess>
 #include <algorithm>
 #include <vector>
+#include <QFile>
+#include <QTextStream>
 
 typedef struct Example
 {
@@ -50,11 +51,23 @@ void MainWindow::on_maxContourCenterRadioButton_clicked()
     sprintf(Temp,"滑动条表示边缘阈值,其值为:%d\n\n",g_nThresh);
     ui->helpTextBrowser->insertPlainText(Temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "此功能实现过程为：\n"
-                                         "首先读入图片，将其转换为灰度图后使用canny边缘检测，使用边缘图得到轮廓\n"
-                                         "将得到的轮廓按面积大小由大到小排序，将面积最大的轮廓画出\n"
-                                         "之后计算图像中心矩并输出\n\n");
+    QFile txtFile("maxcontourcenter.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
     ui->maxContourCenterRadioButton->setChecked(true);
 
     cv::Mat grayImage;
@@ -192,18 +205,23 @@ void MainWindow::on_searchPolygonRadioButton_clicked()
     sprintf(Temp,"当前选择检测形状为:%s\n\n",shapeString[shapeIndex]);
     ui->helpTextBrowser->insertPlainText(Temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "此功能实现过程为：\n"
-                                         "首先读入图片，将其转换为灰度图后使用canny边缘检测，使用边缘图得到轮廓\n"
-                                         "之后使用多边形逼近函数逼近轮廓，判断每个多边形是否为凸多边形并且满足面积要求，"
-                                         "普通多边形若满足，计算内角和，内角和也满足则画出多边形轮廓\n"
-                                         "正多边形若满足，对每个角度检测范围，满足则画出多边形轮廓\n"
-                                         "此过程核心函数原型为:\n"
-                                         "void approxPolyDP( InputArray curve,OutputArray approxCurve,double epsilon,bool closed);\n\n"
-                                         "第一个参数，InputArray类型的curve，输入的二维点集，可以为std::vector或Mat类型 \n\n"
-                                         "第二个参数，OutputArray类型的approxCurve，多边形逼近的结果，其类型应该和输入的二维点集的类型一致 \n\n"
-                                         "第三个参数，double类型的epsilon，逼近的精度，为原始曲线和即近似曲线之间的最大值\n\n"
-                                         "第四个参数，bool类型的closed,如果其为真，则近似的曲线为封闭曲线，否则曲线不封闭 \n\n");
+    QFile txtFile("searchpolygon.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
     ui->searchPolygonRadioButton->setChecked(true);
 
     double minArea=1000;//最小面积
@@ -424,22 +442,23 @@ void MainWindow::on_faceDetectionRadioButton_clicked()
     sprintf(Temp,"当前选择检测人脸模式为:%s\n\n",faceString[faceIndex]);
     ui->helpTextBrowser->insertPlainText(Temp);
 
-    ui->helpTextBrowser->insertPlainText("以下为讲解部分:\n"
-                                         "此功能实现过程为：\n"
-                                         "首先加载人脸检测器，之后读入图像并将图像转为灰度图\n"
-                                         "使用人脸检测器检测图像，若有人脸，则在原图上画出矩形框标定人脸位置\n"
-                                         "此过程核心函数原型为:\n"
-                                         "void detectMultiScale( InputArray image,CV_OUT std::vector<Rect>& objects,CV_OUT std::vector<int>& rejectLevels,"
-                                         "CV_OUT std::vector<double>& levelWeights,double scaleFactor = 1.1,int minNeighbors = 3, int flags = 0,"
-                                         "Size minSize = Size(), Size maxSize = Size(),bool outputRejectLevels = false );\n\n"
-                                         "参数1：image–待检测图片，一般为灰度图像； \n\n"
-                                         "参数2：objects–被检测物体的矩形框向量组；为输出量，如人脸检测矩阵Mat \n\n"
-                                         "参数3：scaleFactor–表示在前后两次相继的扫描中，搜索窗口的比例系数。默认为1.1即每次搜索窗口依次扩大10%;一般设置为1.1 \n\n"
-                                         "参数4：minNeighbors–表示构成检测目标的相邻矩形的最小个数(默认为3个)。如果组成检测目标的小矩形的个数和小于 min_neighbors - 1 都会被排除。"
-                                         "如果min_neighbors 为 0, 则函数不做任何操作就返回所有的被检候选矩形框，这种设定值一般用在用户自定义对检测结果的组合程序上； \n\n"
-                                         "参数5：flags–要么使用默认值，要么使用CV_HAAR_DO_CANNY_PRUNING，如果设置为CV_HAAR_DO_CANNY_PRUNING，"
-                                         "那么函数将会使用Canny边缘检测来排除边缘过多或过少的区域，因此这些区域通常不会是人脸所在区域； \n\n"
-                                         "参数6、7：minSize和maxSize用来限制得到的目标区域的范围。也就是我本次训练得到实际项目尺寸大小 \n\n");
+    QFile txtFile("facedetection.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
     ui->faceDetectionRadioButton->setChecked(true);
 
     cv::Mat grayImage;

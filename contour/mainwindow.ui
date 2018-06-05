@@ -14,8 +14,8 @@
    <string>王容2014080103018</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="projecticon.qrc">
-    <normaloff>:/icon/resource/icon.ico</normaloff>:/icon/resource/icon.ico</iconset>
+   <iconset>
+    <normaloff>icon.ico</normaloff>icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">font: 9pt &quot;Arial&quot;;</string>
@@ -405,7 +405,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>6</number>
+          <number>3</number>
          </property>
          <property name="tabBarAutoHide">
           <bool>false</bool>
@@ -750,7 +750,7 @@
          </widget>
          <widget class="QWidget" name="tab">
           <attribute name="title">
-           <string>灰度与二值化</string>
+           <string>灰度与阈值化</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout">
            <item row="1" column="1">
@@ -797,7 +797,7 @@
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QRadioButton" name="radioButton_TRZERO">
+            <widget class="QRadioButton" name="radioButton_TOZERO">
              <property name="toolTip">
               <string/>
              </property>
@@ -843,7 +843,7 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QRadioButton" name="radioButton_TRZERO_INV">
+            <widget class="QRadioButton" name="radioButton_TOZERO_INV">
              <property name="toolTip">
               <string/>
              </property>
@@ -889,7 +889,7 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QRadioButton" name="garyRadioButton">
+            <widget class="QRadioButton" name="grayRadioButton">
              <property name="text">
               <string>灰度图</string>
              </property>
@@ -1296,17 +1296,15 @@ p, li { white-space: pre-wrap; }
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="projecticon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="practicalButtonGroup"/>
-  <buttongroup name="binaryButtonGroup"/>
   <buttongroup name="srcImageButtonGroup"/>
-  <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="BlurButtonGroup"/>
+  <buttongroup name="binaryButtonGroup"/>
   <buttongroup name="edgeButtonGroup"/>
+  <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="morphButtonGroup"/>
+  <buttongroup name="practicalButtonGroup"/>
  </buttongroups>
 </ui>

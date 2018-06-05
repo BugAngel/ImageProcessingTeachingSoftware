@@ -425,16 +425,16 @@ void MainWindow::on_tabWidget_currentChanged(int index)
             on_radioButton_TRUNC_clicked();
             break;
         case 3:
-            on_radioButton_TRZERO_clicked();
+            on_radioButton_TOZERO_clicked();
             break;
         case 4:
-            on_radioButton_TRZERO_INV_clicked();
+            on_radioButton_TOZERO_INV_clicked();
             break;
         case 5:
             on_adaptiveRadioButton_clicked();
             break;
         case 6:
-            on_garyRadioButton_clicked();
+            on_grayRadioButton_clicked();
             break;
         }
         break;

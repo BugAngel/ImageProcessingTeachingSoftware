@@ -1,0 +1,22 @@
+以下为讲解部分:
+采用自适应阈值操作，由src输入，dst输出
+
+函数原型为： 
+void adaptiveThreshold(InputArray src, OutputArray dst, double maxval, int adaptiveMethod, int thresholdType,int blockSize,double C)
+
+第一个参数，InputArray类型的src，输入图像，即源图像，填单通道，8或32位浮点类型的Mat对象即可。 
+
+第二个参数，OutputArray类型的dst，函数调用后的运算结果存放在这里，即这个参数用于存放输出结果，
+
+第三个参数，double类型的maxval，阈值的最大值
+
+第四个参数为int类型的adaptiveMethod,用于指定要使用的自适应阈值算法，可取值为ADAPTIVE_THRESH_MEAN_C 或 ADAPTIVE_THRESH_GUSSIAN_C
+前者阈值T(x,y)为blockSize*blockSize邻域内(x,y)减去第七个参数C的平均值
+后者阈值T(x,y)为blockSize*blockSize邻域内(x,y)减去第七个参数C与高斯窗交叉相关的加权总和
+
+第五个参数为thresholdType，表示阈值类型，取值为THRESH_BINARY或THRESH_BINARY_INV
+这两者的说明见第一个和第二个单选框
+
+第六个参数为blockSize，用于计算阈值大小的一个像素的邻域尺寸，取值为3,5,7等
+
+第七个参数为C，为减去平均或加权平均值后的常数值，通常为正数，但少数情况下也可以为负数或0

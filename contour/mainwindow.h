@@ -57,7 +57,7 @@ public slots:
 
     void on_scharrRadioButton_clicked();
 
-    void on_garyRadioButton_clicked();
+    void on_grayRadioButton_clicked();
 
     void on_resizeCheckBox_stateChanged();
 
@@ -70,9 +70,9 @@ private slots:
 
     void on_radioButton_TRUNC_clicked();
 
-    void on_radioButton_TRZERO_clicked();
+    void on_radioButton_TOZERO_clicked();
 
-    void on_radioButton_TRZERO_INV_clicked();
+    void on_radioButton_TOZERO_INV_clicked();
 
     void on_boxFilterButton_clicked();
 

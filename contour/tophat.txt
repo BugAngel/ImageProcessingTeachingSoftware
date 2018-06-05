@@ -1,0 +1,20 @@
+以下为讲解部分:
+顶帽运算又常常被译为”礼帽“运算,为原图像与开运算的结果图之差。因为开运算带来的结果是放大了裂缝或者局部低亮度的区域，因此，从原图中减去开运算后的图，得到的效果图突出了比原图轮廓周围的区域更明亮的区域，且这一操作和选择的核的大小相关。顶帽运算往往用来分离比邻近点亮一些的斑块。当一幅图像具有大幅的背景的时候，而微小物品比较有规律的情况下，可以使用顶帽运算进行背景提取。
+使用顶帽操作来处理一张图片，由src输入，dst输出
+
+函数原型为： 
+void morphologyEx(InputArray src,OutputArray dst, int op, InputArray kernel,Pointanchor=Point(-1,-1),intiterations=1,intborderType=BORDER_CONSTANT, constScalar& borderValue=morphologyDefaultBorderValue() )  
+
+第一个参数，InputArray类型的src，输入图像，即源图像，填Mat类的对象即可。图像位深应该为以下五种之一：CV_8U, CV_16U,CV_16S, CV_32F 或CV_64F。
+
+第二个参数，OutputArray类型的dst，即目标图像，函数的输出参数，需要和源图片有一样的尺寸和类型。
+
+第三个参数，这里选择宏定义MORPH_TOPHAT,表示顶帽运算
+
+第四个参数，InputArray类型的kernel，形态学运算的内核。
+
+第五个参数，Point类型的anchor，锚的位置，其有默认值（-1，-1），表示锚位于中心。
+
+第六个参数，int类型的iterations，迭代使用函数的次数，默认值为1。
+
+第七个参数，int类型的borderType，用于推断图像外部像素的某种边界模式。注意它有默认值BORDER_ CONSTANT。第八个参数，const Scalar&类型的borderValue，当边界为常数时的边界值，有默认值morphologyDefaultBorderValue()，一般我们不用去管他。需要用到它时，可以看官方文档中的createMorphologyFilter()函数得到更详细的解释。
