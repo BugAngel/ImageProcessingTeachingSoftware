@@ -622,6 +622,13 @@ void MainWindow::on_asciiRadioButton_clicked()
     {
         tempFile<<txt;
     }
+    else
+    {
+        QMessageBox::information(this,
+                                 tr("打开文本文件失败"),
+                                 tr("请关闭result.txt"));
+        return;
+    }
     tempFile.close();
 }
 
