@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>王容2014080103018</string>
+   <string>图像处理软件</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -405,7 +405,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>5</number>
          </property>
          <property name="tabBarAutoHide">
           <bool>false</bool>
@@ -1006,17 +1006,7 @@
            <string>实践项目</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_7">
-           <item row="0" column="0">
-            <widget class="QRadioButton" name="maxContourCenterRadioButton">
-             <property name="text">
-              <string>寻找最大面积轮廓中心位置</string>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">practicalButtonGroup</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="0" column="1">
+           <item row="0" column="2">
             <widget class="QSlider" name="maxContourCenterHorizontalSlider">
              <property name="maximum">
               <number>255</number>
@@ -1042,7 +1032,7 @@
              </attribute>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="1" column="2">
             <widget class="QComboBox" name="searchPolygonComboBox">
              <item>
               <property name="text">
@@ -1096,7 +1086,7 @@
              </attribute>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="2" column="2">
             <widget class="QComboBox" name="faceDetectionComboBox">
              <item>
               <property name="text">
@@ -1108,6 +1098,33 @@
                <string>多个人脸</string>
               </property>
              </item>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="maxContourCenterRadioButton">
+             <property name="text">
+              <string>寻找最大面积轮廓中心位置</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">practicalButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QRadioButton" name="asciiRadioButton">
+             <property name="text">
+              <string>图片转ASCII码</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">practicalButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QPushButton" name="asciiPushButton">
+             <property name="text">
+              <string>设置</string>
+             </property>
             </widget>
            </item>
           </layout>
@@ -1300,11 +1317,11 @@ p, li { white-space: pre-wrap; }
  <connections/>
  <buttongroups>
   <buttongroup name="srcImageButtonGroup"/>
-  <buttongroup name="BlurButtonGroup"/>
-  <buttongroup name="binaryButtonGroup"/>
   <buttongroup name="edgeButtonGroup"/>
-  <buttongroup name="dstImageButtonGroup"/>
   <buttongroup name="morphButtonGroup"/>
+  <buttongroup name="binaryButtonGroup"/>
+  <buttongroup name="dstImageButtonGroup"/>
+  <buttongroup name="BlurButtonGroup"/>
   <buttongroup name="practicalButtonGroup"/>
  </buttongroups>
 </ui>

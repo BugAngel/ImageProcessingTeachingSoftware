@@ -22,6 +22,10 @@
 #include <vector>
 #include <QFile>
 #include <QTextStream>
+#include "imagetoascii.h"
+#include "imagetoasciiset.h"
+#include <string>
+#include <fstream>
 
 typedef struct Example
 {
@@ -542,4 +546,94 @@ void MainWindow::on_faceDetectionRadioButton_clicked()
 void MainWindow::on_faceDetectionComboBox_currentIndexChanged()
 {
     on_faceDetectionRadioButton_clicked();
+}
+
+/**
+* @brief  图片转ASCII码单选按钮按下
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_asciiRadioButton_clicked()
+{
+    int row,col;
+    char ascii_char[70] = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+    float unit= (256.0 + 1)/69;
+    cv::Mat resizeImage;
+    std::string txt;
+    char temp[200];
+
+    imageToAscii_set.getValue(row,col);
+    ui->helpTextBrowser->clear();
+    sprintf(temp,"设置对话框中的选项及它们的值依次为\n"
+                 "行:%d\n"
+                 "列:%d\n\n",
+            row,col);
+    ui->helpTextBrowser->insertPlainText(temp);
+
+    QFile txtFile("ascii.txt");
+    if(!txtFile.open(QFile::ReadOnly|QFile::Text))
+    {
+        QMessageBox::information(this,
+                                 tr("打开讲解文件失败"),
+                                 tr("请重新安装本软件"));
+        return;
+    }
+    //构建QTextStream以便读取文本
+    QTextStream txtFileContent(&txtFile);
+    //将应用程序的光标设置为等待状态
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    //将读取的所有文本设置到QTextEdit控件中显示出来
+    ui->helpTextBrowser->insertPlainText(txtFileContent.readAll());
+    //读取完成后，恢复光标状态
+    QApplication::restoreOverrideCursor();
+
+    ui->asciiRadioButton->setChecked(true);
+
+    std::string fileString=file.getFileString().toLocal8Bit().toStdString();
+    cv::Mat srcImage=cv::imread(fileString);//输入图像
+    if(!srcImage.data )
+    {
+        QMessageBox::information(this,
+                                 tr("打开图像失败"),
+                                 tr("请打开合适的图像！"));
+        return;
+    }
+
+    cv::cvtColor(srcImage,srcImage,CV_RGB2GRAY);
+    cv::resize(srcImage,resizeImage,cv::Size(row,col));
+    int rowNumber=resizeImage.rows;//行数
+    int colNumber=resizeImage.cols;//列数
+
+    for(int i=0;i<rowNumber;i++)//行循环
+    {
+        for(int j=0;j<colNumber;j++)//列循环
+        {
+            txt+=ascii_char[int((resizeImage.at<uchar>(i,j))/unit)];//灰度图像为uchar,RGB图像为Vec3b
+        }
+        txt+='\n';
+    }
+
+    //写入txt
+    std::ofstream tempFile;
+    tempFile.open("result.txt");
+    if(tempFile.is_open())
+    {
+        tempFile<<txt;
+    }
+    tempFile.close();
+}
+
+/**
+* @brief  图片转ASCII码设置按键按下
+* @param  NONE
+* @retval NONE
+* @author  BugAngel
+* @attention
+*/
+void MainWindow::on_asciiPushButton_clicked()
+{
+    ImageToAscii imageToAscii(this);
+    imageToAscii.exec();
 }

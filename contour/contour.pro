@@ -48,11 +48,12 @@ SOURCES += \
     cannyset.cpp \
     sobel.cpp \
     sobelset.cpp \
-    multioperateset.cpp \
     multioperate.cpp \
     showimageui.cpp \
     transform.cpp \
-    practical.cpp
+    practical.cpp \
+    imagetoascii.cpp \
+    imagetoasciiset.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -74,7 +75,8 @@ HEADERS += \
     cannyset.h \
     sobel.h \
     sobelset.h \
-    multioperateset.h
+    imagetoascii.h \
+    imagetoasciiset.h
 
 FORMS += \
         mainwindow.ui \
@@ -85,7 +87,8 @@ FORMS += \
     bilateralfilter.ui \
     contour.ui \
     canny.ui \
-    sobel.ui
+    sobel.ui \
+    imagetoascii.ui
 
 INCLUDEPATH += E:\Opencv\QTOpenCV\include \
                E:\Opencv\QTOpenCV\include/opencv \

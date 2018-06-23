@@ -97,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->practicalButtonGroup->setId(ui->maxContourCenterRadioButton,0);
     ui->practicalButtonGroup->setId(ui->searchPolygonRadioButton,1);
     ui->practicalButtonGroup->setId(ui->faceDetectionRadioButton,2);
+    ui->practicalButtonGroup->setId(ui->asciiRadioButton,3);
     ui->maxContourCenterRadioButton->setChecked(true);//设置默认选项
 
     ui->tabWidget->setCurrentIndex(0);//设置图像操作Tab的默认显示

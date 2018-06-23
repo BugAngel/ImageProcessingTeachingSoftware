@@ -63,6 +63,8 @@ public slots:
 
     void on_rotateCheckBox_stateChanged();
 
+    void on_asciiRadioButton_clicked();
+
 private slots:
     void on_radioButton_Binary_clicked();
 
@@ -152,12 +154,6 @@ private slots:
 
     void on_multiOperatePushButton_clicked();
 
-//    void on_firstOperateComboBox_currentIndexChanged();
-
-//    void on_secondOperateComboBox_currentIndexChanged();
-
-//    void on_thirdOperateComboBox_currentIndexChanged();
-
     void on_dstImageTabWidget_currentChanged();
 
     void on_openImagePushButton_clicked();
@@ -194,19 +190,11 @@ private slots:
 
     void on_searchPolygonRadioButton_clicked();
 
-//    void on_firstOperateComboBox_currentTextChanged();
-
-//    void on_secondOperateComboBox_currentTextChanged();
-
-//    void on_thirdOperateComboBox_currentTextChanged();
-
-//    void on_forthOperateComboBox_currentTextChanged();
-
-//    void on_fifthOperateComboBox_currentTextChanged();
-
     void on_sixthOperateCheckBox_stateChanged(int arg1);
 
     void on_faceDetectionComboBox_currentIndexChanged();
+
+    void on_asciiPushButton_clicked();
 
 public:
     Ui::MainWindow *ui;

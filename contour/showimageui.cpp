@@ -470,6 +470,9 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         case 2:
             on_faceDetectionRadioButton_clicked();
             break;
+        case 3:
+            on_asciiRadioButton_clicked();
+            break;
         }
         break;
     }

@@ -10,12 +10,9 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "multioperateset.h"
 #include <QMessageBox>
 #include "showimage.h"
 #include "file.h"
-
-MultiOperateSet multiOperate_set;//这个对象来存储多步操作设置的值
 
 /**
 * @brief  第一步操作的checkbox状态改变，选上了使能第二个，取消了失能下面的;
@@ -194,180 +191,6 @@ void MainWindow::on_sixthOperateCheckBox_stateChanged(int arg1)
     }
 }
 
-#if 0  //我受不了这些BUG了，不做防重复的功能了
-/**
-* @brief  第一步操作的combobox改变，改变下面的，保证没有重复
-* @param  NONE
-* @retval NONE
-* @author  BugAngel
-* @attention
-*/
-void MainWindow::on_firstOperateComboBox_currentTextChanged()
-{
-    multiOperate_set.itemsAllTrue();
-    QString tempText=ui->firstOperateComboBox->currentText();
-    multiOperate_set.setItemFalse(tempText);
-
-    if(ui->secondOperateCheckBox->isEnabled())
-    {
-        ui->secondOperateComboBox->clear();//清空下拉框内容
-        QStringList tempQStringList=multiOperate_set.getCurrentItems();
-        ui->secondOperateComboBox->addItems(tempQStringList);
-        multiOperate_set.setItemFalse(ui->secondOperateComboBox->currentText());
-        if(ui->thirdOperateCheckBox->isEnabled())
-        {
-            ui->thirdOperateComboBox->clear();//清空下拉框内容
-            ui->thirdOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-            multiOperate_set.setItemFalse(ui->thirdOperateComboBox->currentText());
-            if(ui->forthOperateCheckBox->isEnabled())
-            {
-                ui->forthOperateComboBox->clear();//清空下拉框内容
-                ui->forthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-                multiOperate_set.setItemFalse(ui->forthOperateComboBox->currentText());
-                if(ui->fifthOperateCheckBox->isEnabled())
-                {
-                    ui->fifthOperateComboBox->clear();//清空下拉框内容
-                    ui->fifthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-                    multiOperate_set.setItemFalse(ui->fifthOperateComboBox->currentText());
-                    if(ui->sixthOperateCheckBox->isEnabled())
-                    {
-                        ui->sixthOperateComboBox->clear();//清空下拉框内容
-                        ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-                        multiOperate_set.setItemFalse(ui->sixthOperateComboBox->currentText());
-                    }
-                }
-            }
-        }
-    }
-}
-
-/**
-* @brief  第二步操作的combobox改变，改变下面的，保证没有重复
-* @param  NONE
-* @retval NONE
-* @author  BugAngel
-* @attention
-*/
-void MainWindow::on_secondOperateComboBox_currentTextChanged()
-{
-    multiOperate_set.itemsAllTrue();
-    multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->secondOperateComboBox->currentText());
-
-    if(ui->thirdOperateCheckBox->isEnabled())
-    {
-        ui->thirdOperateComboBox->clear();//清空下拉框内容
-        ui->thirdOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-        multiOperate_set.setItemFalse(ui->thirdOperateComboBox->currentText());
-        if(ui->forthOperateCheckBox->isEnabled())
-        {
-            ui->forthOperateComboBox->clear();//清空下拉框内容
-            ui->forthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-            multiOperate_set.setItemFalse(ui->forthOperateComboBox->currentText());
-            if(ui->fifthOperateCheckBox->isEnabled())
-            {
-                ui->fifthOperateComboBox->clear();//清空下拉框内容
-                ui->fifthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-                multiOperate_set.setItemFalse(ui->fifthOperateComboBox->currentText());
-                if(ui->sixthOperateCheckBox->isEnabled())
-                {
-                    ui->sixthOperateComboBox->clear();//清空下拉框内容
-                    ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-                    multiOperate_set.setItemFalse(ui->sixthOperateComboBox->currentText());
-                }
-            }
-        }
-    }
-}
-
-/**
-* @brief  第三步操作的combobox改变，改变下面的，保证没有重复
-* @param  NONE
-* @retval NONE
-* @author  BugAngel
-* @attention
-*/
-void MainWindow::on_thirdOperateComboBox_currentTextChanged()
-{
-    multiOperate_set.itemsAllTrue();
-    multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->secondOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->thirdOperateComboBox->currentText());
-
-    if(ui->forthOperateCheckBox->isEnabled())
-    {
-        ui->forthOperateComboBox->clear();//清空下拉框内容
-        ui->forthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-        multiOperate_set.setItemFalse(ui->forthOperateComboBox->currentText());
-        if(ui->fifthOperateCheckBox->isEnabled())
-        {
-            ui->fifthOperateComboBox->clear();//清空下拉框内容
-            ui->fifthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-            multiOperate_set.setItemFalse(ui->fifthOperateComboBox->currentText());
-            if(ui->sixthOperateCheckBox->isEnabled())
-            {
-                ui->sixthOperateComboBox->clear();//清空下拉框内容
-                ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-                multiOperate_set.setItemFalse(ui->sixthOperateComboBox->currentText());
-            }
-        }
-    }
-}
-
-/**
-* @brief  第四步操作的combobox改变，改变下面的，保证没有重复
-* @param  NONE
-* @retval NONE
-* @author  BugAngel
-* @attention
-*/
-void MainWindow::on_forthOperateComboBox_currentTextChanged()
-{
-    multiOperate_set.itemsAllTrue();
-    multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->secondOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->thirdOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->forthOperateComboBox->currentText());
-
-    if(ui->fifthOperateCheckBox->isEnabled())
-    {
-        ui->fifthOperateComboBox->clear();//清空下拉框内容
-        ui->fifthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-        multiOperate_set.setItemFalse(ui->fifthOperateComboBox->currentText());
-        if(ui->sixthOperateCheckBox->isEnabled())
-        {
-            ui->sixthOperateComboBox->clear();//清空下拉框内容
-            ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-            multiOperate_set.setItemFalse(ui->sixthOperateComboBox->currentText());
-        }
-    }
-}
-
-/**
-* @brief  第五步操作的combobox改变，改变下面的，保证没有重复
-* @param  NONE
-* @retval NONE
-* @author  BugAngel
-* @attention
-*/
-void MainWindow::on_fifthOperateComboBox_currentTextChanged()
-{
-    multiOperate_set.itemsAllTrue();
-    multiOperate_set.setItemFalse(ui->firstOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->secondOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->thirdOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->forthOperateComboBox->currentText());
-    multiOperate_set.setItemFalse(ui->fifthOperateComboBox->currentText());
-
-    if(ui->sixthOperateCheckBox->isEnabled())
-    {
-        ui->sixthOperateComboBox->clear();//清空下拉框内容
-        ui->sixthOperateComboBox->addItems(multiOperate_set.getCurrentItems());
-        multiOperate_set.setItemFalse(ui->sixthOperateComboBox->currentText());
-    }
-}
-#endif
-
 /**
 * @brief  多步操作处理按键按下，根据下拉框的内容依次处理，之后将CurrentImageNum复位
 * @param  NONE
@@ -377,48 +200,41 @@ void MainWindow::on_fifthOperateComboBox_currentTextChanged()
 */
 void MainWindow::on_multiOperatePushButton_clicked()
 {
-    int index;//tab的index值
     if(ui->firstOperateCheckBox->isChecked())
     {
        showImg.setCurrentImageNum(1);
        file.setFileString();
-       index=multiOperate_set.getTabValue(ui->firstOperateComboBox->currentText());
-       on_tabWidget_currentChanged(index);
+       on_tabWidget_currentChanged(ui->firstOperateComboBox->currentIndex());
     }
     if(ui->secondOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(2);
         file.setFileString();
-        index=multiOperate_set.getTabValue(ui->secondOperateComboBox->currentText());
-        on_tabWidget_currentChanged(index);
+        on_tabWidget_currentChanged(ui->secondOperateComboBox->currentIndex());
     }
     if(ui->thirdOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(3);
         file.setFileString();
-        index=multiOperate_set.getTabValue(ui->thirdOperateComboBox->currentText());
-        on_tabWidget_currentChanged(index);
+        on_tabWidget_currentChanged(ui->thirdOperateComboBox->currentIndex());
     }
     if(ui->forthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(4);
         file.setFileString();
-        index=multiOperate_set.getTabValue(ui->forthOperateComboBox->currentText());
-        on_tabWidget_currentChanged(index);
+        on_tabWidget_currentChanged(ui->forthOperateComboBox->currentIndex());
     }
     if(ui->fifthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(5);
         file.setFileString();
-        index=multiOperate_set.getTabValue(ui->fifthOperateComboBox->currentText());
-        on_tabWidget_currentChanged(index);
+        on_tabWidget_currentChanged(ui->fifthOperateComboBox->currentIndex());
     }
     if(ui->sixthOperateCheckBox->isChecked())
     {
         showImg.setCurrentImageNum(6);
         file.setFileString();
-        index=multiOperate_set.getTabValue(ui->sixthOperateComboBox->currentText());
-        on_tabWidget_currentChanged(index);
+        on_tabWidget_currentChanged(ui->sixthOperateComboBox->currentIndex());
     }
     showImg.setCurrentImageNum(1);//输出图像序号复位
     file.setFileString();//文件名复位
